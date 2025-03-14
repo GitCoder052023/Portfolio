@@ -98,8 +98,14 @@
                         <div
                             class="w-64 h-64 md:w-80 md:h-80 bg-blue-600 rounded-full absolute top-0 right-0 -z-10 blur-3xl opacity-20">
                         </div>
-                        <img src="./images/profile.jpg" alt="Profile"
-                            class="w-48 h-48 md:w-64 md:h-64 rounded-full mx-auto relative z-10 border-4 border-white shadow-lg object-cover">
+                        <script>
+                            document.write(`
+                                <img src="http://${window.location.hostname}:5000/api/profile-image" 
+                                     alt="Profile" 
+                                     class="w-48 h-48 md:w-64 md:h-64 rounded-full mx-auto relative z-10 border-4 border-white shadow-lg object-cover"
+                                     onerror="this.src='/images/default-profile.jpg'">
+                            `);
+                        </script>
                     </div>
                 </div>
             </div>

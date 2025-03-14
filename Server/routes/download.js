@@ -4,7 +4,6 @@ const path = require('path');
 
 router.get('/download-cv', (req, res) => {
     try {
-        // Store CV in a non-public directory
         const cvPath = path.join(__dirname, '../assets/CV.pdf');
         
         res.download(cvPath, 'Hamdan_Khubaib_CV.pdf', (err) => {

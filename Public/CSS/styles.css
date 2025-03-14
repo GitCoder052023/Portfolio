@@ -8,6 +8,16 @@
     --accent: #3b82f6;
 }
 
+* {
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -20,6 +30,12 @@ body {
     width: 100%;
     margin: 0;
     padding: 0;
+}
+
+input, textarea {
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }
 
 .progress-bar {
@@ -416,4 +432,20 @@ body {
 
 .hidden {
     display: none !important;
+}
+
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em; 
+    background-color: rgb(202, 202, 219); 
+    animation: blink 1s step-end infinite; 
+    margin-left: 2px;
+    vertical-align: middle;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
 }

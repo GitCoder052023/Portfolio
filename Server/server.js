@@ -3,6 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 const contactRoute = require('./routes/contact');
 const downloadRoute = require('./routes/download')
+const imagesRoute = require('./routes/images');
 const path = require('path');
 const app = express();
 const port = process.env.PORT
@@ -48,6 +49,7 @@ app.options('*', cors());
 
 app.use('/api', contactRoute);
 app.use('/api', downloadRoute);
+app.use('/api', imagesRoute);
 
 app.listen(port, () => {
     console.log(`Server is running on http://${host}:${port}`);

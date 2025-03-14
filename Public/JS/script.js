@@ -7,14 +7,114 @@ const currentHost = window.location.hostname;
 const menuToggle = document.getElementById('menu-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
 
+document.addEventListener('DOMContentLoaded', () => {
+    const h1 = document.querySelector('#hero h1');
+    if (h1) {
+        h1.innerHTML = '';
+
+        const text1 = document.createTextNode(''); 
+        const span = document.createElement('span');
+        span.className = 'gradient-text';
+        const text2 = document.createTextNode(''); 
+        span.appendChild(text2);
+
+        const cursor = document.createElement('span');
+        cursor.className = 'cursor';
+
+        // Append elements to h1
+        h1.appendChild(text1);
+        h1.appendChild(span);
+        h1.appendChild(cursor);
+
+        const beforeSpan = "Hi, I'm ";
+        const inSpan = "Hamdan Khubaib";
+        let index = 0;
+
+        const typeWriter = () => {
+            if (index < beforeSpan.length) {
+                text1.textContent += beforeSpan[index];
+            } else if (index < beforeSpan.length + inSpan.length) {
+                text2.textContent += inSpan[index - beforeSpan.length];
+            }
+            index++;
+
+            if (index < beforeSpan.length + inSpan.length) {
+                setTimeout(typeWriter, 250); 
+            } else {
+                cursor.remove();
+            }
+        };
+
+        setTimeout(typeWriter, 1000);
+    }
+});
+
+document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+});
+
+document.addEventListener('keydown', (e) => {
+    if (
+        (e.ctrlKey && e.key === 'c') ||
+        (e.ctrlKey && e.key === 'x') ||
+        (e.ctrlKey && e.key === 's') ||
+        (e.ctrlKey && e.key === 'p') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'i') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'c') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'j') ||
+        e.key === 'F12'
+    ) {
+        e.preventDefault();
+        return false;
+    }
+});
+
+document.addEventListener('dragstart', (e) => {
+    e.preventDefault();
+});
+
+document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('mousedown', (e) => {
+        e.preventDefault();
+    });
+});
+
+document.addEventListener('mouseup', () => {
+    if (window.getSelection) {
+        if (window.getSelection().empty) {
+            window.getSelection().empty();
+        } else if (window.getSelection().removeAllRanges) {
+            window.getSelection().removeAllRanges();
+        }
+    }
+});
+
+document.addEventListener('copy', (e) => {
+    if (!e.target.matches('input, textarea')) {
+        e.preventDefault();
+    }
+});
+
+document.addEventListener('cut', (e) => {
+    if (!e.target.matches('input, textarea')) {
+        e.preventDefault();
+    }
+});
+
+document.addEventListener('paste', (e) => {
+    if (!e.target.matches('input, textarea')) {
+        e.preventDefault();
+    }
+});
+
 async function downloadCV(event) {
     event.preventDefault();
-    
+
     try {
         const response = await fetch(`http://${currentHost}:5000/api/download-cv`, {
             method: 'GET',
         });
-        
+
         if (response.ok) {
             const blob = await response.blob();
             const url = window.URL.createObjectURL(blob);
@@ -44,7 +144,7 @@ menuToggle.addEventListener('click', () => {
         mobileMenu.classList.remove('active');
         setTimeout(() => {
             mobileMenu.classList.add('hidden');
-        }, 300); 
+        }, 300);
     }
 });
 
@@ -121,9 +221,9 @@ const progressBars = document.querySelectorAll('.progress-bar');
 
 const animateProgressBars = () => {
     progressBars.forEach(bar => {
-        const targetWidth = bar.getAttribute('data-width'); 
-        bar.style.transition = 'width 1.5s ease-in-out'; 
-        bar.style.width = targetWidth; 
+        const targetWidth = bar.getAttribute('data-width');
+        bar.style.transition = 'width 1.5s ease-in-out';
+        bar.style.width = targetWidth;
     });
 };
 
@@ -133,10 +233,10 @@ const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             animateProgressBars();
-            observer.unobserve(entry.target); 
+            observer.unobserve(entry.target);
         }
     });
-}, { threshold: 0.4 }); 
+}, { threshold: 0.4 });
 
 observer.observe(skillsSection);
 
