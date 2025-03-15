@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>404 - Page Not Found</title>
+  <link rel="stylesheet" href="/CSS/output.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen flex items-center justify-center px-4">
+  <div class="max-w-lg w-full bg-white rounded-lg shadow-xl overflow-hidden">
+    <div class="bg-indigo-600 p-8 text-center">
+      <i data-feather="map-pin" class="text-white mx-auto mb-4" width="64" height="64"></i>
+      <h1 class="text-white text-4xl font-bold">404</h1>
+      <p class="text-indigo-100 text-lg">Oops! Page not found</p>
+    </div>
+    
+    <div class="p-8 text-center">
+      <div class="bg-indigo-100 inline-flex p-4 rounded-full mb-6">
+        <i data-feather="compass" class="text-indigo-600" width="32" height="32"></i>
+      </div>
+      <h2 class="text-2xl font-bold text-gray-800 mb-3">We've lost this page</h2>
+      <p class="text-gray-600 mb-6">
+        The page you are looking for might have been removed, had its name changed,
+        or is temporarily unavailable.
+      </p>
+      <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 justify-center">
+        <a href="/" class="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition duration-200 flex items-center justify-center">
+          <i data-feather="home" class="mr-2" width="16" height="16"></i>
+          Go to Homepage
+        </a>
+        <a href="/#contact" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg transition duration-200 flex items-center justify-center">
+          <i data-feather="help-circle" class="mr-2" width="16" height="16"></i>
+          Contact Support
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      feather.replace()});
+  </script>
+</body>
+</html>

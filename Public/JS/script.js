@@ -241,12 +241,15 @@ const observer = new IntersectionObserver((entries) => {
 observer.observe(skillsSection);
 
 const contactForm = document.getElementById('contactForm');
+const formLoader = document.getElementById('formLoader');
 
 contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const formData = new FormData(contactForm);
     const formDataObj = Object.fromEntries(formData.entries());
+
+    formLoader.classList.remove('hidden'); // Show Loader
 
     try {
         const response = await fetch(`http://${currentHost}:5000/api/contact`, {
@@ -261,15 +264,18 @@ contactForm.addEventListener('submit', async (e) => {
 
         if (response.ok) {
             contactForm.reset();
-            alert('Thank you for your message! Please check your email for confirmation.');
+            window.location.href = '/contact-request-accepted';
         } else {
             throw new Error(data.message || 'Something went wrong');
         }
     } catch (error) {
         console.error('Error:', error);
         alert('Sorry, there was an error sending your message. Please try again later.');
+    } finally {
+        formLoader.classList.add('hidden'); // Hide Loader
     }
 });
+
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

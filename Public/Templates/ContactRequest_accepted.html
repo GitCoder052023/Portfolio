@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Request Accepted</title>
+  <link rel="stylesheet" href="/CSS/output.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js"></script>
+</head>
+<body class="bg-gray-100 font-sans min-h-screen flex items-center justify-center px-4">
+  <div class="max-w-lg w-full bg-white rounded-lg shadow-xl overflow-hidden">
+    <div class="bg-green-600 p-8 text-center">
+      <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/20 mb-4 mx-auto">
+        <i data-feather="check-circle" class="text-white" width="40" height="40"></i>
+      </div>
+      <h1 class="text-white text-3xl font-bold">Thank You!</h1>
+      <p class="text-green-100 text-lg">Your contact request has been accepted</p>
+    </div>
+    
+    <div class="p-8">
+      <div class="flex items-center p-4 mb-6 bg-green-50 rounded-lg border border-green-100">
+        <i data-feather="clock" class="text-green-500 mr-3" width="24" height="24"></i>
+        <p class="text-green-800">
+          I'll get back to you within <span class="font-semibold">24 hours</span>
+        </p>
+      </div>
+      
+      <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+        <i data-feather="info" class="text-green-500 mr-2" width="20" height="20"></i>
+        What happens next?
+      </h2>
+      
+      <ul class="space-y-4 mb-6">
+        <li class="flex">
+          <div class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-500 mr-3">
+            <i data-feather="mail" width="16" height="16"></i>
+          </div>
+          <div>
+            <p class="text-gray-700">You'll receive a confirmation email shortly</p>
+          </div>
+        </li>
+        <li class="flex">
+          <div class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-500 mr-3">
+            <i data-feather="user" width="16" height="16"></i>
+          </div>
+          <div>
+            <p class="text-gray-700">I'll review your request</p>
+          </div>
+        </li>
+        <li class="flex">
+          <div class="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-500 mr-3">
+            <i data-feather="phone" width="16" height="16"></i>
+          </div>
+          <div>
+            <p class="text-gray-700">I'll contact you to discuss your needs</p>
+          </div>
+        </li>
+      </ul>
+      
+      <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3">
+        <a href="/" class="flex-1 px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg transition duration-200 flex items-center justify-center">
+          <i data-feather="home" class="mr-2" width="16" height="16"></i>
+          Return Home
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      feather.replace()});
+  </script>
+</body>
+</html>
