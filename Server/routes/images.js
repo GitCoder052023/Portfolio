@@ -11,7 +11,10 @@ router.get('/profile-image', (req, res) => {
             'Cache-Control': 'no-store, no-cache, must-revalidate, private',
             'Expires': '0',
             'Pragma': 'no-cache',
-            'X-Content-Type-Options': 'nosniff'
+            'X-Content-Type-Options': 'nosniff',
+            'Access-Control-Allow-Origin': process.env.ALLOWED_ORIGINS,
+            'Access-Control-Allow-Methods': 'GET',
+            'Cross-Origin-Resource-Policy': 'cross-origin'
         });
         
         res.sendFile(imagePath);
