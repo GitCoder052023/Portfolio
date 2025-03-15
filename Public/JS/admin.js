@@ -9,6 +9,11 @@ const imageInput = document.getElementById('imageInput');
 const imagePreview = document.getElementById('imagePreview');
 const imagePreviewContainer = document.getElementById('imagePreviewContainer');
 const currentProfileImage = document.getElementById('currentProfileImage');
+const sidebar = document.getElementById('sidebar');
+const openSidebarBtn = document.getElementById('openSidebarBtn');
+const closeSidebarBtn = document.getElementById('closeSidebarBtn');
+const sidebarOverlay = document.getElementById('sidebarOverlay');
+const mobileLogoutBtn = document.getElementById('mobileLogoutBtn');
 
 function checkAuthStatus() {
     const token = localStorage.getItem('adminToken');
@@ -25,6 +30,18 @@ function showAdminPanel() {
 function hideAdminPanel() {
     adminPanel.classList.add('hidden');
     loginSection.classList.remove('hidden');
+}
+
+function openSidebar() {
+    sidebar.classList.remove('closed');
+    sidebar.classList.add('open');
+    sidebarOverlay.classList.remove('hidden');
+}
+
+function closeSidebar() {
+    sidebar.classList.remove('open');
+    sidebar.classList.add('closed');
+    sidebarOverlay.classList.add('hidden');
 }
 
 loginForm.addEventListener('submit', async (e) => {
@@ -133,4 +150,38 @@ document.addEventListener('DOMContentLoaded', () => {
     profileImage.onerror = () => {
         console.error('Failed to load profile image');
     };
+
+    if (openSidebarBtn) {
+        openSidebarBtn.addEventListener('click', openSidebar);
+    }
+    
+    if (closeSidebarBtn) {
+        closeSidebarBtn.addEventListener('click', closeSidebar);
+    }
+    
+    if (sidebarOverlay) {
+        sidebarOverlay.addEventListener('click', closeSidebar);
+    }
+    
+    if (mobileLogoutBtn) {
+        mobileLogoutBtn.addEventListener('click', function() {
+            localStorage.removeItem('adminToken');
+            location.reload();
+        });
+    }
+    
+    const menuItems = document.querySelectorAll('#sidebar nav a');
+    menuItems.forEach(item => {
+        item.addEventListener('click', function() {
+            if (window.innerWidth < 768) {
+                closeSidebar();
+            }
+        });
+    });
+    
+    window.addEventListener('resize', function() {
+        if (window.innerWidth >= 768) {
+            sidebarOverlay.classList.add('hidden');
+        }
+    });
 });

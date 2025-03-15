@@ -7,102 +7,179 @@
     <title>Admin Panel | Portfolio</title>
     <link rel="stylesheet" href="/CSS/output.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/CSS/admin.css">
 </head>
 
-<body class="bg-gray-100 min-h-screen">
-    <div id="formLoader" class="hidden fixed inset-0 bg-opacity-0 flex items-center justify-center z-50">
-        <div class="loader"></div>
+<body class="bg-gray-50 min-h-screen font-sans">
+    <div id="formLoader" class="hidden fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50 backdrop-blur-sm">
+        <div class="bg-white p-5 rounded-lg shadow-lg flex flex-col items-center">
+            <div class="loader mb-3"></div>
+            <p class="text-gray-700">Processing...</p>
+        </div>
     </div>
 
+    <div id="sidebarOverlay" class="fixed inset-0 hidden md:hidden"></div>
+
     <div class="flex min-h-screen">
-        <div id="loginSection" class="w-full flex items-center justify-center p-6">
-            <div class="bg-white rounded-lg shadow-xl p-8 w-full max-w-md">
-                <div class="text-center mb-8">
-                    <h1 class="text-2xl font-bold text-gray-800">Admin Login</h1>
+        <div id="loginSection" class="w-full flex items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-blue-50 to-indigo-50">
+            <div class="bg-white rounded-xl shadow-2xl p-6 sm:p-8 w-full max-w-md hover-grow">
+                <div class="text-center mb-6 sm:mb-8">
+                    <div class="mx-auto w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-user-shield text-white text-2xl"></i>
+                    </div>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">Admin Login</h1>
                     <p class="text-gray-600 mt-2">Enter your credentials to access the admin panel</p>
                 </div>
 
-                <form id="loginForm" class="space-y-6">
+                <form id="loginForm" class="space-y-5 sm:space-y-6">
                     <div>
-                        <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Username</label>
-                        <input type="text" id="username" name="username" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
+                        <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-user text-gray-400"></i>
+                            </div>
+                            <input type="text" id="username" name="username" required
+                                class="form-control w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
+                        </div>
                     </div>
 
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                        <input type="password" id="password" name="password" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
+                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-lock text-gray-400"></i>
+                            </div>
+                            <input type="password" id="password" name="password" required
+                                class="form-control w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
+                        </div>
                     </div>
 
                     <button type="submit"
-                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition duration-200">
-                        Login
+                        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-lg transition duration-200 shadow-md hover:shadow-lg flex items-center justify-center">
+                        <i class="fas fa-sign-in-alt mr-2"></i>Login
                     </button>
                 </form>
             </div>
         </div>
 
         <div id="adminPanel" class="hidden w-full">
-            <nav class="bg-white shadow-md px-6 py-4 fixed w-full top-0 z-10">
-                <div class="flex justify-between items-center">
-                    <h1 class="text-xl font-bold text-gray-800">Admin Panel</h1>
-                    <button id="logoutBtn" class="text-gray-600 hover:text-red-600 transition duration-200">
-                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
-                    </button>
-                </div>
-            </nav>
-
-            <main class="container mx-auto px-6 py-8 mt-20">
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h2 class="text-xl font-bold mb-6">Update Profile Image</h2>
-
-                    <div class="flex flex-col md:flex-row gap-8">
-                        <div class="md:w-1/3">
-                            <div class="bg-gray-50 p-4 rounded-lg">
-                                <h3 class="font-medium mb-4">Current Image</h3>
-                                <img id="currentProfileImage" alt="Current Profile"
-                                    class="w-48 h-48 rounded-full mx-auto object-cover border-4 border-white shadow-lg">
-                            </div>
+            <div id="sidebar" class="sidebar fixed inset-y-0 left-0 w-64 bg-gray-900 text-white shadow-lg z-30 closed md:open">
+                <div class="flex flex-col h-full">
+                    <div class="p-5 border-b border-gray-800 flex justify-between items-center">
+                        <div>
+                            <h1 class="text-xl font-bold">Portfolio Admin</h1>
+                            <p class="text-sm text-gray-400 mt-1">Manage your website</p>
                         </div>
-
-                        <div class="md:w-2/3">
-                            <form id="imageUploadForm" class="space-y-6">
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">New Image</label>
-                                    <div class="flex items-center justify-center w-full">
-                                        <label
-                                            class="flex flex-col w-full h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer hover:bg-gray-50">
-                                            <div class="flex flex-col items-center justify-center pt-7">
-                                                <i class="fas fa-cloud-upload-alt text-gray-400 text-3xl mb-2"></i>
-                                                <p class="text-sm text-gray-600">Click to upload or drag and drop</p>
-                                                <p class="text-xs text-gray-500 mt-1">PNG, JPG up to 2MB</p>
-                                            </div>
-                                            <input type="file" id="imageInput" name="image" accept="image/*"
-                                                class="hidden">
-                                        </label>
+                        <button id="closeSidebarBtn" class="text-gray-400 hover:text-white md:hidden">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <nav class="flex-1 overflow-y-auto p-4">
+                        <ul class="space-y-2">
+                            <li>
+                                <a href="#" class="flex items-center px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-800 hover:text-white transition">
+                                    <i class="fas fa-cog w-5 mr-3"></i>
+                                    <span>Server logs</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="flex items-center px-4 py-3 rounded-lg bg-blue-600 text-white transition">
+                                    <i class="fas fa-user-circle w-5 mr-3"></i>
+                                    <span>Profile</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    
+                    <div class="p-4 border-t border-gray-800">
+                        <button id="logoutBtn" class="flex items-center w-full px-4 py-3 rounded-lg text-gray-300 hover:bg-gray-800 hover:text-white transition">
+                            <i class="fas fa-sign-out-alt w-5 mr-3"></i>
+                            <span>Logout</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="md:hidden fixed top-0 left-0 right-0 bg-white shadow-md z-20 px-4 py-3 flex items-center justify-between">
+                <button id="openSidebarBtn" class="text-gray-600 hover:text-blue-600">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+                <h1 class="text-lg font-bold text-gray-800">Admin Panel</h1>
+                <button id="mobileLogoutBtn" class="text-gray-600 hover:text-red-600">
+                    <i class="fas fa-sign-out-alt text-lg"></i>
+                </button>
+            </div>
+            
+            <div class="md:ml-64 p-4 sm:p-6 md:p-8 pt-16 md:pt-8">
+                <header class="mb-6 md:mb-8">
+                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Profile Management</h1>
+                    <p class="text-gray-600 mt-1 md:mt-2">Update your profile information and appearance</p>
+                </header>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="p-4 sm:p-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
+                        <h2 class="text-lg md:text-xl font-bold">Update Profile Image</h2>
+                        <p class="text-blue-100 mt-1 text-sm">Change how you appear across your portfolio</p>
+                    </div>
+                    
+                    <div class="p-4 sm:p-6">
+                        <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+                            <div class="w-full md:w-1/3">
+                                <div class="bg-gray-50 p-4 sm:p-6 rounded-xl border border-gray-100">
+                                    <h3 class="font-medium mb-4 text-gray-800">Current Image</h3>
+                                    <div class="relative mx-auto w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 group">
+                                        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                                        <img id="currentProfileImage" alt="Current Profile"
+                                            class="w-full h-full rounded-full mx-auto object-cover border-4 border-white shadow-lg">
                                     </div>
                                 </div>
+                            </div>
 
-                                <div id="imagePreviewContainer" class="hidden">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Preview</label>
-                                    <img id="imagePreview"
-                                        class="w-48 h-48 rounded-full object-cover border-4 border-white shadow-lg">
-                                </div>
+                            <div class="w-full md:w-2/3">
+                                <form id="imageUploadForm" class="space-y-5 sm:space-y-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">Upload New Image</label>
+                                        <div class="flex items-center justify-center w-full">
+                                            <label
+                                                class="flex flex-col w-full h-32 sm:h-40 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer image-drop-area hover:bg-gray-50 relative group">
+                                                <div class="flex flex-col items-center justify-center pt-6 sm:pt-8 pb-6">
+                                                    <div class="w-12 h-12 sm:w-16 sm:h-16 mb-3 bg-blue-50 rounded-full flex items-center justify-center group-hover:bg-blue-100 transition-all">
+                                                        <i class="fas fa-cloud-upload-alt text-blue-600 text-xl sm:text-2xl"></i>
+                                                    </div>
+                                                    <p class="text-sm font-medium text-gray-700 mb-1">Click to upload or drag and drop</p>
+                                                    <p class="text-xs text-gray-500">PNG, JPG up to 2MB</p>
+                                                </div>
+                                                <input type="file" id="imageInput" name="image" accept="image/*"
+                                                    class="hidden">
+                                            </label>
+                                        </div>
+                                    </div>
 
-                                <button type="submit"
-                                    class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 py-3 rounded-lg transition duration-200 flex items-center justify-center">
-                                    <i class="fas fa-upload mr-2"></i>Update Profile Image
-                                </button>
-                            </form>
+                                    <div id="imagePreviewContainer" class="hidden bg-gray-50 p-4 sm:p-6 rounded-xl border border-gray-100">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">Preview</label>
+                                        <div class="flex items-center justify-center">
+                                            <div class="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48">
+                                                <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full opacity-10"></div>
+                                                <img id="imagePreview"
+                                                    class="w-full h-full rounded-full object-cover border-4 border-white shadow-lg">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="submit"
+                                        class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white font-medium px-6 sm:px-8 py-3 rounded-lg transition duration-200 flex items-center justify-center shadow-md hover:shadow-lg">
+                                        <i class="fas fa-upload mr-2"></i>Update Profile Image
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </main>
+            </div>
         </div>
     </div>
 
     <script src="/JS/admin.js"></script>
 </body>
-
 </html>
