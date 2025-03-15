@@ -4,6 +4,7 @@ require('dotenv').config();
 const contactRoute = require('./routes/contact');
 const downloadRoute = require('./routes/download')
 const imagesRoute = require('./routes/images');
+const adminRoute = require('./routes/admin');
 const path = require('path');
 const { limiter, apiLimiter, contactLimiter, securityMiddleware } = require('./middleware/security');
 const ddosProtection = require('./middleware/ddosProtection');
@@ -31,22 +32,18 @@ const allowedOrigins = [
     `http://${host}:3000`
 ];
 
+// Update the corsOptions configuration
 const corsOptions = {
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: process.env.ALLOWED_ORIGINS,
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-    maxAge: 600,
-    exposedHeaders: ['Content-Type', 'Content-Length']
+    credentials: true
 };
 
 app.use(cors(corsOptions));
+
+// Remove or comment out any other cors() middleware
+// app.use(cors());
 
 app.use('/api', apiLimiter);
 app.use('/api/contact', contactLimiter);
@@ -54,6 +51,7 @@ app.use('/api/contact', contactLimiter);
 app.use('/api', contactRoute);
 app.use('/api', downloadRoute);
 app.use('/api', imagesRoute);
+app.use('/api', adminRoute);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);

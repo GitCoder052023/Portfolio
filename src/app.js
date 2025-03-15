@@ -17,6 +17,10 @@ app.get("/contact-request-accepted", (req, res) => {
     res.sendFile(path.join(__dirname, '../Public/Templates/ContactRequest_accepted.html'));
 });
 
+app.get("/admin", (req, res) => {
+    res.sendFile(path.join(__dirname, '../Public/Templates/admin.html'));
+});
+
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, '../Public/Templates/404.html'));
 });

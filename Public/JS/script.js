@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const cursor = document.createElement('span');
         cursor.className = 'cursor';
 
-        // Append elements to h1
         h1.appendChild(text1);
         h1.appendChild(span);
         h1.appendChild(cursor);
@@ -249,7 +248,7 @@ contactForm.addEventListener('submit', async (e) => {
     const formData = new FormData(contactForm);
     const formDataObj = Object.fromEntries(formData.entries());
 
-    formLoader.classList.remove('hidden'); // Show Loader
+    formLoader.classList.remove('hidden'); 
 
     try {
         const response = await fetch(`http://${currentHost}:5000/api/contact`, {
@@ -272,7 +271,7 @@ contactForm.addEventListener('submit', async (e) => {
         console.error('Error:', error);
         alert('Sorry, there was an error sending your message. Please try again later.');
     } finally {
-        formLoader.classList.add('hidden'); // Hide Loader
+        formLoader.classList.add('hidden'); 
     }
 });
 
