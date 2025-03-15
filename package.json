@@ -5,7 +5,8 @@
   "scripts": {
     "start": "concurrently \"node Server/server.js\" \"node src/app.js\"",
     "build:css": "npx @tailwindcss/cli -i ./Public/CSS/tailwind.css -o ./Public/CSS/output.css --watch",
-    "dev": "concurrently \"nodemon run Server/server.js\" \"nodemon run src/app.js\" \"npm run build:css\""
+    "dev": "concurrently \"nodemon Server/server.js\" \"nodemon src/app.js\" \"npm run build:css\"",
+    "start:prod": "npm run build:css && concurrently \"node Server/server.js\" \"node src/app.js\""
   },
   "keywords": [],
   "author": "",

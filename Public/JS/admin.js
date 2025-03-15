@@ -136,8 +136,6 @@ imageUploadForm.addEventListener('submit', async (e) => {
     }
 });
 
-checkAuthStatus();
-
 document.addEventListener('DOMContentLoaded', () => {
     if (!localStorage.getItem('adminToken')) {
         hideAdminPanel();
@@ -184,4 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
             sidebarOverlay.classList.add('hidden');
         }
     });
+    
+    checkAuthStatus();
 });

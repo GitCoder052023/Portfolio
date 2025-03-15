@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -10,47 +10,47 @@
     <link rel="stylesheet" href="/CSS/admin.css">
 </head>
 
-<body class="bg-gray-50 min-h-screen font-sans">
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen font-sans transition-colors duration-300">
     <div id="formLoader" class="hidden fixed inset-0 bg-black bg-opacity-30 flex items-center justify-center z-50 backdrop-blur-sm">
-        <div class="bg-white p-5 rounded-lg shadow-lg flex flex-col items-center">
+        <div class="bg-white dark:bg-gray-800 p-5 rounded-lg shadow-lg flex flex-col items-center">
             <div class="loader mb-3"></div>
-            <p class="text-gray-700">Processing...</p>
+            <p class="text-gray-700 dark:text-gray-300">Processing...</p>
         </div>
     </div>
 
     <div id="sidebarOverlay" class="fixed inset-0 hidden md:hidden"></div>
 
     <div class="flex min-h-screen">
-        <div id="loginSection" class="w-full flex items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-blue-50 to-indigo-50">
-            <div class="bg-white rounded-xl shadow-2xl p-6 sm:p-8 w-full max-w-md hover-grow">
+        <div id="loginSection" class="w-full flex items-center justify-center p-4 sm:p-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900 transition-colors duration-300">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl p-6 sm:p-8 w-full max-w-md hover-grow transition-colors duration-300">
                 <div class="text-center mb-6 sm:mb-8">
                     <div class="mx-auto w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center mb-4">
                         <i class="fas fa-user-shield text-white text-2xl"></i>
                     </div>
-                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-800">Admin Login</h1>
-                    <p class="text-gray-600 mt-2">Enter your credentials to access the admin panel</p>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">Admin Login</h1>
+                    <p class="text-gray-600 dark:text-gray-400 mt-2">Enter your credentials to access the admin panel</p>
                 </div>
 
                 <form id="loginForm" class="space-y-5 sm:space-y-6">
                     <div>
-                        <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                        <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Username</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-user text-gray-400"></i>
                             </div>
-                            <input type="text" id="username" name="username" required
-                                class="form-control w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
+                            <input type="text" id="username" name="username" placeholder="username" required
+                                class="form-control w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                         </div>
                     </div>
 
                     <div>
-                        <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
                         <div class="relative">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-lock text-gray-400"></i>
                             </div>
-                            <input type="password" id="password" name="password" required
-                                class="form-control w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all">
+                            <input type="password" id="password" name="password" placeholder="password" required
+                                class="form-control w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                         </div>
                     </div>
 
@@ -63,7 +63,7 @@
         </div>
 
         <div id="adminPanel" class="hidden w-full">
-            <div id="sidebar" class="sidebar fixed inset-y-0 left-0 w-64 bg-gray-900 text-white shadow-lg z-30 closed md:open">
+            <div id="sidebar" class="sidebar fixed inset-y-0 left-0 w-64 bg-gray-900 dark:bg-gray-950 text-white shadow-lg z-30 closed md:open transition-colors duration-300">
                 <div class="flex flex-col h-full">
                     <div class="p-5 border-b border-gray-800 flex justify-between items-center">
                         <div>
@@ -95,23 +95,27 @@
                 </div>
             </div>
             
-            <div class="md:hidden fixed top-0 left-0 right-0 bg-white shadow-md z-20 px-4 py-3 flex items-center justify-between">
-                <button id="openSidebarBtn" class="text-gray-600 hover:text-blue-600">
+            <div class="md:hidden fixed top-0 left-0 right-0 bg-white dark:bg-gray-800 shadow-md z-20 px-4 py-3 flex items-center justify-between transition-colors duration-300">
+                <button id="openSidebarBtn" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
-                <h1 class="text-lg font-bold text-gray-800">Admin Panel</h1>
-                <button id="mobileLogoutBtn" class="text-gray-600 hover:text-red-600">
-                    <i class="fas fa-sign-out-alt text-lg"></i>
-                </button>
+                <h1 class="text-lg font-bold text-gray-800 dark:text-white">Admin Panel</h1>
+                <div class="flex items-center space-x-3">
+                    <button id="mobileLogoutBtn" class="text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400">
+                        <i class="fas fa-sign-out-alt text-lg"></i>
+                    </button>
+                </div>
             </div>
             
             <div class="md:ml-64 p-4 sm:p-6 md:p-8 pt-16 md:pt-8">
-                <header class="mb-6 md:mb-8">
-                    <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Profile Management</h1>
-                    <p class="text-gray-600 mt-1 md:mt-2">Update your profile information and appearance</p>
+                <header class="mb-6 md:mb-8 flex justify-between items-center">
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold text-white">Profile Management</h1>
+                        <p class="text-gray-400 mt-1 md:mt-2">Update your profile information and appearance</p>
+                    </div>
                 </header>
                 
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-md overflow-hidden transition-colors duration-300">
                     <div class="p-4 sm:p-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white">
                         <h2 class="text-lg md:text-xl font-bold">Update Profile Image</h2>
                         <p class="text-blue-100 mt-1 text-sm">Change how you appear across your portfolio</p>
@@ -120,12 +124,12 @@
                     <div class="p-4 sm:p-6">
                         <div class="flex flex-col md:flex-row gap-6 md:gap-8">
                             <div class="w-full md:w-1/3">
-                                <div class="bg-gray-50 p-4 sm:p-6 rounded-xl border border-gray-100">
-                                    <h3 class="font-medium mb-4 text-gray-800">Current Image</h3>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-4 sm:p-6 rounded-xl border border-gray-100 dark:border-gray-600 transition-colors duration-300">
+                                    <h3 class="font-medium mb-4 text-gray-800 dark:text-white transition-colors duration-300">Current Image</h3>
                                     <div class="relative mx-auto w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48 group">
-                                        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full opacity-10 group-hover:opacity-20 transition-opacity"></div>
+                                        <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full opacity-10"></div>
                                         <img id="currentProfileImage" alt="Current Profile"
-                                            class="w-full h-full rounded-full mx-auto object-cover border-4 border-white shadow-lg">
+                                            class="w-full h-full rounded-full mx-auto object-cover border-4 border-white dark:border-gray-800 shadow-lg transition-colors duration-300">
                                     </div>
                                 </div>
                             </div>
@@ -133,16 +137,16 @@
                             <div class="w-full md:w-2/3">
                                 <form id="imageUploadForm" class="space-y-5 sm:space-y-6">
                                     <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">Upload New Image</label>
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 sm:mb-3 transition-colors duration-300">Upload New Image</label>
                                         <div class="flex items-center justify-center w-full">
                                             <label
-                                                class="flex flex-col w-full h-32 sm:h-40 border-2 border-gray-300 border-dashed rounded-xl cursor-pointer image-drop-area hover:bg-gray-50 relative group">
+                                                class="flex flex-col w-full h-32 sm:h-40 border-2 border-gray-300 dark:border-gray-600 border-dashed rounded-xl cursor-pointer image-drop-area hover:bg-gray-50 dark:hover:bg-gray-700 relative group transition-colors duration-300">
                                                 <div class="flex flex-col items-center justify-center pt-6 sm:pt-8 pb-6">
-                                                    <div class="w-12 h-12 sm:w-16 sm:h-16 mb-3 bg-blue-50 rounded-full flex items-center justify-center group-hover:bg-blue-100 transition-all">
-                                                        <i class="fas fa-cloud-upload-alt text-blue-600 text-xl sm:text-2xl"></i>
+                                                    <div class="w-12 h-12 sm:w-16 sm:h-16 mb-3 bg-blue-50 dark:bg-blue-900 rounded-full flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-800 transition-all">
+                                                        <i class="fas fa-cloud-upload-alt text-blue-600 dark:text-blue-400 text-xl sm:text-2xl"></i>
                                                     </div>
-                                                    <p class="text-sm font-medium text-gray-700 mb-1">Click to upload or drag and drop</p>
-                                                    <p class="text-xs text-gray-500">PNG, JPG up to 2MB</p>
+                                                    <p class="text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 transition-colors duration-300">Click to upload or drag and drop</p>
+                                                    <p class="text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">PNG, JPG up to 2MB</p>
                                                 </div>
                                                 <input type="file" id="imageInput" name="image" accept="image/*"
                                                     class="hidden">
@@ -150,13 +154,13 @@
                                         </div>
                                     </div>
 
-                                    <div id="imagePreviewContainer" class="hidden bg-gray-50 p-4 sm:p-6 rounded-xl border border-gray-100">
-                                        <label class="block text-sm font-medium text-gray-700 mb-2 sm:mb-3">Preview</label>
+                                    <div id="imagePreviewContainer" class="hidden bg-gray-50 dark:bg-gray-700 p-4 sm:p-6 rounded-xl border border-gray-100 dark:border-gray-600 transition-colors duration-300">
+                                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2 sm:mb-3 transition-colors duration-300">Preview</label>
                                         <div class="flex items-center justify-center">
                                             <div class="relative w-32 h-32 sm:w-40 sm:h-40 md:w-48 md:h-48">
                                                 <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full opacity-10"></div>
                                                 <img id="imagePreview"
-                                                    class="w-full h-full rounded-full object-cover border-4 border-white shadow-lg">
+                                                    class="w-full h-full rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-lg transition-colors duration-300">
                                             </div>
                                         </div>
                                     </div>
