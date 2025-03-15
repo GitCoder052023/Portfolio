@@ -32,7 +32,6 @@ const allowedOrigins = [
     `http://${host}:3000`
 ];
 
-// Update the corsOptions configuration
 const corsOptions = {
     origin: process.env.ALLOWED_ORIGINS,
     methods: ['GET', 'POST', 'OPTIONS'],
@@ -41,9 +40,6 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-// Remove or comment out any other cors() middleware
-// app.use(cors());
 
 app.use('/api', apiLimiter);
 app.use('/api/contact', contactLimiter);
