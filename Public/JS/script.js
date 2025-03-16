@@ -110,7 +110,7 @@ async function downloadCV(event) {
     event.preventDefault();
 
     try {
-        const response = await fetch(`http://${currentHost}:5000/api/download-cv`, {
+        const response = await fetch(`https://hamdankhubaib.in/api/download-cv`, {
             method: 'GET',
         });
 
@@ -251,7 +251,7 @@ contactForm.addEventListener('submit', async (e) => {
     formLoader.classList.remove('hidden'); 
 
     try {
-        const response = await fetch(`http://${currentHost}:5000/api/contact`, {
+        const response = await fetch(`https://hamdankhubaib.in/api/contact`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

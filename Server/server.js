@@ -36,7 +36,8 @@ const corsOptions = {
     origin: process.env.ALLOWED_ORIGINS,
     methods: ['GET', 'POST', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    credentials: true,
+    secure: true // Force secure in production
 };
 
 app.use(cors(corsOptions));
@@ -65,5 +66,5 @@ app.use((req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on http://${host}:${port}`);
+    console.log(`Server is running on port ${port}`);
 });

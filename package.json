@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "Server/server.js",
   "scripts": {
-    "start": "concurrently \"node Server/server.js\" \"node src/app.js\"",
-    "build:css": "npx @tailwindcss/cli -i ./Public/CSS/tailwind.css -o ./Public/CSS/output.css --watch",
-    "dev": "concurrently \"nodemon Server/server.js\" \"nodemon src/app.js\" \"npm run build:css\"",
-    "start:prod": "npm run build:css && concurrently \"node Server/server.js\" \"node src/app.js\""
+    "start": "NODE_ENV=production concurrently \"node Server/server.js\" \"node src/app.js\"",
+    "build:css": "npx @tailwindcss/cli -i ./Public/CSS/tailwind.css -o ./Public/CSS/output.css",
+    "dev": "NODE_ENV=development concurrently \"nodemon Server/server.js\" \"nodemon src/app.js\" \"npm run build:css -- --watch\"",
+    "start:prod": "NODE_ENV=production npm run build:css && concurrently \"node Server/server.js\" \"node src/app.js\""
   },
   "keywords": [],
   "author": "",

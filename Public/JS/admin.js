@@ -1,4 +1,4 @@
-const currentHost = window.location.hostname;
+const API_BASE_URL = 'https://hamdankhubaib.in';
 const loginForm = document.getElementById('loginForm');
 const imageUploadForm = document.getElementById('imageUploadForm');
 const loginSection = document.getElementById('loginSection');
@@ -56,13 +56,13 @@ loginForm.addEventListener('submit', async (e) => {
 
     try {
         console.log('Sending login request...');
-        const response = await fetch(`http://${currentHost}:5000/api/admin/login`, {
+        const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(credentials),
-            credentials: 'same-origin' 
+            credentials: 'include'
         });
 
         console.log('Response status:', response.status);
@@ -110,7 +110,7 @@ imageUploadForm.addEventListener('submit', async (e) => {
     formData.append('image', imageInput.files[0]);
 
     try {
-        const response = await fetch(`http://${currentHost}:5000/api/admin/update-profile-image`, {
+        const response = await fetch(`${API_BASE_URL}/api/admin/update-profile-image`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const profileImage = document.getElementById('currentProfileImage');
     
-    profileImage.src = `http://${currentHost}:5000/api/profile-image`;
+    profileImage.src = `${API_BASE_URL}/api/profile-image`;
     
     profileImage.onerror = () => {
         console.error('Failed to load profile image');

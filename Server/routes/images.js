@@ -14,7 +14,8 @@ router.get('/profile-image', (req, res) => {
             'X-Content-Type-Options': 'nosniff',
             'Access-Control-Allow-Origin': process.env.ALLOWED_ORIGINS,
             'Access-Control-Allow-Methods': 'GET',
-            'Cross-Origin-Resource-Policy': 'cross-origin'
+            'Cross-Origin-Resource-Policy': 'cross-origin',
+            'Strict-Transport-Security': 'max-age=31536000; includeSubDomains'
         });
         
         res.sendFile(imagePath);
