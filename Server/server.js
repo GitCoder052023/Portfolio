@@ -8,9 +8,12 @@ const adminRoute = require('./routes/admin');
 const path = require('path');
 const { limiter, apiLimiter, contactLimiter, securityMiddleware } = require('./middleware/security');
 const ddosProtection = require('./middleware/ddosProtection');
+const { getLocalIPv4, updateEnvFile } = require('../utils/ipConfig');
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
 dotenv.config({ path: path.resolve(__dirname, `../${envFile}`) });
+
+updateEnvFile();
 
 const app = express();
 const port = process.env.PORT;
@@ -65,5 +68,6 @@ app.use((req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`[LOCAL INTERFACE] - Server is running on http://localhost:${port} (Only use it for development purposes or testing)`);
+    console.log(`[NETWORK INTERFACE] Server is running on http://${getLocalIPv4()}:${port} (Recommended)`);
 });

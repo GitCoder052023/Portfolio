@@ -3,6 +3,7 @@ AOS.init({
 });
 
 const currentHost = window.location.hostname;
+const API_BASE_URL = `http://${currentHost}:5000`;
 
 const menuToggle = document.getElementById('menu-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
@@ -110,7 +111,7 @@ async function downloadCV(event) {
     event.preventDefault();
 
     try {
-        const response = await fetch(`https://hamdankhubaib.in/api/download-cv`, {
+        const response = await fetch(`${API_BASE_URL}/api/download-cv`, {
             method: 'GET',
         });
 
@@ -251,7 +252,7 @@ contactForm.addEventListener('submit', async (e) => {
     formLoader.classList.remove('hidden'); 
 
     try {
-        const response = await fetch(`https://hamdankhubaib.in/api/contact`, {
+        const response = await fetch(`${API_BASE_URL}/api/contact`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,4 +1,5 @@
-const API_BASE_URL = 'https://hamdankhubaib.in';
+const currentHost = window.location.hostname;
+const API_BASE_URL = `http://${currentHost}:5000`;
 const loginForm = document.getElementById('loginForm');
 const imageUploadForm = document.getElementById('imageUploadForm');
 const loginSection = document.getElementById('loginSection');
