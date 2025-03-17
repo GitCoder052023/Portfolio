@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "main": "Server/server.js",
   "scripts": {
-    "start": "NODE_ENV=production dotenv -e .env.production concurrently \"node Server/server.js\" \"node src/app.js\"",
+    "start": "cross-env NODE_ENV=production concurrently \"node Server/server.js\" \"node src/app.js\"",
     "build:css": "npx @tailwindcss/cli -i ./Public/CSS/tailwind.css -o ./Public/CSS/output.css",
-    "dev": "NODE_ENV=development dotenv -e .env.development concurrently \"nodemon Server/server.js\" \"nodemon src/app.js\" \"npm run build:css -- --watch\"",
-    "start:prod": "NODE_ENV=production npm run build:css && dotenv -e .env.production concurrently \"node Server/server.js\" \"node src/app.js\""
+    "dev": "cross-env NODE_ENV=development concurrently \"nodemon Server/server.js\" \"nodemon src/app.js\" \"npm run build:css -- --watch\"",
+    "start:prod": "cross-env NODE_ENV=production npm run build:css && concurrently \"node Server/server.js\" \"node src/app.js\""
   },
   "keywords": [],
   "author": "",
@@ -30,6 +30,7 @@
     "xss-clean": "^0.1.4"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "nodemon": "^3.0.1"
   }
 }

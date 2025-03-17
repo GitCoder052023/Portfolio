@@ -29,8 +29,7 @@ app.use(express.static(path.join(__dirname, '../Public'), {
 }));
 
 const allowedOrigins = [
-    'http://localhost:3000',
-    `http://${host}:3000`
+    `http://${process.env.ALLOWED_ORIGINS}`
 ];
 
 const corsOptions = {
