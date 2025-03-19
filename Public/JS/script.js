@@ -171,41 +171,6 @@ backToTopButton.addEventListener('click', (e) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-const cursor = document.querySelector('.custom-cursor');
-const cursorDot = document.querySelector('.cursor-dot');
-
-document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX + 'px';
-    cursor.style.top = e.clientY + 'px';
-    cursorDot.style.left = e.clientX + 'px';
-    cursorDot.style.top = e.clientY + 'px';
-});
-
-document.addEventListener('mousedown', () => {
-    cursor.style.width = '15px';
-    cursor.style.height = '15px';
-});
-
-document.addEventListener('mouseup', () => {
-    cursor.style.width = '20px';
-    cursor.style.height = '20px';
-});
-
-const links = document.querySelectorAll('a, button');
-links.forEach(link => {
-    link.addEventListener('mouseenter', () => {
-        cursor.style.width = '40px';
-        cursor.style.height = '40px';
-        cursor.style.backgroundColor = 'rgba(37, 99, 235, 0.2)';
-    });
-
-    link.addEventListener('mouseleave', () => {
-        cursor.style.width = '20px';
-        cursor.style.height = '20px';
-        cursor.style.backgroundColor = 'rgba(37, 99, 235, 0.3)';
-    });
-});
-
 const progressBars = document.querySelectorAll('.progress-bar');
 
 const animateProgressBars = () => {
@@ -283,7 +248,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 document.querySelectorAll('input, textarea').forEach(input => {
     input.addEventListener('touchstart', (e) => {
-        e.preventDefault(); // Prevent default long-press behavior
-        input.focus(); // Force focus on single tap
+        e.preventDefault(); 
+        input.focus(); 
     });
 });

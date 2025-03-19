@@ -174,30 +174,6 @@ input, textarea {
     visibility: visible;
 }
 
-/* Custom cursor */
-.custom-cursor {
-    position: fixed;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: rgba(37, 99, 235, 0.3);
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s, height 0.3s, background-color 0.3s;
-}
-
-.cursor-dot {
-    position: fixed;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background-color: var(--primary);
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-}
-
 /* Timeline */
 .timeline {
     position: relative;
