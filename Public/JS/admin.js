@@ -66,7 +66,6 @@ loginForm.addEventListener('submit', async (e) => {
     };
 
     try {
-        console.log('Sending login request...');
         const response = await fetch(`${API_BASE_URL}/api/admin/login`, {
             method: 'POST',
             headers: {
@@ -76,11 +75,9 @@ loginForm.addEventListener('submit', async (e) => {
             credentials: 'include'
         });
 
-        console.log('Response status:', response.status);
         const data = await response.json();
 
         if (response.ok) {
-            console.log('Login successful');
             localStorage.setItem('adminToken', data.token);
             showAdminPanel();
             loadProfileImage();

@@ -1,210 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site Maintenance | Portfolio</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/4.0.0/font/MaterialIcons-Regular.ttf" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #fafafa;
-        }
-        .material-card {
-            border-radius: 8px;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.15);
-            transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .material-card:hover {
-            box-shadow: 0 8px 16px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.20);
-        }
-        .progress-bar {
-            width: 0%;
-            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .material-button {
-            border-radius: 50%;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .material-button:hover {
-            box-shadow: 0 5px 10px rgba(0,0,0,0.3);
-            transform: translateY(-1px);
-        }
-        .material-button:active {
-            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-            transform: translateY(1px);
-        }
-        .floating-action {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .floating-action:hover {
-            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-            transform: translateY(-2px);
-        }
-        .floating-action:active {
-            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
-            transform: translateY(1px);
-        }
-        .contact-button {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .contact-button:hover {
-            transform: translateY(-2px);
-        }
-        .contact-button:active {
-            transform: translateY(1px);
-        }
-        @keyframes ripple {
-            0% {
-                transform: scale(0);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(10);
-                opacity: 0;
-            }
-        }
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background-color: rgba(255, 255, 255, 0.5);
-            width: 100px;
-            height: 100px;
-            margin-top: -50px;
-            margin-left: -50px;
-            animation: ripple 1s;
-            pointer-events: none;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="min-h-screen flex flex-col justify-center items-center py-12 px-4">
-    <div class="container max-w-4xl">
-        <div class="material-card bg-white mb-10 p-8 md:p-12">
-            <div class="flex flex-col md:flex-row gap-12">
-                <div class="flex-1">
-                    <div class="inline-flex items-center justify-center h-12 w-12 rounded-full bg-purple-600 mb-6">
-                        <span class="material-icons text-white">code</span>
-                    </div>
-                    
-                    <h1 class="text-3xl md:text-4xl font-medium text-gray-900 mb-4">Site Under Maintenance</h1>
-                    
-                    <p class="text-gray-700 text-lg mb-10">I'm currently improving my portfolio with new projects and features. The site will be back online shortly.</p>
-                    
-                    <div class="mb-10">
-                        <div class="flex justify-between mb-2">
-                            <p class="text-sm text-gray-600">Progress</p>
-                            <p class="text-sm font-medium text-purple-600"><span id="percentage">0</span>%</p>
+
+<body class="bg-gray-50 text-gray-800 font-sans">
+    <div class="min-h-screen flex flex-col justify-center items-center p-4">
+        <div class="max-w-md w-full bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="p-6 sm:p-8">
+                <div class="text-center">
+                    <i class="fas fa-wrench text-indigo-600 text-4xl mb-4"></i>
+                    <h1 class="text-2xl font-bold text-gray-900 mb-2">Site Temporarily Unavailable</h1>
+                    <div class="w-16 h-1 bg-indigo-600 mx-auto my-3"></div>
+                </div>
+
+                <p class="text-gray-600 mb-6 text-center">
+                    I'm currently performing some maintenance on this portfolio site to improve your experience.
+                </p>
+
+                <div class="bg-gray-100 p-4 rounded-md mb-6">
+                    <p class="text-sm text-gray-700 italic">
+                        "Making things perfect sometimes requires taking a step back. I'll be back with something even
+                        better soon."
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <div
+                            class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-clock text-indigo-600"></i>
                         </div>
-                        <div class="h-1 bg-gray-200 rounded-full overflow-hidden">
-                            <div class="progress-bar h-full bg-purple-600 rounded-full"></div>
+                        <div class="ml-4">
+                            <h3 class="text-sm font-medium text-gray-900">Expected Return</h3>
+                            <p class="text-sm text-gray-500" id="return-time">Calculating...</p>
                         </div>
                     </div>
-                    
-                    <div class="bg-purple-50 rounded-lg p-6 mb-8">
-                        <div class="flex items-start">
-                            <span class="material-icons-outlined text-purple-600 mr-4">schedule</span>
-                            <div>
-                                <h3 class="font-medium text-gray-900 mb-1">Estimated Completion</h3>
-                                <p class="text-gray-700">The portfolio will be back online in approximately 24 hours</p>
-                            </div>
+
+                    <div class="flex items-center">
+                        <div
+                            class="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-envelope text-indigo-600"></i>
                         </div>
-                    </div>
-                    
-                    <div class="bg-gray-50 rounded-lg p-6 mb-8">
-                        <div class="flex items-start">
-                            <span class="material-icons text-purple-600 mr-4">contact_support</span>
-                            <div>
-                                <h3 class="font-medium text-gray-900 mb-3">Need Support?</h3>
-                                <p class="text-gray-700 mb-4">If you need immediate assistance or have questions about the maintenance, please feel free to contact me:</p>
-                                
-                                <div class="flex flex-col sm:flex-row gap-3 mt-2">
-                                    <a href="mailto:contat.khub.dev@gmail.com" class="contact-button inline-flex items-center justify-center px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors">
-                                        <span class="material-icons text-sm mr-2">email</span>
-                                        Email Me
-                                    </a>
-                                </div>
-                            </div>
+                        <div class="ml-4">
+                            <h3 class="text-sm font-medium text-gray-900">Contact</h3>
+                            <p class="text-sm text-gray-500">contact.khub.dev@gamil.com</p>
                         </div>
                     </div>
                 </div>
-                
-                <div class="flex-1 flex items-center justify-center">
-                    <div class="w-full max-w-xs">
-                        <svg width="100%" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="200" cy="200" r="200" fill="#F3E8FF" />
-                            <rect x="110" y="120" width="180" height="160" rx="8" fill="#9333EA" />
-                            <rect x="130" y="140" width="140" height="15" rx="4" fill="white" opacity="0.8" />
-                            <rect x="130" y="170" width="140" height="15" rx="4" fill="white" opacity="0.6" />
-                            <rect x="130" y="200" width="140" height="15" rx="4" fill="white" opacity="0.8" />
-                            <rect x="130" y="230" width="70" height="15" rx="4" fill="white" opacity="0.6" />
-                            <rect x="130" y="260" width="30" height="8" rx="4" fill="white" opacity="0.8" />
-                            <rect x="170" y="260" width="30" height="8" rx="4" fill="white" opacity="0.8" />
-                            <rect x="210" y="260" width="30" height="8" rx="4" fill="white" opacity="0.8" />
-                            <circle cx="330" cy="100" r="30" fill="#9333EA" />
-                            <circle cx="70" cy="280" r="20" fill="#9333EA" />
-                            <circle cx="330" cy="300" r="15" fill="#9333EA" />
-                            <circle cx="310" cy="320" r="10" fill="#9333EA" />
-                        </svg>
+            </div>
+
+            <div class="bg-gray-50 px-6 py-4 sm:px-8">
+                <div class="text-center text-xs text-gray-500">
+                    <p>© <span id="current-year"></span> Hamdan Khubaib | Independent Developer</p>
+                    <div class="flex justify-center space-x-4 mt-3">
+                        <a href="https://x.com/HamdanKhu41893" class="text-gray-400 hover:text-indigo-600">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://github.com/GitCoder052023" class="text-gray-400 hover:text-indigo-600">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/hamdan-khubaib-3046b8331" class="text-gray-400 hover:text-indigo-600">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <p class="text-center text-gray-500 text-sm">© <span id="year">2025</span> • Hamdan Khubaib</p>
     </div>
-    
+
     <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-        
-        setTimeout(() => {
-            const progressBar = document.querySelector('.progress-bar');
-            const percentageText = document.getElementById('percentage');
-            const targetPercentage = Math.floor(Math.random() * 40) + 55;
-            
-            progressBar.style.width = targetPercentage + '%';
-            
-            let currentPercentage = 0;
-            const interval = setInterval(() => {
-                if (currentPercentage >= targetPercentage) {
-                    clearInterval(interval);
-                    return;
-                }
-                currentPercentage++;
-                percentageText.textContent = currentPercentage;
-            }, 25);
-        }, 500);
-        
-        function createRipple(event) {
-            const button = event.currentTarget;
-            
-            const ripple = document.createElement('span');
-            ripple.classList.add('ripple');
-            
-            const rect = button.getBoundingClientRect();
-            ripple.style.left = event.clientX - rect.left + 'px';
-            ripple.style.top = event.clientY - rect.top + 'px';
-            
-            button.appendChild(ripple);
-            
-            setTimeout(() => {
-                ripple.remove();
-            }, 1000);
-        }
-        
-        const buttons = document.querySelectorAll('.material-button, .floating-action, .contact-button');
-        buttons.forEach(button => {
-            button.addEventListener('click', createRipple);
-        });
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        const returnTime = moment().add(24, 'hours');
+        document.getElementById('return-time').textContent = returnTime.format('MMMM Do, YYYY');
     </script>
 </body>
+
 </html>
