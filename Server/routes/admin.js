@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const path = require('path');
@@ -5,13 +6,19 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 const fs = require('fs/promises');
 const bcrypt = require('bcrypt');
+const cloudinary = require('cloudinary').v2;
+const streamifier = require('streamifier'); 
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 const storage = multer.memoryStorage();
 const upload = multer({
     storage: storage,
-    limits: {
-        fileSize: 2 * 1024 * 1024 
-    },
+    limits: { fileSize: 2 * 1024 * 1024 },
     fileFilter: (req, file, cb) => {
         const allowedTypes = ['image/jpeg', 'image/png'];
         if (allowedTypes.includes(file.mimetype)) {
@@ -20,7 +27,7 @@ const upload = multer({
             cb(new Error('Invalid file type. Only JPEG and PNG allowed.'));
         }
     }
-});
+}).single('image'); 
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -42,18 +49,13 @@ const authenticateToken = (req, res, next) => {
 router.post('/admin/login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        console.log('Login attempt:', { username }); 
         
         if (username !== process.env.ADMIN_USERNAME) {
-            console.log('Username mismatch'); 
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
         const passwordMatch = await bcrypt.compare(password, process.env.ADMIN_PASSWORD);
-        console.log('Password match:', passwordMatch); 
-
         if (!passwordMatch) {
-            console.log('Password mismatch'); 
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
@@ -63,7 +65,6 @@ router.post('/admin/login', async (req, res) => {
             { expiresIn: '24h' }
         );
 
-        console.log('Login successful'); 
         res.json({ token });
     } catch (error) {
         console.error('Login error:', error);
@@ -71,34 +72,61 @@ router.post('/admin/login', async (req, res) => {
     }
 });
 
-router.post('/admin/update-profile-image', authenticateToken, upload.single('image'), async (req, res) => {
-    try {
-        if (!req.file) {
-            return res.status(400).json({ message: 'No image provided' });
+router.post('/admin/update-profile-image', authenticateToken, (req, res) => {
+    upload(req, res, async (err) => {
+        if (err) {
+            return res.status(400).json({ message: err.message });
         }
 
-        const imagePath = path.join(__dirname, '../assets/images/profile.jpg');
-        
         try {
-            await fs.copyFile(imagePath, imagePath + '.backup');
+            if (!req.file) {
+                return res.status(400).json({ message: 'No image provided' });
+            }
+
+            if (process.env.NODE_ENV === 'production') {
+                const uploadPromise = new Promise((resolve, reject) => {
+                    const uploadStream = cloudinary.uploader.upload_stream(
+                        { folder: 'profile_images', public_id: 'profile', overwrite: true },
+                        (error, result) => {
+                            if (error) {
+                                reject(error);
+                            } else {
+                                resolve(result);
+                            }
+                        }
+                    );
+                    streamifier.createReadStream(req.file.buffer).pipe(uploadStream);
+                });
+
+                const result = await uploadPromise;
+                return res.json({ message: 'Profile image updated successfully', imageUrl: result.secure_url });
+            } else {
+                const imagePath = path.join(__dirname, '../assets/images/profile.jpg');
+
+                try {
+                    await fs.copyFile(imagePath, imagePath + '.backup');
+                } catch (error) {
+                    console.log('No existing image to backup');
+                }
+
+                await fs.writeFile(imagePath, req.file.buffer);
+                return res.json({ message: 'Profile image updated successfully' });
+            }
         } catch (error) {
-            console.log('No existing image to backup');
+            console.error('Image upload error:', error);
+
+            if (process.env.NODE_ENV !== 'production') {
+                const imagePath = path.join(__dirname, '../assets/images/profile.jpg');
+                try {
+                    await fs.copyFile(imagePath + '.backup', imagePath);
+                } catch (error) {
+                    console.log('No backup to restore');
+                }
+            }
+
+            return res.status(500).json({ message: 'Failed to update profile image' });
         }
-
-        await fs.writeFile(imagePath, req.file.buffer);
-
-        res.json({ message: 'Profile image updated successfully' });
-    } catch (error) {
-        console.error('Image upload error:', error);
-        
-        try {
-            await fs.copyFile(imagePath + '.backup', imagePath);
-        } catch (error) {
-            console.log('No backup to restore');
-        }
-
-        res.status(500).json({ message: 'Failed to update profile image' });
-    }
+    });
 });
 
 module.exports = router;
