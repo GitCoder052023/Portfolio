@@ -44,6 +44,17 @@ function closeSidebar() {
     sidebarOverlay.classList.add('hidden');
 }
 
+async function loadProfileImage() {
+    const profileImage = document.getElementById('currentProfileImage');
+    
+    const timestamp = Date.now();
+    profileImage.src = `${API_BASE_URL}/api/profile-image?t=${timestamp}`;
+    
+    profileImage.onerror = () => {
+        console.error('Failed to load profile image');
+    };
+}
+
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     formLoader.classList.remove('hidden');
@@ -72,6 +83,7 @@ loginForm.addEventListener('submit', async (e) => {
             console.log('Login successful');
             localStorage.setItem('adminToken', data.token);
             showAdminPanel();
+            loadProfileImage();
         } else {
             console.log('Login failed:', data.message);
             alert(data.message || 'Login failed');
@@ -122,7 +134,11 @@ imageUploadForm.addEventListener('submit', async (e) => {
 
         if (response.ok) {
             alert('Profile image updated successfully');
-            currentProfileImage.src = `/api/profile-image?t=${Date.now()}`;
+            if (data.imageUrl) {
+                currentProfileImage.src = `${data.imageUrl}?t=${Date.now()}`;
+            } else {
+                loadProfileImage();
+            }
             imageUploadForm.reset();
             imagePreviewContainer.classList.add('hidden');
         } else {
@@ -139,15 +155,9 @@ imageUploadForm.addEventListener('submit', async (e) => {
 document.addEventListener('DOMContentLoaded', () => {
     if (!localStorage.getItem('adminToken')) {
         hideAdminPanel();
+    } else {
+        loadProfileImage();
     }
-
-    const profileImage = document.getElementById('currentProfileImage');
-    
-    profileImage.src = `${API_BASE_URL}/api/profile-image`;
-    
-    profileImage.onerror = () => {
-        console.error('Failed to load profile image');
-    };
 
     if (openSidebarBtn) {
         openSidebarBtn.addEventListener('click', openSidebar);

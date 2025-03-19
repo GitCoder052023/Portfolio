@@ -1,10 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const router = express.Router();
-const path = require('path');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
-const fs = require('fs/promises');
 const bcrypt = require('bcrypt');
 const cloudinary = require('cloudinary').v2;
 const streamifier = require('streamifier'); 
@@ -83,50 +81,52 @@ router.post('/admin/update-profile-image', authenticateToken, (req, res) => {
                 return res.status(400).json({ message: 'No image provided' });
             }
 
-            if (process.env.NODE_ENV === 'production') {
-                const uploadPromise = new Promise((resolve, reject) => {
-                    const uploadStream = cloudinary.uploader.upload_stream(
-                        { folder: 'profile_images', public_id: 'profile', overwrite: true },
-                        (error, result) => {
-                            if (error) {
-                                reject(error);
-                            } else {
-                                resolve(result);
-                            }
+            const uploadPromise = new Promise((resolve, reject) => {
+                const uploadStream = cloudinary.uploader.upload_stream(
+                    { folder: 'profile_images', public_id: 'profile', overwrite: true },
+                    (error, result) => {
+                        if (error) {
+                            reject(error);
+                        } else {
+                            resolve(result);
                         }
-                    );
-                    streamifier.createReadStream(req.file.buffer).pipe(uploadStream);
-                });
+                    }
+                );
+                streamifier.createReadStream(req.file.buffer).pipe(uploadStream);
+            });
 
-                const result = await uploadPromise;
-                return res.json({ message: 'Profile image updated successfully', imageUrl: result.secure_url });
-            } else {
-                const imagePath = path.join(__dirname, '../assets/images/profile.jpg');
-
-                try {
-                    await fs.copyFile(imagePath, imagePath + '.backup');
-                } catch (error) {
-                    console.log('No existing image to backup');
-                }
-
-                await fs.writeFile(imagePath, req.file.buffer);
-                return res.json({ message: 'Profile image updated successfully' });
-            }
+            const result = await uploadPromise;
+            
+            process.env.PROFILE_IMAGE_URL = result.secure_url;
+            
+            return res.json({ 
+                message: 'Profile image updated successfully', 
+                imageUrl: result.secure_url 
+            });
         } catch (error) {
             console.error('Image upload error:', error);
-
-            if (process.env.NODE_ENV !== 'production') {
-                const imagePath = path.join(__dirname, '../assets/images/profile.jpg');
-                try {
-                    await fs.copyFile(imagePath + '.backup', imagePath);
-                } catch (error) {
-                    console.log('No backup to restore');
-                }
-            }
-
             return res.status(500).json({ message: 'Failed to update profile image' });
         }
     });
+});
+
+router.get('/admin/profile-image-url', authenticateToken, async (req, res) => {
+    try {
+        if (process.env.PROFILE_IMAGE_URL) {
+            return res.json({ imageUrl: process.env.PROFILE_IMAGE_URL });
+        }
+        
+        const result = await cloudinary.api.resource('profile_images/profile');
+        if (result && result.secure_url) {
+            process.env.PROFILE_IMAGE_URL = result.secure_url;
+            return res.json({ imageUrl: result.secure_url });
+        }
+        
+        return res.status(404).json({ message: 'Profile image not found' });
+    } catch (error) {
+        console.error('Error fetching profile image URL:', error);
+        return res.status(500).json({ message: 'Failed to retrieve profile image URL' });
+    }
 });
 
 module.exports = router;
