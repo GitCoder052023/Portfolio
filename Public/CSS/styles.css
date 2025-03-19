@@ -35,10 +35,15 @@ body {
 }
 
 input, textarea {
-    -webkit-user-select: text;
-    -ms-user-select: text;
-    user-select: text;
+    -webkit-user-select: auto;
+    -ms-user-select: auto;
+    user-select: auto;
+    -webkit-user-drag: auto;
+    -khtml-user-drag: auto;
+    -moz-user-drag: auto;
+    -o-user-drag: auto;
 }
+
 
 .progress-bar {
     height: 8px;
