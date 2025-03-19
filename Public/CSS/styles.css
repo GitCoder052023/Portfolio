@@ -38,10 +38,9 @@ input, textarea {
     -webkit-user-select: auto;
     -ms-user-select: auto;
     user-select: auto;
-    -webkit-user-drag: auto;
-    -khtml-user-drag: auto;
-    -moz-user-drag: auto;
-    -o-user-drag: auto;
+    pointer-events: auto;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 
