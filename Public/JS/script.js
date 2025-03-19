@@ -78,16 +78,6 @@ document.querySelectorAll('img').forEach(img => {
     });
 });
 
-document.addEventListener('mouseup', () => {
-    if (window.getSelection) {
-        if (window.getSelection().empty) {
-            window.getSelection().empty();
-        } else if (window.getSelection().removeAllRanges) {
-            window.getSelection().removeAllRanges();
-        }
-    }
-});
-
 document.addEventListener('copy', (e) => {
     if (!e.target.matches('input, textarea')) {
         e.preventDefault();
@@ -288,5 +278,12 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 behavior: 'smooth'
             });
         }
+    });
+});
+
+document.querySelectorAll('input, textarea').forEach(input => {
+    input.addEventListener('touchstart', (e) => {
+        e.preventDefault(); // Prevent default long-press behavior
+        input.focus(); // Force focus on single tap
     });
 });
