@@ -8,6 +8,25 @@ const menuToggle = document.getElementById('menu-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
 
 document.addEventListener('DOMContentLoaded', () => {
+    const calculateAge = () => {
+        const birthDate = new Date('2009-06-19');
+        const today = new Date();
+        
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+        
+        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+        }
+        
+        const ageElement = document.getElementById('dynamic-age');
+        if (ageElement) {
+            ageElement.textContent = `${age} Years`;
+        }
+    };
+    
+    calculateAge();
+
     const h1 = document.querySelector('#hero h1');
     if (h1) {
         h1.innerHTML = '';
