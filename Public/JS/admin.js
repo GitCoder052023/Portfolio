@@ -82,12 +82,11 @@ loginForm.addEventListener('submit', async (e) => {
             showAdminPanel();
             loadProfileImage();
         } else {
-            console.log('Login failed:', data.message);
-            alert(data.message || 'Login failed');
+            window.location.href = '/Templates/Access_Denied.html';
         }
     } catch (error) {
         console.error('Login error:', error);
-        alert('Login failed. Please try again.');
+        window.location.href = '/Templates/Access_Denied.html';
     } finally {
         formLoader.classList.add('hidden');
     }
