@@ -20,6 +20,10 @@
       "dest": "/Server/server.js"
     },
     {
+      "src": "/Templates/(.*)",
+      "dest": "/src/app.js"
+    },
+    {
       "src": "/(.*)",
       "dest": "/src/app.js"
     }

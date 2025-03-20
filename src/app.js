@@ -10,6 +10,10 @@ const port = process.env.FPORT;
 
 app.use(express.static(path.join(__dirname, '../Public')));
 
+app.use('/Templates/*', (req, res) => {
+    res.status(403).sendFile(path.join(__dirname, '../Public/Templates/Access_Denied.html'));
+});
+
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../Public/Templates/index.html'));
 });
