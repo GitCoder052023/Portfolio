@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>403 Forbidden | Portfolio</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Material Design inspired font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
     <style>
         body {
@@ -151,23 +149,19 @@
         </div>
         
         <div class="mt-8 text-sm text-red-800 text-center">
-            <p>© <span id="currentYear"></span> | Personal Portfolio of an Independent Developer</p>
+            <p>© <span id="currentYear"></span> Hamdan Khubaib | All rights reserved.</p>
         </div>
     </div>
 
     <script>
-        // Set current year
         document.getElementById('currentYear').textContent = new Date().getFullYear();
-        
-        // Go back button functionality
+
         document.getElementById('goBack').addEventListener('click', () => {
             window.history.back();
         });
         
-        // Set home link to root
         document.getElementById('homeLink').href = '/';
         
-        // Add ripple effect to buttons
         document.querySelectorAll('.material-button').forEach(button => {
             button.addEventListener('click', function(e) {
                 const rippleContainer = this.querySelector('.paper-ripple');

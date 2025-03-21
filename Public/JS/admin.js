@@ -82,11 +82,11 @@ loginForm.addEventListener('submit', async (e) => {
             showAdminPanel();
             loadProfileImage();
         } else {
-            window.location.href = '/Templates/Access_Denied.html';
+            window.location.href = '/admin-forbidden';
         }
     } catch (error) {
         console.error('Login error:', error);
-        window.location.href = '/Templates/Access_Denied.html';
+        window.location.href = '/admin-forbidden';
     } finally {
         formLoader.classList.add('hidden');
     }

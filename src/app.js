@@ -8,6 +8,10 @@ dotenv.config({ path: path.resolve(__dirname, `../${envFile}`) });
 const app = express();
 const port = process.env.FPORT;
 
+app.get("/admin-forbidden", (req, res) => {
+    res.sendFile(path.join(__dirname, '../Public/Templates/Admin-Access_Forbidden.html'));
+});
+
 app.use('/Templates/*', (req, res) => {
     res.status(403).sendFile(path.join(__dirname, '../Public/Templates/Access_Denied.html'));
 });

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Access Forbidden | Portfolio</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #FFEBEE;
+        }
+
+        .material-card {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+            transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        .material-button {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+        }
+
+        .material-button:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+            transform: translateY(-2px);
+        }
+
+        .paper-ripple {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            overflow: hidden;
+            border-radius: inherit;
+            z-index: 0;
+        }
+
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-animation {
+            from {
+                transform: scale(0);
+                opacity: 0.4;
+            }
+
+            to {
+                transform: scale(2.5);
+                opacity: 0;
+            }
+        }
+
+        .icon-container {
+            position: relative;
+            background-color: #D50000;
+            height: 96px;
+            width: 96px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+            box-shadow: 0 4px 20px rgba(213, 0, 0, 0.4);
+        }
+
+        .http-code {
+            position: relative;
+            font-size: 120px;
+            font-weight: 700;
+            color: #D50000;
+            opacity: 0.8;
+            text-shadow: 2px 2px 8px rgba(213, 0, 0, 0.3);
+            line-height: 1;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(213, 0, 0, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 15px rgba(213, 0, 0, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(213, 0, 0, 0);
+            }
+        }
+
+        .error-line {
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #D50000, transparent);
+        }
+
+        .admin-badge {
+            background-color: #D50000;
+            color: white;
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center justify-center p-4 text-gray-800 relative">
+    <!-- Content -->
+    <div class="z-10 max-w-md w-full">
+        <div class="z-10 max-w-md w-full">
+            <div class="mb-2 flex justify-center">
+                <div class="http-code">403</div>
+            </div>
+
+            <div class="error-line mb-6"></div>
+
+            <div class="material-card bg-white rounded-lg p-8">
+                <div class="-mt-16 mb-6 flex justify-center">
+                    <div class="icon-container pulse">
+                        <span class="material-icons text-white" style="font-size: 48px;">admin_panel_settings</span>
+                    </div>
+                </div>
+
+                <div class="flex justify-center mb-4">
+                    <span class="admin-badge">Admin Panel</span>
+                </div>
+
+                <h1 class="text-3xl font-medium mb-2 text-gray-900 text-center">Access Forbidden</h1>
+                <p class="text-red-600 font-medium mb-6 text-center">You don't have permission to access the admin panel
+                </p>
+
+                <div class="bg-red-50 border-l-4 border-red-600 p-4 mb-6">
+                    <div class="flex items-start">
+                        <span class="material-icons text-red-600 mr-3 mt-1">security</span>
+                        <div>
+                            <p class="mb-2 text-red-800">This area is restricted to authorized administrators only.</p>
+                            <p class="text-sm text-red-700">If you believe you should have access, please contact the
+                                site owner.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-100 p-4 rounded mb-6">
+                    <div class="flex items-center mb-2">
+                        <span class="material-icons text-gray-600 mr-2">info</span>
+                        <h3 class="font-medium">About Admin Access</h3>
+                    </div>
+                    <p class="text-sm text-gray-600">
+                        The admin panel contains sensitive controls for managing site content, user accounts, and system
+                        settings. Access is restricted to maintain site security and data integrity.
+                    </p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mt-8">
+                    <button id="goBack"
+                        class="material-button relative overflow-hidden px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-medium rounded flex items-center justify-center">
+                        <span class="material-icons mr-2">arrow_back</span>
+                        Go Back
+                        <div class="paper-ripple"></div>
+                    </button>
+
+                    <a href="#" id="homeLink"
+                        class="material-button relative overflow-hidden px-6 py-3 bg-white border border-gray-300 text-gray-700 hover:text-red-600 hover:border-red-600 font-medium rounded flex items-center justify-center">
+                        <span class="material-icons mr-2">home</span>
+                        Homepage
+                        <div class="paper-ripple"></div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="mt-8 text-sm text-red-800 text-center">
+                <p>© <span id="currentYear"></span> Hamdan Khubaib | All rights reserved.</p>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            document.getElementById('goBack').addEventListener('click', () => {
+                window.history.back();
+            });
+
+            document.getElementById('homeLink').href = '/';
+
+            document.querySelectorAll('.material-button').forEach(button => {
+                button.addEventListener('click', function (e) {
+                    const rippleContainer = this.querySelector('.paper-ripple');
+                    const rect = rippleContainer.getBoundingClientRect();
+
+                    const ripple = document.createElement('div');
+                    ripple.classList.add('ripple');
+                    rippleContainer.appendChild(ripple);
+
+                    const size = Math.max(rect.width, rect.height) * 2;
+                    ripple.style.width = ripple.style.height = `${size}px`;
+
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        </script>
+</body>
+
+</html>
