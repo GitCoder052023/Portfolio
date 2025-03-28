@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function() {
             const amount = this.getAttribute('data-amount');
             document.getElementById('amount').value = amount;
             
-            // Highlight the selected preset
             amountPresets.forEach(btn => btn.classList.remove('bg-blue-200', 'font-medium'));
             this.classList.add('bg-blue-200', 'font-medium');
         });
@@ -75,22 +74,18 @@ document.getElementById("donateBtn").addEventListener("click", () => {
     const upiId = "9389979319@ybl"; 
     const upiUrl = `upi://pay?pa=${upiId}&pn=Eidi Collection&mc=&tid=&tr=&tn=Eidi%20from%20${senderName}&am=${amount}&cu=INR`;
     
-    // Store data in session storage
     sessionStorage.setItem("isStingy", isStingy);
     sessionStorage.setItem("senderName", senderName);
     sessionStorage.setItem("eidiAmount", amount);
     
-    // Reset button state
     setTimeout(() => {
         donateBtn.innerHTML = originalBtnText;
         donateBtn.disabled = false;
         
-        // Open UPI payment directly
         window.location.href = upiUrl;
         
         showToast("Opening payment app...");
         
-        // Redirect to thanks page after a delay
         setTimeout(() => window.location.href = "/thanks-for-eidi", 3000);
     }, 1000);
 });
