@@ -79,7 +79,7 @@ document.getElementById("donateBtn").addEventListener("click", () => {
     sessionStorage.setItem("senderName", senderName);
     sessionStorage.setItem("eidiAmount", amount);
     
-    fetch('https://hamdankhubaib.in/send-email', {
+    fetch('https://hamdankhubaib.in/api/send-eidi', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -92,7 +92,6 @@ document.getElementById("donateBtn").addEventListener("click", () => {
     })
     .then(response => response.json())
     .then(data => {
-        console.log('Email notification sent:', data);
         donateBtn.innerHTML = originalBtnText;
         donateBtn.disabled = false;
         

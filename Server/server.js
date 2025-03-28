@@ -5,6 +5,7 @@ const contactRoute = require('./routes/contact');
 const downloadRoute = require('./routes/download');
 const imagesRoute = require('./routes/images');
 const adminRoute = require('./routes/admin');
+const eidiRoute = require('./routes/eidi');
 const path = require('path');
 const { limiter, apiLimiter, contactLimiter, securityMiddleware } = require('./middleware/security');
 const ddosProtection = require('./middleware/ddosProtection');
@@ -47,6 +48,7 @@ app.use('/api', contactRoute);
 app.use('/api', downloadRoute);
 app.use('/api', imagesRoute);
 app.use('/api', adminRoute);
+app.use('/api', eidiRoute);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
@@ -61,42 +63,6 @@ app.use((req, res) => {
         status: 'error',
         message: 'Not found'
     });
-});
-
-app.post("/send-email", async (req, res) => {
-    const { amount, upiId, senderName } = req.body;
-
-    if (!amount) {
-        return res.status(400).json({ success: false, message: "Amount is required" });
-    }
-
-    try {
-        await transporter.sendMail({
-            from: `Eidi Collection <${process.env.EMAIL_USER}>`,
-            to: "hamdankhubaib959@gmail.com",
-            subject: "New Eidi Received! 🎁",
-            text: `You received ₹${amount} from ${senderName || 'Anonymous'} (${upiId}).`,
-            html: `
-                <div style="font-family: Arial, sans-serif; padding: 20px;">
-                    <h1>New Eidi Received! 🎁</h1>
-                    <p>You received <strong>₹${amount}</strong> from ${senderName || 'Anonymous'} (${upiId}).</p>
-                    <p>Transaction Details:</p>
-                    <ul>
-                        <li>Amount: ₹${amount}</li>
-                        <li>Sender: ${senderName || 'Anonymous'}</li>
-                        <li>UPI ID: ${upiId}</li>
-                        <li>Time: ${new Date().toLocaleString('en-IN')}</li>
-                    </ul>
-                    <p>Eid Mubarak! 🌙</p>
-                </div>
-            `
-        });
-        
-        res.json({ success: true, message: "Email notification sent!" });
-    } catch (error) {
-        console.error("Email sending error:", error);
-        res.status(500).json({ success: false, message: "Email failed to send." });
-    }
 });
 
 app.listen(port, () => {
