@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You! 🎁</title>
+    <link rel="stylesheet" href="/CSS/output.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9fafb;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+        .payment-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .payment-icon:hover {
+            transform: scale(1.1);
+        }
+        .thank-you-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .thank-you-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        .active-scale {
+            transition: transform 0.1s ease;
+        }
+        .active-scale:active {
+            transform: scale(0.98);
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .success-icon {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .eid-pattern {
+            background-color: #ffffff;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M54.627 0l.83.828-1.415 1.415L51.8 0h2.827zM5.373 0l-.83.828L5.96 2.243 8.2 0H5.374zM48.97 0l3.657 3.657-1.414 1.414L46.143 0h2.828zM11.03 0L7.372 3.657 8.787 5.07 13.857 0H11.03zm32.284 0L49.8 6.485 48.384 7.9l-7.9-7.9h2.83zM16.686 0L10.2 6.485 11.616 7.9l7.9-7.9h-2.83zm20.97 0l9.315 9.314-1.414 1.414L34.828 0h2.83zM22.344 0L13.03 9.314l1.414 1.414L25.172 0h-2.83zM32 0l12.142 12.142-1.414 1.414L30 .828 17.272 13.556l-1.414-1.414L28 0h4zM.284 0l28 28-1.414 1.414L0 2.544V0h.284zM0 5.373l25.456 25.455-1.414 1.415L0 8.2V5.374zm0 5.656l22.627 22.627-1.414 1.414L0 13.86v-2.83zm0 5.656l19.8 19.8-1.415 1.413L0 19.514v-2.83zm0 5.657l16.97 16.97-1.414 1.415L0 25.172v-2.83zM0 28l14.142 14.142-1.414 1.414L0 30.828V28zm0 5.657L11.314 44.97 9.9 46.386l-9.9-9.9v-2.828zm0 5.657L8.485 47.8 7.07 49.212 0 42.143v-2.83zm0 5.657l5.657 5.657-1.414 1.415L0 47.8v-2.83zm0 5.657l2.828 2.83-1.414 1.413L0 53.456v-2.83zM54.627 60L30 35.373 5.373 60H8.2L30 38.2 51.8 60h2.827zm-5.656 0L30 41.03 11.03 60h2.828L30 43.858 46.142 60h2.83zm-5.656 0L30 46.686 16.686 60h2.83L30 49.515 40.485 60h2.83zm-5.657 0L30 52.343 22.344 60h2.83L30 55.172 34.828 60h2.83zM32 60l-2-2-2 2h4z' fill='%233b82f6' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% {
+                left: -100%;
+                opacity: 0;
+            }
+            10% {
+                left: -100%;
+                opacity: 1;
+            }
+            50% {
+                left: 100%;
+                opacity: 1;
+            }
+            51% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 flex flex-col items-center justify-center min-h-screen p-4 relative">
+    <div id="confetti-container" class="fixed top-0 left-0 w-full h-full pointer-events-none"></div>
+
+    <div class="bg-white shadow-lg card-shadow p-8 rounded-xl text-center w-full max-w-md border border-gray-100 thank-you-card animate__animated animate__fadeIn eid-pattern">
+        <div class="mb-6">
+            <div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 success-icon">
+                <span id="statusIcon" class="material-icons text-green-600" style="font-size: 48px;">check_circle</span>
+            </div>
+            <h1 id="thankYouMessage" class="text-3xl font-bold gradient-text mb-2">Thank You!</h1>
+            <p id="amountMessage" class="text-gray-600 mt-2">Your Eidi has made my Eid extra special! 🎊</p>
+        </div>
+
+        <!-- Stingy Message (Hidden by default) -->
+        <div id="stingyMessage" class="hidden mb-6 p-4 bg-yellow-50 border-l-4 border-yellow-500 text-left rounded-r-md animate__animated animate__fadeIn">
+            <p class="text-yellow-800 font-medium">Ya Allah! Less than 50 rupees?</p>
+            <p class="text-yellow-700 mt-2">I automatically increased your Eidi to ₹100 because sending less than ₹50 is considered stingy in our culture. May Allah guide you to be more generous next time!</p>
+            <p class="text-yellow-700 mt-2 italic">"The believer's shade on the Day of Resurrection will be his charity." - Prophet Muhammad (PBUH)</p>
+        </div>
+
+        <!-- Ask If Cousin -->
+        <div class="mb-6 bg-blue-50 p-5 rounded-lg">
+            <p class="text-lg font-medium text-gray-700 mb-3">Are you my cousin?</p>
+            <div class="flex gap-3 justify-center">
+                <button onclick="showCousinMessage(true)" class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition-all active-scale">Yes</button>
+                <button onclick="showCousinMessage(false)" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-5 py-2 rounded-lg transition-all active-scale">No</button>
+            </div>
+        </div>
+
+        <!-- Cousin Special Message -->
+        <div id="cousinMessage" class="hidden mb-6 p-5 bg-indigo-50 rounded-lg text-center animate__animated animate__fadeIn">
+            <h2 class="text-lg font-semibold text-gray-800 mb-2">Special Message for My Cousins!</h2>
+            <p class="text-gray-700">Thank you for the Eidi! May Allah bless you with the best wife/husband next Ramzan! <br> "Haath chode, pakode jal jainge waala moment!" 😊</p>
+        </div>
+
+        <!-- Payment Methods Section -->
+        <div class="mb-6 bg-gray-50 p-5 rounded-lg">
+            <p class="text-gray-700 font-medium mb-3">Accepted Payment Methods</p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <div class="flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/UPI-Logo-vector.svg/1200px-UPI-Logo-vector.svg.png" alt="UPI" class="payment-icon">
+                    <span class="text-xs mt-1">UPI</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://download.logo.wine/logo/PhonePe/PhonePe-Logo.wine.png" alt="PhonePe" class="payment-icon">
+                    <span class="text-xs mt-1">PhonePe</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Google_Pay_Logo_%282020%29.svg/2560px-Google_Pay_Logo_%282020%29.svg.png" alt="Google Pay" class="payment-icon">
+                    <span class="text-xs mt-1">Google Pay</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Paytm_Logo_%28standalone%29.svg/2560px-Paytm_Logo_%28standalone%29.svg.png" alt="Paytm" class="payment-icon">
+                    <span class="text-xs mt-1">Paytm</span>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="window.location.href='/'" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 active-scale btn-shine">
+            <span class="material-icons">home</span> Back to Home
+        </button>
+    </div>
+
+    <footer class="w-full max-w-md mx-auto mt-8 text-center text-gray-500 text-sm py-4">
+        <p>Made with ❤️ for Eid celebrations</p>
+    </footer>
+
+    <script>
+        function showCousinMessage(isCousin) {
+            if (isCousin) {
+                document.getElementById("cousinMessage").classList.remove("hidden");
+                createConfetti(30);
+            }
+        }
+        
+        function createConfetti(count) {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#3b82f6', '#8b5cf6', '#f59e0b', '#10b981', '#ef4444'];
+            
+            for (let i = 0; i < count; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                confetti.style.height = (Math.random() * 10 + 5) + 'px';
+                container.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+        
+        window.onload = function() {
+            createConfetti(20);
+        };
+    </script>
+    <script src="/JS/thanks-for-eidi.js"></script>
+</body>
+</html>

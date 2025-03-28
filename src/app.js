@@ -22,9 +22,13 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../Public/Templates/index.html'));
 });
 
-// app.get('/eid-form', (req, res) => {
-//     res.sendFile(path.join(__dirname, '../Public/Templates/eid-form.html'));
-// });
+app.get('/eidi', (req, res) => {
+    res.sendFile(path.join(__dirname, '../Public/Templates/eidi-form.html'));
+});
+
+app.get('/thanks-for-eidi', (req, res) => {
+    res.sendFile(path.join(__dirname, '../Public/Templates/thanks-for-eidi.html')); 
+})
 
 app.get("/contact-request-accepted", (req, res) => {
     res.sendFile(path.join(__dirname, '../Public/Templates/ContactRequest_accepted.html'));
