@@ -22,6 +22,10 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../Public/Templates/index.html'));
 });
 
+// app.get('/eid-form', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../Public/Templates/eid-form.html'));
+// });
+
 app.get("/contact-request-accepted", (req, res) => {
     res.sendFile(path.join(__dirname, '../Public/Templates/ContactRequest_accepted.html'));
 });

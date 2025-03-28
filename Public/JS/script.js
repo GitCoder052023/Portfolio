@@ -27,6 +27,19 @@ document.addEventListener('DOMContentLoaded', () => {
     
     calculateAge();
 
+    // Check if Eid section should be displayed based on date
+    const checkEidSectionVisibility = () => {
+        const today = new Date();
+        const removalDate = new Date('2025-04-10');
+        
+        const eidSection = document.getElementById('eid-special');
+        if (eidSection && today > removalDate) {
+            eidSection.style.display = 'none';
+        }
+    };
+    
+    checkEidSectionVisibility();
+
     const h1 = document.querySelector('#hero h1');
     if (h1) {
         h1.innerHTML = '';
