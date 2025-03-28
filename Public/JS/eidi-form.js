@@ -75,40 +75,24 @@ document.getElementById("donateBtn").addEventListener("click", () => {
     const upiId = "9389979319@ybl"; 
     const upiUrl = `upi://pay?pa=${upiId}&pn=Eidi Collection&mc=&tid=&tr=&tn=Eidi%20from%20${senderName}&am=${amount}&cu=INR`;
     
+    // Store data in session storage
     sessionStorage.setItem("isStingy", isStingy);
     sessionStorage.setItem("senderName", senderName);
     sessionStorage.setItem("eidiAmount", amount);
     
-    fetch('https://hamdankhubaib.in/api/send-eidi', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            amount: amount,
-            upiId: upiId,
-            senderName: senderName
-        })
-    })
-    .then(response => response.json())
-    .then(data => {
+    // Reset button state
+    setTimeout(() => {
         donateBtn.innerHTML = originalBtnText;
         donateBtn.disabled = false;
         
+        // Open UPI payment directly
         window.location.href = upiUrl;
         
         showToast("Opening payment app...");
         
+        // Redirect to thanks page after a delay
         setTimeout(() => window.location.href = "/thanks-for-eidi", 3000);
-    })
-    .catch(error => {
-        console.error('Error sending email notification:', error);
-        donateBtn.innerHTML = originalBtnText;
-        donateBtn.disabled = false;
-        
-        window.location.href = upiUrl;
-        setTimeout(() => window.location.href = "/thanks-for-eidi", 3000);
-    });
+    }, 1000);
 });
 
 document.getElementById("downloadQrBtn").addEventListener("click", () => {

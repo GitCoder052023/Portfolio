@@ -5,11 +5,9 @@ const contactRoute = require('./routes/contact');
 const downloadRoute = require('./routes/download');
 const imagesRoute = require('./routes/images');
 const adminRoute = require('./routes/admin');
-const eidiRoute = require('./routes/eidi');
 const path = require('path');
 const { limiter, apiLimiter, contactLimiter, securityMiddleware } = require('./middleware/security');
 const ddosProtection = require('./middleware/ddosProtection');
-const transporter = require('./config');
 
 const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.development';
 dotenv.config({ path: path.resolve(__dirname, `../${envFile}`) });
@@ -48,7 +46,6 @@ app.use('/api', contactRoute);
 app.use('/api', downloadRoute);
 app.use('/api', imagesRoute);
 app.use('/api', adminRoute);
-app.use('/api', eidiRoute);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
