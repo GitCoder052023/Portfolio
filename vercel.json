@@ -1,15 +1,27 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "Public/**/*",
-        "use": "@vercel/static"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/Public/Templates/maintenance.html"
-      }
-    ]
-  }
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/app.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "Server/server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "Public/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/Server/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/src/app.js"
+    }
+  ]
+}

@@ -6,6 +6,16 @@ const mobileMenu = document.getElementById('mobile-menu');
 document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
 
+    const skillCards = document.querySelectorAll('.skill-card');
+    skillCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+    
+    const expertiseGroups = document.querySelectorAll('.expertise-group');
+    expertiseGroups.forEach((group, index) => {
+        group.style.animationDelay = `${index * 0.1}s`;
+    });
+
     const calculateAge = () => {
         const birthDate = new Date('2009-06-19');
         const today = new Date();

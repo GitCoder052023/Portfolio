@@ -264,6 +264,9 @@
   .relative {
     position: relative;
   }
+  .static {
+    position: static;
+  }
   .inset-0 {
     inset: calc(var(--spacing) * 0);
   }
@@ -728,6 +731,9 @@
   .border-dashed {
     --tw-border-style: dashed;
     border-style: dashed;
+  }
+  .border-blue-100 {
+    border-color: var(--color-blue-100);
   }
   .border-blue-400 {
     border-color: var(--color-blue-400);
