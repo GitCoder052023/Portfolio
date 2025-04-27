@@ -1,13 +1,11 @@
-AOS.init({
-    once: true
-});
-
 const currentHost = window.location.hostname;
 
 const menuToggle = document.getElementById('menu-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
 
 document.addEventListener('DOMContentLoaded', () => {
+    initScrollAnimations();
+
     const calculateAge = () => {
         const birthDate = new Date('2009-06-19');
         const today = new Date();
@@ -24,6 +22,27 @@ document.addEventListener('DOMContentLoaded', () => {
             ageElement.textContent = `${age} Years`;
         }
     };
+
+    function initScrollAnimations() {
+        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+        
+        const animateOnScroll = () => {
+            const triggerBottom = window.innerHeight * 0.8;
+            
+            animatedElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                
+                if (elementTop < triggerBottom) {
+                    const animationType = element.dataset.animation || 'fade-in';
+                    element.classList.add('animated', animationType);
+                }
+            });
+        };
+        
+        animateOnScroll();
+        
+        window.addEventListener('scroll', animateOnScroll);
+    }
     
     calculateAge();
 
