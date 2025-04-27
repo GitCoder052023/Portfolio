@@ -1,11 +1,17 @@
 const currentHost = window.location.hostname;
-
 const menuToggle = document.getElementById('menu-toggle');
 const mobileMenu = document.getElementById('mobile-menu');
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize animations and UI elements
     initScrollAnimations();
+    initSkillAnimations();
+    calculateAge();
+    checkEidSectionVisibility();
+    initTypewriterEffect();
+});
 
+function initSkillAnimations() {
     const skillCards = document.querySelectorAll('.skill-card');
     skillCards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
@@ -15,103 +21,98 @@ document.addEventListener('DOMContentLoaded', () => {
     expertiseGroups.forEach((group, index) => {
         group.style.animationDelay = `${index * 0.1}s`;
     });
+}
 
-    const calculateAge = () => {
-        const birthDate = new Date('2009-06-19');
-        const today = new Date();
-        
-        let age = today.getFullYear() - birthDate.getFullYear();
-        const monthDifference = today.getMonth() - birthDate.getMonth();
-        
-        if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-            age--;
-        }
-        
-        const ageElement = document.getElementById('dynamic-age');
-        if (ageElement) {
-            ageElement.textContent = `${age} Years`;
-        }
-    };
+function calculateAge() {
+    const birthDate = new Date('2009-06-19');
+    const today = new Date();
+    
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const monthDifference = today.getMonth() - birthDate.getMonth();
+    
+    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    
+    const ageElement = document.getElementById('dynamic-age');
+    if (ageElement) {
+        ageElement.textContent = `${age} Years`;
+    }
+}
 
-    function initScrollAnimations() {
-        const animatedElements = document.querySelectorAll('.animate-on-scroll');
+function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    
+    const animateOnScroll = () => {
+        const triggerBottom = window.innerHeight * 0.8;
         
-        const animateOnScroll = () => {
-            const triggerBottom = window.innerHeight * 0.8;
+        animatedElements.forEach(element => {
+            const elementTop = element.getBoundingClientRect().top;
             
-            animatedElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                
-                if (elementTop < triggerBottom) {
-                    const animationType = element.dataset.animation || 'fade-in';
-                    element.classList.add('animated', animationType);
-                }
-            });
-        };
-        
-        animateOnScroll();
-        
-        window.addEventListener('scroll', animateOnScroll);
-    }
-    
-    calculateAge();
-
-    // Check if Eid section should be displayed based on date
-    const checkEidSectionVisibility = () => {
-        const today = new Date();
-        const removalDate = new Date('2025-04-10');
-        
-        const eidSection = document.getElementById('eid-special');
-        if (eidSection && today > removalDate) {
-            eidSection.style.display = 'none';
-        }
+            if (elementTop < triggerBottom) {
+                const animationType = element.dataset.animation || 'fade-in';
+                element.classList.add('animated', animationType);
+            }
+        });
     };
     
-    checkEidSectionVisibility();
+    animateOnScroll();
+    window.addEventListener('scroll', animateOnScroll);
+}
 
-    const h1 = document.querySelector('#hero h1');
-    if (h1) {
-        h1.innerHTML = '';
-
-        const text1 = document.createTextNode(''); 
-        const span = document.createElement('span');
-        span.className = 'gradient-text';
-        const text2 = document.createTextNode(''); 
-        span.appendChild(text2);
-
-        const cursor = document.createElement('span');
-        cursor.className = 'cursor';
-
-        h1.appendChild(text1);
-        h1.appendChild(span);
-        h1.appendChild(cursor);
-
-        const beforeSpan = "Hi, I'm ";
-        const inSpan = "Hamdan Khubaib";
-        let index = 0;
-
-        const typeWriter = () => {
-            if (index < beforeSpan.length) {
-                text1.textContent += beforeSpan[index];
-            } else if (index < beforeSpan.length + inSpan.length) {
-                text2.textContent += inSpan[index - beforeSpan.length];
-            }
-            index++;
-
-            if (index < beforeSpan.length + inSpan.length) {
-                setTimeout(typeWriter, 250); 
-            } else {
-                cursor.remove();
-            }
-        };
-
-        setTimeout(typeWriter, 1000);
+function checkEidSectionVisibility() {
+    const today = new Date();
+    const removalDate = new Date('2025-04-10');
+    
+    const eidSection = document.getElementById('eid-special');
+    if (eidSection && today > removalDate) {
+        eidSection.style.display = 'none';
     }
-});
+}
 
-document.addEventListener('contextmenu', (e) => {
-    e.preventDefault();
-});
+function initTypewriterEffect() {
+    const h1 = document.querySelector('#hero h1');
+    if (!h1) return;
+    
+    h1.innerHTML = '';
+
+    const text1 = document.createTextNode(''); 
+    const span = document.createElement('span');
+    span.className = 'gradient-text';
+    const text2 = document.createTextNode(''); 
+    span.appendChild(text2);
+
+    const cursor = document.createElement('span');
+    cursor.className = 'cursor';
+
+    h1.appendChild(text1);
+    h1.appendChild(span);
+    h1.appendChild(cursor);
+
+    const beforeSpan = "Hi, I'm ";
+    const inSpan = "Hamdan Khubaib";
+    let index = 0;
+
+    const typeWriter = () => {
+        if (index < beforeSpan.length) {
+            text1.textContent += beforeSpan[index];
+        } else if (index < beforeSpan.length + inSpan.length) {
+            text2.textContent += inSpan[index - beforeSpan.length];
+        }
+        index++;
+
+        if (index < beforeSpan.length + inSpan.length) {
+            setTimeout(typeWriter, 250); 
+        } else {
+            cursor.remove();
+        }
+    };
+
+    setTimeout(typeWriter, 1000);
+}
+
+// Security measures
+document.addEventListener('contextmenu', e => e.preventDefault());
 
 document.addEventListener('keydown', (e) => {
     if (
@@ -129,14 +130,10 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-document.addEventListener('dragstart', (e) => {
-    e.preventDefault();
-});
+document.addEventListener('dragstart', e => e.preventDefault());
 
 document.querySelectorAll('img').forEach(img => {
-    img.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-    });
+    img.addEventListener('mousedown', e => e.preventDefault());
 });
 
 document.addEventListener('copy', (e) => {
@@ -157,6 +154,7 @@ document.addEventListener('paste', (e) => {
     }
 });
 
+// CV download functionality
 async function downloadCV(event) {
     event.preventDefault();
 
@@ -184,6 +182,7 @@ async function downloadCV(event) {
     }
 }
 
+// Mobile menu functionality
 menuToggle.addEventListener('click', () => {
     if (mobileMenu.classList.contains('hidden')) {
         mobileMenu.classList.remove('hidden');
@@ -208,6 +207,7 @@ mobileLinks.forEach(link => {
     });
 });
 
+// Navbar shadow on scroll
 const navbar = document.querySelector('.navbar');
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
@@ -217,8 +217,8 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// Back to top button
 const backToTopButton = document.getElementById('backToTop');
-
 window.addEventListener('scroll', () => {
     if (window.scrollY > 300) {
         backToTopButton.classList.add('active');
@@ -232,8 +232,8 @@ backToTopButton.addEventListener('click', (e) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
+// Progress bars animation
 const progressBars = document.querySelectorAll('.progress-bar');
-
 const animateProgressBars = () => {
     progressBars.forEach(bar => {
         const targetWidth = bar.getAttribute('data-width');
@@ -243,7 +243,6 @@ const animateProgressBars = () => {
 };
 
 const skillsSection = document.getElementById('skills');
-
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -253,45 +252,50 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, { threshold: 0.4 });
 
-observer.observe(skillsSection);
+if (skillsSection) {
+    observer.observe(skillsSection);
+}
 
+// Contact form submission
 const contactForm = document.getElementById('contactForm');
 const formLoader = document.getElementById('formLoader');
 
-contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-    const formData = new FormData(contactForm);
-    const formDataObj = Object.fromEntries(formData.entries());
+        const formData = new FormData(contactForm);
+        const formDataObj = Object.fromEntries(formData.entries());
 
-    formLoader.classList.remove('hidden'); 
+        formLoader.classList.remove('hidden'); 
 
-    try {
-        const response = await fetch(`https://hamdankhubaib.in/api/contact`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formDataObj)
-        });
+        try {
+            const response = await fetch(`https://hamdankhubaib.in/api/contact`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formDataObj)
+            });
 
-        const data = await response.json();
+            const data = await response.json();
 
-        if (response.ok) {
-            contactForm.reset();
-            window.location.href = '/contact-request-accepted';
-        } else {
-            throw new Error(data.message || 'Something went wrong');
+            if (response.ok) {
+                contactForm.reset();
+                window.location.href = '/contact-request-accepted';
+            } else {
+                throw new Error(data.message || 'Something went wrong');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Sorry, there was an error sending your message. Please try again later.');
+        } finally {
+            formLoader.classList.add('hidden'); 
         }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('Sorry, there was an error sending your message. Please try again later.');
-    } finally {
-        formLoader.classList.add('hidden'); 
-    }
-});
+    });
+}
 
-
+// Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -307,6 +311,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Fix for mobile input focus
 document.querySelectorAll('input, textarea').forEach(input => {
     input.addEventListener('touchstart', (e) => {
         e.preventDefault(); 
