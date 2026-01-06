@@ -3,6 +3,7 @@ import About from "./components/About";
 import ExamBazar from "./components/ExamBazar";
 import StreamNet from "./components/StreamNet";
 import Goals from "./components/Goals";
+import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import SmoothScroll from "./components/SmoothScroll";
 import Navbar from "./components/Navbar";
@@ -14,10 +15,10 @@ export default function Home() {
       <main className="min-h-screen">
         <Hero />
         <About />
-        <ExamBazar />
-        <StreamNet />
+        <ExamBazar align="left" />
+        <StreamNet align="right" />
         <Goals />
-        <Footer />
+        <Contact />
       </main>
     </SmoothScroll>
   );

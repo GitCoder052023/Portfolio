@@ -14,9 +14,6 @@ export default function Footer() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <p className="text-[#787774] mb-6">
-            Built with Next.js, Framer Motion, and Tailwind CSS
-          </p>
           <div className="flex justify-center gap-6">
             <motion.a
               href="https://github.com/GitCoder052023"

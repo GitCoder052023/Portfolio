@@ -6,7 +6,11 @@ import { useRef } from "react";
 import Image from "next/image";
 import { ExternalLink, MessageSquare, Shield, Sparkles } from "lucide-react";
 
-export default function StreamNet() {
+interface StreamNetProps {
+  align?: "left" | "right";
+}
+
+export default function StreamNet({ align = "right" }: StreamNetProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -49,12 +53,30 @@ export default function StreamNet() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center mt-16">
+          <div className={`grid lg:grid-cols-2 gap-12 items-center mt-16 ${align === "right" ? "lg:grid-flow-dense" : ""}`}>
+            {/* Image - Left when align=left, Right when align=right */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+              initial={{ opacity: 0, x: align === "left" ? -30 : 30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: align === "left" ? -30 : 30 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="space-y-6 order-2 lg:order-1"
+              className={`relative h-80 bg-[#f7f6f3] border border-[#e9e9e7] rounded-2xl overflow-hidden flex items-center justify-center ${align === "right" ? "lg:col-start-2 lg:row-start-1" : ""}`}
+            >
+              <Image
+                src="https://api.dicebear.com/7.x/shapes/svg?seed=StreamNet&backgroundColor=b6e3f4,c0aede,d1d4f9"
+                alt="StreamNet - Secure Real-time Chat Application with AI"
+                width={300}
+                height={300}
+                className="w-full h-full object-contain p-8"
+                unoptimized
+              />
+            </motion.div>
+
+            {/* Content - Right when align=left, Left when align=right */}
+            <motion.div
+              initial={{ opacity: 0, x: align === "left" ? 30 : -30 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: align === "left" ? 30 : -30 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className={`space-y-6 ${align === "right" ? "lg:col-start-1 lg:row-start-1" : ""}`}
             >
               <p className="text-lg leading-relaxed text-[#787774]">
                 Secure real-time chat application for local networks with AI-powered conversations using ChatLLaMA.
@@ -66,9 +88,9 @@ export default function StreamNet() {
                   return (
                     <motion.div
                       key={feature.title}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                      transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                      initial={{ opacity: 0, x: align === "left" ? 20 : -20 }}
+                      animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: align === "left" ? 20 : -20 }}
+                      transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
                       className="flex items-start gap-4 p-4 bg-white rounded-lg border border-[#e9e9e7] hover:border-[#d4d4d1] transition-colors"
                     >
                       <div className="p-2 bg-[#f7f6f3] rounded-lg">
@@ -93,28 +115,12 @@ export default function StreamNet() {
                 rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 10 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-[#37352f] text-white rounded-lg hover:bg-[#2e2d29] transition-colors duration-200 font-medium mt-4"
               >
                 View on GitHub
                 <ExternalLink className="w-4 h-4" />
               </motion.a>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="relative h-80 bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl overflow-hidden flex items-center justify-center order-1 lg:order-2"
-            >
-              <Image
-                src="https://api.dicebear.com/7.x/shapes/svg?seed=StreamNet&backgroundColor=b6e3f4,c0aede,d1d4f9"
-                alt="StreamNet - Secure Real-time Chat Application with AI"
-                width={300}
-                height={300}
-                className="w-full h-full object-contain p-8"
-                unoptimized
-              />
             </motion.div>
           </div>
         </motion.div>

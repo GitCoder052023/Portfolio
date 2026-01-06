@@ -3,7 +3,8 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Code, Database, TrendingUp, MapPin } from "lucide-react";
+import { Code, Database, TrendingUp, MapPin, Sparkles, Rocket } from "lucide-react";
+import TechIcon from "./TechIcon";
 
 export default function About() {
   const ref = useRef(null);
@@ -14,25 +15,6 @@ export default function About() {
     { label: "Web Dev Focus", value: "3 years", icon: TrendingUp },
     { label: "Python Experience", value: "4 years", icon: Database },
     { label: "Location", value: "India", icon: MapPin },
-  ];
-
-  const expertise = [
-    {
-      category: "Frontend",
-      skills: ["React", "Next.js", "TypeScript", "TanStack Start"],
-    },
-    {
-      category: "Backend",
-      skills: ["Node.js", "Express", "REST APIs", "Webhooks"],
-    },
-    {
-      category: "Database",
-      skills: ["MongoDB", "PostgreSQL", "Supabase"],
-    },
-    {
-      category: "Data & ML",
-      skills: ["Python", "Pandas", "NumPy", "ML Fundamentals"],
-    },
   ];
 
   return (
@@ -76,14 +58,22 @@ export default function About() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="bg-white p-8 rounded-xl border border-[#e9e9e7]"
             >
-              <h3 className="text-2xl font-semibold text-[#37352f] mb-4">
-                Full-Stack Developer
-              </h3>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                  <Rocket className="w-5 h-5 text-[#37352f]" />
+                </div>
+                <h3 className="text-2xl font-semibold text-[#37352f]">
+                  Full-Stack Developer
+                </h3>
+              </div>
               <p className="text-[#787774] leading-relaxed mb-4">
-                Building end-to-end applications independently. Strong focus on backend systems and application logic. Comfortable taking products from idea to deployment.
+                I'm a self-driven developer who thrives on building complete solutions from the ground up. With over 6 years of coding experience, I've developed a deep passion for creating applications that solve real-world problems. My journey has been one of continuous learning, from scripting automation tools to architecting full-stack web applications.
+              </p>
+              <p className="text-[#787774] leading-relaxed mb-4">
+                What sets me apart is my ability to work independently across the entire development stack. I'm comfortable diving into backend architecture, crafting intuitive frontend experiences, and ensuring everything works seamlessly together. I believe in writing clean, maintainable code and building systems that scale.
               </p>
               <p className="text-[#787774] leading-relaxed">
-                Currently building <strong className="text-[#37352f]">Exam Bazar</strong> — a centralized academic ecosystem for students and educators.
+                Currently, I'm channeling my expertise into building <strong className="text-[#37352f]">Exam Bazar</strong> — a transformative platform that aims to reshape how students and educators connect, learn, and grow together in the academic space.
               </p>
             </motion.div>
 
@@ -93,46 +83,194 @@ export default function About() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="bg-white p-8 rounded-xl border border-[#e9e9e7]"
             >
-              <h3 className="text-2xl font-semibold text-[#37352f] mb-4">
-                Python & Data
-              </h3>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-100 to-teal-100 flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-[#37352f]" />
+                </div>
+                <h3 className="text-2xl font-semibold text-[#37352f]">
+                  Python & Data Enthusiast
+                </h3>
+              </div>
               <p className="text-[#787774] leading-relaxed mb-4">
-                4 years of experience in scripting, automation, and data analysis. Worked with Pandas, NumPy, Matplotlib, Seaborn, and Plotly.
+                Python has been my companion for over 4 years, and it's where I discovered the power of data. I've spent countless hours working with Pandas, NumPy, Matplotlib, Seaborn, and Plotly to transform raw data into meaningful insights. Whether it's automating repetitive tasks, analyzing complex datasets, or building data pipelines, Python has been my go-to tool.
+              </p>
+              <p className="text-[#787774] leading-relaxed mb-4">
+                My experience spans from writing efficient scripts that save hours of manual work to creating comprehensive data analysis workflows. I understand the nuances of data manipulation, cleaning, and visualization — skills that have proven invaluable in understanding user behavior and making data-driven decisions.
               </p>
               <p className="text-[#787774] leading-relaxed">
-                Preparing to re-engage with Python while learning <strong className="text-[#37352f]">machine learning fundamentals</strong>.
+                As I continue to grow, I'm preparing to dive deeper into <strong className="text-[#37352f]">machine learning fundamentals</strong>, exploring how algorithms can unlock patterns and predictions that weren't visible before. The intersection of data science and web development is where I see exciting opportunities ahead.
               </p>
             </motion.div>
           </div>
 
           <div>
-            <h3 className="text-2xl font-semibold text-[#37352f] mb-6">
+            <h3 className="text-2xl font-semibold text-[#37352f] mb-8">
               Tech Stack
             </h3>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {expertise.map((area, index) => (
-                <motion.div
-                  key={area.category}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  className="bg-white p-6 rounded-xl border border-[#e9e9e7]"
-                >
-                  <h4 className="font-semibold text-[#37352f] mb-3">
-                    {area.category}
+            <div className="grid lg:grid-cols-3 gap-8">
+              {/* Core Technologies - Left Column */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="lg:col-span-2"
+              >
+                <h4 className="text-xl font-bold text-[#37352f] mb-6">
+                  Core Technologies
+                </h4>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {[
+                    {
+                      name: "HTML",
+                      description: "Semantic markup, Accessibility, SEO optimization",
+                      icon: "html5",
+                    },
+                    {
+                      name: "CSS",
+                      description: "Responsive design, Animations, Flexbox & Grid",
+                      icon: "css3",
+                    },
+                    {
+                      name: "JavaScript",
+                      description: "ES6+, DOM manipulation, Async programming",
+                      icon: "javascript",
+                    },
+                    {
+                      name: "Python",
+                      description: "Data processing, Automation, Web scraping",
+                      icon: "python",
+                    },
+                    {
+                      name: "React.js",
+                      description: "Component-based UI, Hooks, State management",
+                      icon: "react",
+                    },
+                    {
+                      name: "Node.js",
+                      description: "Server-side JavaScript, API development",
+                      icon: "nodejs",
+                    },
+                    {
+                      name: "MongoDB",
+                      description: "NoSQL database, Schema design, CRUD operations",
+                      icon: "mongodb",
+                    },
+                    {
+                      name: "SQL",
+                      description: "Relational databases, Query optimization, Data modeling",
+                      icon: "postgresql",
+                    },
+                  ].map((tech, index) => (
+                    <motion.div
+                      key={tech.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                      transition={{ duration: 0.5, delay: 0.5 + index * 0.05 }}
+                      className="bg-white p-5 rounded-xl border border-[#e9e9e7] hover:border-[#d4d4d1] transition-colors"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0">
+                          <TechIcon name={tech.icon} size={40} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h5 className="font-bold text-[#37352f] mb-1.5">
+                            {tech.name}
+                          </h5>
+                          <p className="text-sm text-[#787774] leading-relaxed">
+                            {tech.description}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Right Column - Technologies & Additional Skills */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+                className="space-y-8"
+              >
+                {/* Technologies */}
+                <div>
+                  <h4 className="text-xl font-bold text-[#37352f] mb-4">
+                    Technologies
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {area.skills.map((skill) => (
-                      <span
-                        key={skill}
-                        className="px-3 py-1 text-xs bg-[#f7f6f3] text-[#787774] rounded-md"
+                    {[
+                      "HTML",
+                      "CSS",
+                      "JavaScript",
+                      "Express.js",
+                      "Node.js",
+                      "Tailwind CSS",
+                      "MongoDB",
+                      "SQL",
+                      "React.js",
+                      "Python",
+                      "Git",
+                      "RESTful APIs",
+                      "Responsive Design",
+                      "TypeScript",
+                      "Next.js",
+                      "PostgreSQL",
+                      "Supabase",
+                    ].map((tech, index) => (
+                      <motion.span
+                        key={tech}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+                        transition={{ duration: 0.3, delay: 0.7 + index * 0.02 }}
+                        className="px-4 py-2 bg-white border border-[#e9e9e7] rounded-full text-sm text-[#37352f] hover:border-[#d4d4d1] transition-colors cursor-default"
                       >
-                        {skill}
-                      </span>
+                        {tech}
+                      </motion.span>
                     ))}
                   </div>
-                </motion.div>
-              ))}
+                </div>
+
+                {/* Additional Skills */}
+                <div>
+                  <h4 className="text-xl font-bold text-[#37352f] mb-4">
+                    Additional Skills
+                  </h4>
+                  <div className="space-y-3">
+                    {[
+                      "Problem Solving",
+                      "Team Collaboration",
+                      "Project Management",
+                      "UI/UX Design",
+                      "Code Optimization",
+                      "API Integration",
+                    ].map((skill, index) => (
+                      <motion.div
+                        key={skill}
+                        initial={{ opacity: 0, x: 10 }}
+                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 10 }}
+                        transition={{ duration: 0.4, delay: 0.8 + index * 0.05 }}
+                        className="flex items-center gap-3"
+                      >
+                        <div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                          <svg
+                            className="w-3 h-3 text-blue-600"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="3"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path d="M5 13l4 4L19 7"></path>
+                          </svg>
+                        </div>
+                        <span className="text-[#787774]">{skill}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </motion.div>
