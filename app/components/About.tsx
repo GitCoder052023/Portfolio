@@ -121,29 +121,19 @@ export default function About() {
                 <div className="grid sm:grid-cols-2 gap-4">
                   {[
                     {
-                      name: "HTML",
-                      description: "Semantic markup, Accessibility, SEO optimization",
-                      icon: "html5",
-                    },
-                    {
-                      name: "CSS",
-                      description: "Responsive design, Animations, Flexbox & Grid",
-                      icon: "css3",
-                    },
-                    {
-                      name: "JavaScript",
-                      description: "ES6+, DOM manipulation, Async programming",
-                      icon: "javascript",
-                    },
-                    {
-                      name: "Python",
-                      description: "Data processing, Automation, Web scraping",
-                      icon: "python",
-                    },
-                    {
-                      name: "React.js",
+                      name: "React",
                       description: "Component-based UI, Hooks, State management",
                       icon: "react",
+                    },
+                    {
+                      name: "Next.js",
+                      description: "Full-stack React framework, SSR, API routes",
+                      icon: "next.js",
+                    },
+                    {
+                      name: "TypeScript",
+                      description: "Type-safe JavaScript, Enhanced developer experience",
+                      icon: "typescript",
                     },
                     {
                       name: "Node.js",
@@ -151,14 +141,24 @@ export default function About() {
                       icon: "nodejs",
                     },
                     {
+                      name: "Express.js",
+                      description: "Web framework, REST APIs, Middleware",
+                      icon: "express",
+                    },
+                    {
                       name: "MongoDB",
                       description: "NoSQL database, Schema design, CRUD operations",
                       icon: "mongodb",
                     },
                     {
-                      name: "SQL",
-                      description: "Relational databases, Query optimization, Data modeling",
+                      name: "PostgreSQL",
+                      description: "Relational database, Query optimization, Data modeling",
                       icon: "postgresql",
+                    },
+                    {
+                      name: "Python",
+                      description: "Data science, Automation, Scripting, ML fundamentals",
+                      icon: "python",
                     },
                   ].map((tech, index) => (
                     <motion.div
@@ -200,23 +200,27 @@ export default function About() {
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {[
-                      "HTML",
-                      "CSS",
-                      "JavaScript",
-                      "Express.js",
-                      "Node.js",
-                      "Tailwind CSS",
-                      "MongoDB",
-                      "SQL",
-                      "React.js",
-                      "Python",
-                      "Git",
-                      "RESTful APIs",
-                      "Responsive Design",
-                      "TypeScript",
+                      "React",
                       "Next.js",
+                      "TanStack Start",
+                      "JavaScript",
+                      "TypeScript",
+                      "Node.js",
+                      "Express.js",
+                      "REST APIs",
+                      "Webhooks",
+                      "MongoDB",
                       "PostgreSQL",
                       "Supabase",
+                      "Python",
+                      "Pandas",
+                      "NumPy",
+                      "Matplotlib",
+                      "Seaborn",
+                      "Plotly",
+                      "Authentication & Authorization",
+                      "API Integration",
+                      "Deployment",
                     ].map((tech, index) => (
                       <motion.span
                         key={tech}
@@ -238,12 +242,15 @@ export default function About() {
                   </h4>
                   <div className="space-y-3">
                     {[
-                      "Problem Solving",
-                      "Team Collaboration",
-                      "Project Management",
-                      "UI/UX Design",
-                      "Code Optimization",
-                      "API Integration",
+                      "Full Backend Development",
+                      "API Design & Business Logic",
+                      "End-to-end Deployment",
+                      "Data Cleaning & Preprocessing",
+                      "Exploratory Data Analysis",
+                      "Data Visualization",
+                      "Machine Learning Fundamentals",
+                      "Environment Configuration",
+                      "Authentication & Authorization",
                     ].map((skill, index) => (
                       <motion.div
                         key={skill}
