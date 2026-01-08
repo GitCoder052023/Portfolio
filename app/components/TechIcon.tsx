@@ -19,6 +19,7 @@ const techColors: Record<string, string> = {
   tanstackstart: "#FF6B35",
   tanstack: "#FF6B35",
   nodejs: "#339933",
+  "node.js": "#339933",
   express: "#000000",
   "express.js": "#000000",
   expressjs: "#000000",
@@ -32,6 +33,7 @@ const techColors: Record<string, string> = {
   seaborn: "#3776AB",
   plotly: "#3F4F75",
   tailwindcss: "#06B6D4",
+  "tailwind css": "#06B6D4",
   html5: "#E34F26",
   css3: "#1572B6",
 };
@@ -47,18 +49,29 @@ const iconSlugMap: Record<string, string> = {
   "ml fundamentals": "machinelearning",
   "express.js": "express",
   "expressjs": "express",
+  "express": "express",
+  "tailwind css": "tailwindcss",
+  "tailwindcss": "tailwindcss",
+  "node.js": "nodedotjs",
+  "nodejs": "nodedotjs",
+  "css3": "css",
+};
+
+// Icons to use from DevIcon (TechIcons) instead of Simple Icons
+const devIconNames: Record<string, string> = {
+  "matplotlib": "Matplotlib",
+};
+
+// Icons to use from Iconify instead of Simple Icons
+const iconifyIcons: Record<string, string> = {
+  "seaborn": "logos:seaborn-icon",
 };
 
 export default function TechIcon({ name, size = 24, className = "" }: TechIconProps) {
   const [imageError, setImageError] = useState(false);
   
-  const techName = name.toLowerCase().replace(/\s+/g, "");
-  const iconSlug = iconSlugMap[techName] || techName.replace(/[^a-z0-9]/g, "");
+  const techName = name.toLowerCase().trim();
   const color = techColors[techName] || "#787774";
-  
-  // Use Simple Icons CDN for consistent, colored icons
-  // Format: https://cdn.simpleicons.org/{slug}/{color}
-  const iconUrl = `https://cdn.simpleicons.org/${iconSlug}/${color.replace("#", "")}`;
   
   // Convert hex to rgba for background
   const hexToRgba = (hex: string, alpha: number) => {
@@ -67,6 +80,21 @@ export default function TechIcon({ name, size = 24, className = "" }: TechIconPr
     const b = parseInt(hex.slice(5, 7), 16);
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   };
+  
+  // Check which CDN to use
+  let iconUrl: string;
+  
+  if (devIconNames[techName]) {
+    // Use DevIcon/TechIcons CDN for matplotlib
+    iconUrl = `https://icon.icepanel.io/Technology/svg/${devIconNames[techName]}.svg`;
+  } else if (iconifyIcons[techName]) {
+    // Use Iconify CDN for seaborn
+    iconUrl = `https://api.iconify.design/${iconifyIcons[techName]}.svg?color=${color.replace("#", "%23")}`;
+  } else {
+    // Use Simple Icons CDN for everything else
+    const iconSlug = iconSlugMap[techName] || techName.replace(/[^a-z0-9]/g, "");
+    iconUrl = `https://cdn.simpleicons.org/${iconSlug}/${color.replace("#", "")}`;
+  }
   
   if (imageError) {
     // Fallback: show a colored badge with text
@@ -104,4 +132,3 @@ export default function TechIcon({ name, size = 24, className = "" }: TechIconPr
     </div>
   );
 }
-

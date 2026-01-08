@@ -1,20 +1,59 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Code, Database, TrendingUp, MapPin, Sparkles, Rocket } from "lucide-react";
 import TechIcon from "./TechIcon";
 
 export default function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [selectedCategory, setSelectedCategory] = useState(0);
+  const [hoveredTech, setHoveredTech] = useState(null);
 
   const stats = [
     { label: "Years Coding", value: "6+", icon: Code },
     { label: "Web Dev Focus", value: "3 years", icon: TrendingUp },
     { label: "Python Experience", value: "4 years", icon: Database },
     { label: "Location", value: "India", icon: MapPin },
+  ];
+
+  const techCategories = [
+    {
+      category: "Frontend",
+      techs: [
+        { name: "HTML5", icon: "html5" },
+        { name: "CSS3", icon: "css3" },
+        { name: "JavaScript", icon: "javascript" },
+        { name: "React", icon: "react" },
+        { name: "Next.js", icon: "next.js" },
+        { name: "TanStack Start", icon: "tanstack start" },
+        { name: "TypeScript", icon: "typescript" },
+        { name: "Tailwind CSS", icon: "tailwindcss" }
+      ]
+    },
+    {
+      category: "Backend",
+      techs: [
+        { name: "Node.js", icon: "nodejs" },
+        { name: "Express.js", icon: "express" },
+        { name: "MongoDB", icon: "mongodb" },
+        { name: "PostgreSQL", icon: "postgresql" },
+        { name: "Supabase", icon: "supabase" },
+      ]
+    },
+    {
+      category: "Data",
+      techs: [
+        { name: "Python", icon: "python" },
+        { name: "Pandas", icon: "pandas" },
+        { name: "NumPy", icon: "numpy" },
+        { name: "Matplotlib", icon: "matplotlib" },
+        { name: "Seaborn", icon: "seaborn" },
+        { name: "Plotly", icon: "plotly" },
+      ]
+    },
   ];
 
   return (
@@ -32,7 +71,6 @@ export default function About() {
 
           <div className="grid md:grid-cols-4 gap-6 mb-16">
             {stats.map((stat, index) => {
-              const Icon = stat.icon;
               return (
                 <motion.div
                   key={stat.label}
@@ -41,7 +79,6 @@ export default function About() {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="bg-white p-6 rounded-xl border border-[#e9e9e7] hover:border-[#d4d4d1] transition-colors"
                 >
-                  <Icon className="w-6 h-6 text-[#787774] mb-3" />
                   <div className="text-3xl font-bold text-[#37352f] mb-1">
                     {stat.value}
                   </div>
@@ -51,7 +88,7 @@ export default function About() {
             })}
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 gap-8 mb-20">
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
@@ -103,186 +140,106 @@ export default function About() {
             </motion.div>
           </div>
 
-          <div>
-            <h3 className="text-2xl font-semibold text-[#37352f] mb-8">
-              Tech Stack
-            </h3>
-            <div className="grid lg:grid-cols-3 gap-8">
-              {/* Core Technologies - Left Column */}
+          {/* Modern Tech Stack Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-24"
+          >
+            <div className="mb-16">
+              <h3 className="text-4xl sm:text-5xl font-bold mb-6 text-[#37352f]">
+                Tech Arsenal
+              </h3>
+              <p className="text-[#787774] text-lg">
+                The tools and technologies I use to build modern, scalable solutions
+              </p>
+            </div>
+
+            {/* Centered Capsule Navigation */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="mb-16 flex justify-center"
+            >
+              <div className="bg-white border border-[#e9e9e7] rounded-full p-2 inline-flex gap-2 shadow-sm">
+                {techCategories.map((cat, idx) => (
+                  <motion.button
+                    key={cat.category}
+                    onClick={() => setSelectedCategory(idx)}
+                    className={`px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 ${selectedCategory === idx
+                        ? "bg-[#37352f] text-white shadow-md"
+                        : "bg-transparent text-[#37352f] hover:bg-[#f0f0ed]"
+                      }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {cat.category}
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Dynamic Tech Grid with Clean Hover */}
+            <AnimatePresence mode="wait">
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="lg:col-span-2"
+                className="md:flex md:justify-center"
+                key={selectedCategory}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.25 }}
               >
-                <h4 className="text-xl font-bold text-[#37352f] mb-6">
-                  Core Technologies
-                </h4>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {[
-                    {
-                      name: "React",
-                      description: "Component-based UI, Hooks, State management",
-                      icon: "react",
-                    },
-                    {
-                      name: "Next.js",
-                      description: "Full-stack React framework, SSR, API routes",
-                      icon: "next.js",
-                    },
-                    {
-                      name: "TypeScript",
-                      description: "Type-safe JavaScript, Enhanced developer experience",
-                      icon: "typescript",
-                    },
-                    {
-                      name: "Node.js",
-                      description: "Server-side JavaScript, API development",
-                      icon: "nodejs",
-                    },
-                    {
-                      name: "Express.js",
-                      description: "Web framework, REST APIs, Middleware",
-                      icon: "express",
-                    },
-                    {
-                      name: "MongoDB",
-                      description: "NoSQL database, Schema design, CRUD operations",
-                      icon: "mongodb",
-                    },
-                    {
-                      name: "PostgreSQL",
-                      description: "Relational database, Query optimization, Data modeling",
-                      icon: "postgresql",
-                    },
-                    {
-                      name: "Python",
-                      description: "Data science, Automation, Scripting, ML fundamentals",
-                      icon: "python",
-                    },
-                  ].map((tech, index) => (
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                  {techCategories[selectedCategory].techs.map((tech, idx) => (
                     <motion.div
                       key={tech.name}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                      transition={{ duration: 0.5, delay: 0.5 + index * 0.05 }}
-                      className="bg-white p-5 rounded-xl border border-[#e9e9e7] hover:border-[#d4d4d1] transition-colors"
+                      initial={{ opacity: 0, scale: 0.9, y: 15 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      transition={{ duration: 0.35, delay: idx * 0.05 }}
+                      onMouseEnter={() => setHoveredTech(idx)}
+                      onMouseLeave={() => setHoveredTech(null)}
+                      className="group"
                     >
-                      <div className="flex items-start gap-4">
-                        <div className="flex-shrink-0">
-                          <TechIcon name={tech.icon} size={40} />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h5 className="font-bold text-[#37352f] mb-1.5">
+                      <motion.div
+                        animate={hoveredTech === idx ? { y: -4 } : { y: 0 }}
+                        transition={{ duration: 0.2, type: "spring", stiffness: 300, damping: 30 }}
+                        className="rounded-xl p-6 flex flex-col items-center justify-center gap-3 h-full cursor-pointer transition-all duration-300 group-hover:border-[#d4d4d1] group-hover:shadow-md"
+                      >
+                        <motion.div
+                          animate={hoveredTech === idx ? { scale: 1.08 } : { scale: 1 }}
+                          transition={{ duration: 0.2, type: "spring", stiffness: 300, damping: 30 }}
+                          className="w-12 h-12 flex items-center justify-center"
+                        >
+                          <TechIcon name={tech.icon} size={44} />
+                        </motion.div>
+
+                        <motion.div
+                          animate={hoveredTech === idx ? { opacity: 1 } : { opacity: 0.8 }}
+                          transition={{ duration: 0.2 }}
+                          className="text-center"
+                        >
+                          <span className="text-sm font-medium text-[#37352f] block">
                             {tech.name}
-                          </h5>
-                          <p className="text-sm text-[#787774] leading-relaxed">
-                            {tech.description}
-                          </p>
-                        </div>
-                      </div>
+                          </span>
+                        </motion.div>
+
+                        {/* Subtle bottom accent on hover */}
+                        <motion.div
+                          animate={hoveredTech === idx ? { opacity: 1, scaleX: 1 } : { opacity: 0, scaleX: 0.8 }}
+                          transition={{ duration: 0.2 }}
+                          className="h-0.5 w-6 bg-[#d4d4d1] rounded-full origin-center mt-1"
+                        />
+                      </motion.div>
                     </motion.div>
                   ))}
                 </div>
               </motion.div>
-
-              {/* Right Column - Technologies & Additional Skills */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="space-y-8"
-              >
-                {/* Technologies */}
-                <div>
-                  <h4 className="text-xl font-bold text-[#37352f] mb-4">
-                    Technologies
-                  </h4>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      "React",
-                      "Next.js",
-                      "TanStack Start",
-                      "JavaScript",
-                      "TypeScript",
-                      "Node.js",
-                      "Express.js",
-                      "REST APIs",
-                      "Webhooks",
-                      "MongoDB",
-                      "PostgreSQL",
-                      "Supabase",
-                      "Python",
-                      "Pandas",
-                      "NumPy",
-                      "Matplotlib",
-                      "Seaborn",
-                      "Plotly",
-                      "Authentication & Authorization",
-                      "API Integration",
-                      "Deployment",
-                    ].map((tech, index) => (
-                      <motion.span
-                        key={tech}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                        transition={{ duration: 0.3, delay: 0.7 + index * 0.02 }}
-                        className="px-4 py-2 bg-white border border-[#e9e9e7] rounded-full text-sm text-[#37352f] hover:border-[#d4d4d1] transition-colors cursor-default"
-                      >
-                        {tech}
-                      </motion.span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Additional Skills */}
-                <div>
-                  <h4 className="text-xl font-bold text-[#37352f] mb-4">
-                    Additional Skills
-                  </h4>
-                  <div className="space-y-3">
-                    {[
-                      "Full Backend Development",
-                      "API Design & Business Logic",
-                      "End-to-end Deployment",
-                      "Data Cleaning & Preprocessing",
-                      "Exploratory Data Analysis",
-                      "Data Visualization",
-                      "Machine Learning Fundamentals",
-                      "Environment Configuration",
-                      "Authentication & Authorization",
-                    ].map((skill, index) => (
-                      <motion.div
-                        key={skill}
-                        initial={{ opacity: 0, x: 10 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 10 }}
-                        transition={{ duration: 0.4, delay: 0.8 + index * 0.05 }}
-                        className="flex items-center gap-3"
-                      >
-                        <div className="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                          <svg
-                            className="w-3 h-3 text-blue-600"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="3"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path d="M5 13l4 4L19 7"></path>
-                          </svg>
-                        </div>
-                        <span className="text-[#787774]">{skill}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
+            </AnimatePresence>
+          </motion.div>
         </motion.div>
       </div>
     </section>
   );
 }
-
