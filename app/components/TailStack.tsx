@@ -14,10 +14,6 @@ import {
   ArrowRight,
   Github,
   Layers,
-  Server,
-  Layout,
-  Terminal,
-  FolderTree,
   Settings,
 } from "lucide-react";
 
@@ -45,13 +41,6 @@ export default function TailStack({ align = "right" }: TailStackProps) {
     { icon: Shield, title: "Industry-Standard Tooling", description: "Rigorous linting, TypeScript, and best practices built-in", accent: "from-sky-100 to-blue-100" },
     { icon: Rocket, title: "Scalable Foundation", description: "Perfect for MVPs and large-scale enterprise solutions", accent: "from-violet-100 to-purple-100" },
     { icon: Code2, title: "Full-Stack Ready", description: "Express, React, and Node.js perfectly integrated", accent: "from-rose-100 to-pink-100" },
-  ];
-
-  const architectureItems = [
-    { icon: FolderTree, label: "packages/", sublabel: "Modular workspace" },
-    { icon: Layout, label: "core/", sublabel: "Frontend + Backend" },
-    { icon: Server, label: "node/", sublabel: "Backend template" },
-    { icon: Terminal, label: "react/", sublabel: "Frontend template" },
   ];
 
   const highlights = [
@@ -86,7 +75,7 @@ export default function TailStack({ align = "right" }: TailStackProps) {
     if (!isInView) return;
 
     const maxDelay = Math.max(...terminalLines.map((line) => line.delay));
-    const totalCycle = maxDelay + 5000; // Show final state for 5s before reset
+    const totalCycle = maxDelay + 5000;
 
     const timer = setInterval(() => {
       setElapsedTime((prev) => (prev >= totalCycle ? 0 : prev + 100));
@@ -155,9 +144,9 @@ export default function TailStack({ align = "right" }: TailStackProps) {
               })}
             </div>
 
-            {/* Terminal */}
+            {/* Terminal Section */}
             <div className="flex-1">
-              <div className="relative h-full min-h-[550px] bg-slate-900 rounded-2xl border border-slate-700/50 shadow-2xl overflow-hidden">
+              <div className="relative min-h-[400px] bg-slate-900 rounded-2xl border border-slate-700/50 shadow-2xl overflow-hidden">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-slate-700/50 bg-slate-800/50">
                   <div className="flex gap-2">
                     <div className="w-3 h-3 rounded-full bg-red-400" />
@@ -167,7 +156,12 @@ export default function TailStack({ align = "right" }: TailStackProps) {
                   <span className="text-xs font-mono text-emerald-400/80">tailstack/ ~ zsh</span>
                 </div>
 
-                <div ref={terminalContentRef} className="p-6 font-mono text-sm space-y-1.5 overflow-y-auto h-[480px] scroll-smooth">
+                {/* SCROLLBAR HIDDEN HERE */}
+                <div 
+                  ref={terminalContentRef} 
+                  className="p-6 font-mono text-sm space-y-1.5 overflow-y-auto h-[480px] scroll-smooth 
+                  [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+                >
                   {terminalLines.map((line, index) => {
                     const isVisible = elapsedTime >= line.delay;
                     if (!isVisible) return null;
@@ -201,19 +195,6 @@ export default function TailStack({ align = "right" }: TailStackProps) {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Architecture Items */}
-          <div className="mb-14 p-8 rounded-2xl bg-white border border-[#e9e9e7] grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {architectureItems.map((item, index) => (
-              <div key={index} className="flex items-center gap-3 p-4 rounded-lg bg-slate-50 border border-slate-200/50">
-                <item.icon className="w-5 h-5 text-[#37352f]" />
-                <div>
-                  <p className="font-semibold text-[#37352f] text-sm">{item.label}</p>
-                  <p className="text-xs text-[#787774]">{item.sublabel}</p>
-                </div>
-              </div>
-            ))}
           </div>
 
           {/* Highlights */}
