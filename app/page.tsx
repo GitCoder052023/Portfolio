@@ -1,6 +1,7 @@
 import Hero from "./components/Hero";
 import About from "./components/About";
-import ExamBazar from "./components/ExamBazar";
+import PidifyJs from "./components/PidifyJs";
+import TailStack from "./components/TailStack";
 import StreamNet from "./components/StreamNet";
 import Goals from "./components/Goals";
 import Contact from "./components/Contact";
@@ -15,8 +16,9 @@ export default function Home() {
       <main className="min-h-screen">
         <Hero />
         <About />
-        <ExamBazar align="left" />
-        <StreamNet align="right" />
+        <PidifyJs align="left" />
+        <TailStack align="right" />
+        <StreamNet align="left" />
         <Goals />
         <Contact />
       </main>

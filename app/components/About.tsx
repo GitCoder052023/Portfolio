@@ -100,17 +100,17 @@ export default function About() {
                   <Rocket className="w-5 h-5 text-[#37352f]" />
                 </div>
                 <h3 className="text-2xl font-semibold text-[#37352f]">
-                  Full-Stack Developer
+                  Backend-first Full-Stack Developer
                 </h3>
               </div>
               <p className="text-[#787774] leading-relaxed mb-4">
-                I'm a self-driven developer who thrives on building complete solutions from the ground up. With over 6 years of coding experience, I've developed a deep passion for creating applications that solve real-world problems. My journey has been one of continuous learning, from scripting automation tools to architecting full-stack web applications.
+                I'm a backend-first developer who thrives on building complete solutions from the ground up. With over 6 years of coding experience, I've developed a deep passion for creating applications that solve real-world problems. My journey has been one of continuous learning, from scripting automation tools to architecting robust backend systems and full-stack web applications.
               </p>
               <p className="text-[#787774] leading-relaxed mb-4">
-                What sets me apart is my ability to work independently across the entire development stack. I'm comfortable diving into backend architecture, crafting intuitive frontend experiences, and ensuring everything works seamlessly together. I believe in writing clean, maintainable code and building systems that scale.
+                What sets me apart is my ability to work independently across the entire development stack, with a strong foundation in backend architecture. I'm passionate about designing scalable APIs, implementing secure authentication systems, and crafting intuitive frontend experiences that seamlessly integrate with powerful backend solutions. I believe in writing clean, maintainable code and building systems that scale.
               </p>
               <p className="text-[#787774] leading-relaxed">
-                Currently, I'm channeling my expertise into building <strong className="text-[#37352f]">Exam Bazar</strong> — a transformative platform that aims to reshape how students and educators connect, learn, and grow together in the academic space.
+                As a part-time open-source builder and contributor, I'm dedicated to giving back to the community through projects like <strong className="text-[#37352f]">PidifyJS</strong> and <strong className="text-[#37352f]">TailStack</strong>, helping developers build better applications with production-ready tools and architectures.
               </p>
             </motion.div>
 
