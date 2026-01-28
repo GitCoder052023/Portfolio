@@ -102,7 +102,7 @@ export default function RootLayout({
               "@type": "WebSite",
               url: "https://hamdankhubaib.in",
               name: "Hamdan Khubaib - Full-Stack Developer",
-              description: "16-year-old full-stack developer from India. Building Exam Bazar.",
+              description: "Backend-first full-stack developer focused on building scalable, reliable, and maintainable software solutions. Experienced in designing systems that solve real-world problems and scale with growth.",
               author: {
                 "@type": "Person",
                 name: "Hamdan Khubaib",

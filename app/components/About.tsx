@@ -26,100 +26,117 @@ export default function About() {
             About Me
           </h2>
 
-          <div className="grid md:grid-cols-4 gap-6 mb-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
             {ABOUT_STATS.map((stat, index) => {
+              const Icon = stat.icon;
               return (
                 <motion.div
                   key={stat.label}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-white p-6 rounded-xl border border-[#e9e9e7] hover:border-[#d4d4d1] transition-colors"
+                  className="group relative"
                 >
-                  <div className="text-3xl font-bold text-[#37352f] mb-1">
-                    {stat.value}
+                  <div className={`relative h-full p-6 rounded-2xl border border-[#e9e9e7] bg-white transition-all duration-300 hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-[#d4d4d1]`}>
+                    <div className="flex flex-col gap-4">
+                      {/* Icon Circle */}
+                      <div className={`w-10 h-10 rounded-xl ${stat.color} flex items-center justify-center transition-transform duration-300 group-hover:scale-110`}>
+                        <Icon className={`w-5 h-5 ${stat.iconColor}`} />
+                      </div>
+
+                      <div className="space-y-1">
+                        <div className="text-2xl font-bold text-[#37352f] tracking-tight">
+                          {stat.value}
+                        </div>
+                        <div className="text-[13px] font-medium text-[#9d9b97] leading-tight">
+                          {stat.label}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Notion-style subtle hover indicator */}
+                    <div className="absolute top-3 right-3 w-1.5 h-1.5 rounded-full bg-[#e9e9e7] opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
-                  <div className="text-sm text-[#787774]">{stat.label}</div>
                 </motion.div>
               );
             })}
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 mb-20">
-  <motion.div
-    initial={{ opacity: 0, x: -20 }}
-    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-    transition={{ duration: 0.6, delay: 0.2 }}
-    className="bg-white p-8 rounded-xl border border-[#e9e9e7]"
-  >
-    <div className="flex items-center gap-3 mb-4">
-      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-        <Rocket className="w-5 h-5 text-[#37352f]" />
-      </div>
-      <h3 className="text-2xl font-semibold text-[#37352f]">
-        Backend-first Full-Stack Developer
-      </h3>
-    </div>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="bg-white p-8 rounded-xl border border-[#e9e9e7]"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
+                  <Rocket className="w-5 h-5 text-[#37352f]" />
+                </div>
+                <h3 className="text-2xl font-semibold text-[#37352f]">
+                  Backend-first Full-Stack Developer
+                </h3>
+              </div>
 
-    <p className="text-[#787774] leading-relaxed mb-4">
-      I’m a backend-first developer focused on building reliable, scalable software
-      systems from the ground up. With over six years of experience, I specialize
-      in turning ambiguous problems into well-structured solutions that are easy
-      to maintain, extend, and operate in real-world environments.
-    </p>
+              <p className="text-[#787774] leading-relaxed mb-4">
+                I'm a backend-first developer focused on building reliable, scalable software
+                systems from the ground up. With over six years of experience, I specialize
+                in turning ambiguous problems into well-structured solutions that are easy
+                to maintain, extend, and operate in real-world environments.
+              </p>
 
-    <p className="text-[#787774] leading-relaxed mb-4">
-      I work comfortably across the entire development lifecycle, with a strong
-      emphasis on backend architecture and system design. My approach prioritizes
-      clean abstractions, secure and well-defined interfaces, and thoughtful
-      trade-offs that support long-term scalability rather than short-term fixes.
-    </p>
+              <p className="text-[#787774] leading-relaxed mb-4">
+                I work comfortably across the entire development lifecycle, with a strong
+                emphasis on backend architecture and system design. My approach prioritizes
+                clean abstractions, secure and well-defined interfaces, and thoughtful
+                trade-offs that support long-term scalability rather than short-term fixes.
+              </p>
 
-    <p className="text-[#787774] leading-relaxed">
-      Alongside product work, I actively contribute to open-source projects,
-      helping design and maintain production-ready tools and architectures that
-      enable developers to ship higher-quality applications with confidence.
-    </p>
-  </motion.div>
+              <p className="text-[#787774] leading-relaxed">
+                Alongside product work, I actively contribute to open-source projects,
+                helping design and maintain production-ready tools and architectures that
+                enable developers to ship higher-quality applications with confidence.
+              </p>
+            </motion.div>
 
-  <motion.div
-    initial={{ opacity: 0, x: 20 }}
-    animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-    transition={{ duration: 0.6, delay: 0.3 }}
-    className="bg-white p-8 rounded-xl border border-[#e9e9e7]"
-  >
-    <div className="flex items-center gap-3 mb-4">
-      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-100 to-teal-100 flex items-center justify-center">
-        <Sparkles className="w-5 h-5 text-[#37352f]" />
-      </div>
-      <h3 className="text-2xl font-semibold text-[#37352f]">
-        Python & Data Enthusiast
-      </h3>
-    </div>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="bg-white p-8 rounded-xl border border-[#e9e9e7]"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-100 to-teal-100 flex items-center justify-center">
+                  <Sparkles className="w-5 h-5 text-[#37352f]" />
+                </div>
+                <h3 className="text-2xl font-semibold text-[#37352f]">
+                  Python & Data Enthusiast
+                </h3>
+              </div>
 
-    <p className="text-[#787774] leading-relaxed mb-4">
-      I use Python as a practical tool for understanding systems, workflows, and
-      user behavior through data. Over several years, I’ve applied data analysis
-      and automation to reduce manual effort, surface insights, and support better
-      technical and product decisions.
-    </p>
+              <p className="text-[#787774] leading-relaxed mb-4">
+                I use Python as a practical tool for understanding systems, workflows, and
+                user behavior through data. Over several years, I've applied data analysis
+                and automation to reduce manual effort, surface insights, and support better
+                technical and product decisions.
+              </p>
 
-    <p className="text-[#787774] leading-relaxed mb-4">
-      My experience includes building repeatable data workflows, cleaning and
-      structuring messy datasets, and translating raw information into clear,
-      actionable insights. This has helped guide decisions based on evidence
-      rather than assumptions.
-    </p>
+              <p className="text-[#787774] leading-relaxed mb-4">
+                My experience includes building repeatable data workflows, cleaning and
+                structuring messy datasets, and translating raw information into clear,
+                actionable insights. This has helped guide decisions based on evidence
+                rather than assumptions.
+              </p>
 
-    <p className="text-[#787774] leading-relaxed">
-      As I continue to grow, I’m expanding into{" "}
-      <strong className="text-[#37352f]">machine learning fundamentals</strong>{" "}
-      to further connect data-driven insights with production software systems,
-      particularly at the intersection of backend engineering and intelligent
-      applications.
-    </p>
-  </motion.div>
-</div>
+              <p className="text-[#787774] leading-relaxed">
+                As I continue to grow, I'm expanding into{" "}
+                <strong className="text-[#37352f]">machine learning fundamentals</strong>{" "}
+                to further connect data-driven insights with production software systems,
+                particularly at the intersection of backend engineering and intelligent
+                applications.
+              </p>
+            </motion.div>
+          </div>
 
 
           {/* Modern Tech Stack Section */}
@@ -151,8 +168,8 @@ export default function About() {
                     key={cat.category}
                     onClick={() => setSelectedCategory(idx)}
                     className={`px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 ${selectedCategory === idx
-                        ? "bg-[#37352f] text-white shadow-md"
-                        : "bg-transparent text-[#37352f] hover:bg-[#f0f0ed]"
+                      ? "bg-[#37352f] text-white shadow-md"
+                      : "bg-transparent text-[#37352f] hover:bg-[#f0f0ed]"
                       }`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
