@@ -5,8 +5,13 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
+      disallow: ['/admin', '/private'],
     },
-    sitemap: 'https://hamdankhubaib.dev/sitemap.xml',
+    sitemap: [
+      'https://hamdankhubaib.in/sitemap.xml',
+      'https://hamdankhubaib.in/sitemap.xml',
+      'https://www.hamdankhubaib.in/sitemap.xml',
+    ],
   }
 }
 

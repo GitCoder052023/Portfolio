@@ -10,6 +10,7 @@ import {
   Linkedin, 
   Twitter, 
   Instagram,
+  Facebook,
   MessageCircle,
   ArrowRight
 } from "lucide-react";
@@ -60,6 +61,20 @@ export default function Contact() {
       value: "@hamdankhubaib.code",
       href: "https://instagram.com/hamdankhubaib.code",
       color: "from-pink-100 to-rose-100",
+    },
+    {
+      icon: Facebook,
+      label: "Facebook",
+      value: "HamdanKhubaib",
+      href: "https://www.facebook.com/HamdanKhubaib",
+      color: "from-blue-100 to-blue-200",
+    },
+    {
+      icon: MessageCircle,
+      label: "Threads",
+      value: "@hamdankhubaib.code",
+      href: "https://threads.com/@hamdankhubaib.code",
+      color: "from-slate-100 to-gray-100",
     },
   ];
 
