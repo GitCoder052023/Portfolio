@@ -22,6 +22,7 @@ export default function Home() {
         <Goals />
         <Contact />
       </main>
+      <Footer />
     </SmoothScroll>
   );
 }
