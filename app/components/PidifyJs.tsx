@@ -392,27 +392,6 @@ export default function PidifyJs({ align = "left" }: PidifyJsProps) {
             })}
           </div>
 
-          {/* Installation snippet */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="mb-10"
-          >
-            <div className="inline-flex items-center gap-4 px-5 py-3 bg-[#f7f6f3] rounded-xl border border-[#e9e9e7]">
-              <code className="text-sm font-mono text-[#37352f]">
-                <span className="text-[#787774]">$</span> npm install <span className="text-emerald-600">pidifyjs</span>
-              </code>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-3 py-1.5 bg-white border border-[#e9e9e7] rounded-lg text-xs font-medium text-[#37352f] hover:border-[#d4d4d1] transition-colors"
-              >
-                Copy
-              </motion.button>
-            </div>
-          </motion.div>
-
           {/* CTA Button */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -29,7 +29,6 @@ export default function TailStack({ align = "right" }: TailStackProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [activeFeature, setActiveFeature] = useState<number | null>(null);
-  const [terminalStep, setTerminalStep] = useState(0);
 
   const features = [
     {
@@ -298,33 +297,6 @@ export default function TailStack({ align = "right" }: TailStackProps) {
                         )}
                       </motion.div>
                     ))}
-                  </div>
-
-                  {/* Architecture preview */}
-                  <div className="px-5 sm:px-6 pb-6">
-                    <div className="border-t border-slate-700/50 pt-5">
-                      <div className="text-xs text-slate-500 mb-3 uppercase tracking-wider">Project Structure</div>
-                      <div className="grid grid-cols-2 gap-2">
-                        {architectureItems.map((item, index) => {
-                          const Icon = item.icon;
-                          return (
-                            <motion.div
-                              key={item.label}
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-                              transition={{ duration: 0.3, delay: 1.2 + index * 0.1 }}
-                              className="flex items-center gap-2 px-3 py-2 bg-slate-800/50 rounded-lg border border-slate-700/30 hover:border-slate-600/50 transition-colors"
-                            >
-                              <Icon className="w-4 h-4 text-amber-400/70" />
-                              <div>
-                                <span className="text-xs text-slate-300">{item.label}</span>
-                                <span className="text-xs text-slate-500 block">{item.sublabel}</span>
-                              </div>
-                            </motion.div>
-                          );
-                        })}
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
