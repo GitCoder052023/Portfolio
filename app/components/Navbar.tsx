@@ -1,24 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { NAV_ITEMS } from "../constants/navigation";
+import { useScrolled } from "../hooks/useScrolled";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const navItems = [
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Goals", href: "#goals" },
-  ];
+  const scrolled = useScrolled(50);
 
   return (
     <motion.nav
@@ -42,7 +29,7 @@ export default function Navbar() {
             HK
           </motion.a>
           <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item, index) => (
+            {NAV_ITEMS.map((item, index) => (
               <motion.a
                 key={item.name}
                 href={item.href}

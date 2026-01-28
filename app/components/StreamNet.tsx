@@ -4,33 +4,13 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import { ExternalLink, MessageSquare, Shield, Sparkles } from "lucide-react";
-
-interface StreamNetProps {
-  align?: "left" | "right";
-}
+import { ExternalLink } from "lucide-react";
+import { STREAMNET_FEATURES } from "../data/streamnet";
+import type { StreamNetProps } from "../types/components";
 
 export default function StreamNet({ align = "right" }: StreamNetProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const features = [
-    {
-      icon: MessageSquare,
-      title: "Real-time Messaging",
-      description: "Instant communication within local networks",
-    },
-    {
-      icon: Shield,
-      title: "Secure & Encrypted",
-      description: "End-to-end encryption for safe conversations",
-    },
-    {
-      icon: Sparkles,
-      title: "AI-Assisted",
-      description: "Powered by ChatLLaMA for intelligent conversations",
-    },
-  ];
 
   return (
     <section className="py-32 px-4 sm:px-6 lg:px-8 bg-[#f7f6f3]">
@@ -83,7 +63,7 @@ export default function StreamNet({ align = "right" }: StreamNetProps) {
               </p>
 
               <div className="grid gap-4 mt-8">
-                {features.map((feature, index) => {
+                {STREAMNET_FEATURES.map((feature, index) => {
                   const Icon = feature.icon;
                   return (
                     <motion.div

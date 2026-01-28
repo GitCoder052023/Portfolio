@@ -3,80 +3,12 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { 
-  Mail, 
-  Phone, 
-  Github, 
-  Linkedin, 
-  Twitter, 
-  Instagram,
-  Facebook,
-  MessageCircle,
-  ArrowRight
-} from "lucide-react";
+import { MessageCircle, ArrowRight } from "lucide-react";
+import { CONTACT_METHODS } from "../data/contact";
 
 export default function Contact() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const contactMethods = [
-    {
-      icon: Mail,
-      label: "Email",
-      value: "hamdankhubaib959@gmail.com",
-      href: "mailto:hamdankhubaib959@gmail.com",
-      color: "from-blue-100 to-cyan-100",
-    },
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "+91 9236785599",
-      href: "tel:+919236785599",
-      color: "from-green-100 to-teal-100",
-    },
-    {
-      icon: Github,
-      label: "GitHub",
-      value: "github.com/GitCoder052023",
-      href: "https://github.com/GitCoder052023",
-      color: "from-gray-100 to-slate-100",
-    },
-    {
-      icon: Linkedin,
-      label: "LinkedIn",
-      value: "linkedin.com/in/hamdan-khubaib",
-      href: "https://www.linkedin.com/in/hamdan-khubaib-3046b8331",
-      color: "from-blue-100 to-indigo-100",
-    },
-    {
-      icon: Twitter,
-      label: "X (Twitter)",
-      value: "@HamdanKhu41893",
-      href: "https://x.com/HamdanKhu41893",
-      color: "from-sky-100 to-blue-100",
-    },
-    {
-      icon: Instagram,
-      label: "Instagram",
-      value: "@hamdankhubaib.code",
-      href: "https://instagram.com/hamdankhubaib.code",
-      color: "from-pink-100 to-rose-100",
-    },
-    {
-      icon: Facebook,
-      label: "Facebook",
-      value: "HamdanKhubaib",
-      href: "https://www.facebook.com/HamdanKhubaib",
-      color: "from-blue-100 to-blue-200",
-    },
-    {
-      icon: MessageCircle,
-      label: "Threads",
-      value: "@hamdankhubaib.code",
-      href: "https://threads.com/@hamdankhubaib.code",
-      color: "from-slate-100 to-gray-100",
-    },
-  ];
 
   return (
     <section id="contact" className="py-32 px-4 sm:px-6 lg:px-8 bg-white">
@@ -109,7 +41,7 @@ export default function Contact() {
 
           {/* Contact Methods Grid */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {contactMethods.map((method, index) => {
+            {CONTACT_METHODS.map((method, index) => {
               const Icon = method.icon;
               return (
                 <motion.a

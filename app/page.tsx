@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import Hero from "./components/Hero";
 import About from "./components/About";
 import PidifyJs from "./components/PidifyJs";
@@ -9,16 +9,9 @@ import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import SmoothScroll from "./components/SmoothScroll";
 import Navbar from "./components/Navbar";
+import { HOME_METADATA } from "./config/seo";
 
-export const metadata: Metadata = {
-  title: "Hamdan Khubaib | Full-Stack Developer & Creator",
-  description: "Backend-first full-stack developer focused on building scalable, reliable, and maintainable software solutions. Experienced in designing systems that solve real-world problems and scale with growth.",
-  openGraph: {
-    title: "Hamdan Khubaib | Full-Stack Developer & Creator",
-    description: "Backend-first full-stack developer focused on building scalable, reliable, and maintainable software solutions. Experienced in designing systems that solve real-world problems and scale with growth.",
-    url: "https://hamdankhubaib.in",
-  },
-};
+export const metadata: Metadata = HOME_METADATA;
 
 export default function Home() {
   return (

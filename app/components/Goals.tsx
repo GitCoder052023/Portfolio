@@ -3,38 +3,12 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { Target, Code, Smartphone, Brain } from "lucide-react";
+import { Target } from "lucide-react";
+import { YEARLY_GOALS } from "../data/goals";
 
 export default function Goals() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const goals = [
-    {
-      icon: Brain,
-      title: "Machine Learning Fundamentals",
-      description: "Complete machine learning fundamentals and practical application",
-      color: "from-purple-100 to-pink-100",
-    },
-    {
-      icon: Code,
-      title: "Learn Go (Golang)",
-      description: "Master Go programming language for backend development",
-      color: "from-blue-100 to-cyan-100",
-    },
-    {
-      icon: Code,
-      title: "Learn Dart",
-      description: "Explore Dart for cross-platform development",
-      color: "from-teal-100 to-green-100",
-    },
-    {
-      icon: Smartphone,
-      title: "App Development",
-      description: "Move into mobile and app development",
-      color: "from-orange-100 to-yellow-100",
-    },
-  ];
 
   return (
     <section id="goals" className="py-32 px-4 sm:px-6 lg:px-8">
@@ -63,7 +37,7 @@ export default function Goals() {
           </div>
 
           <div className="grid sm:grid-cols-2 gap-6">
-            {goals.map((goal, index) => {
+            {YEARLY_GOALS.map((goal, index) => {
               const Icon = goal.icon;
               return (
                 <motion.div

@@ -3,29 +3,13 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { ArrowRight, Github } from "lucide-react";
 import {
-  Zap,
-  Package,
-  Code2,
-  Sliders,
-  Shield,
-  Brain,
-  Rocket,
-  ArrowRight,
-  Github,
-  Layers,
-  Settings,
-} from "lucide-react";
-
-interface TailStackProps {
-  align?: "left" | "right";
-}
-
-interface TerminalLine {
-  type: "command" | "output" | "success" | "ready" | "section" | "processing";
-  text: string;
-  delay: number;
-}
+  TAILSTACK_FEATURES,
+  TAILSTACK_HIGHLIGHTS,
+  TAILSTACK_TERMINAL_LINES,
+} from "../data/tailstack";
+import type { TailStackProps } from "../types/components";
 
 export default function TailStack({ align = "right" }: TailStackProps) {
   const ref = useRef(null);
@@ -34,47 +18,10 @@ export default function TailStack({ align = "right" }: TailStackProps) {
   const [elapsedTime, setElapsedTime] = useState(0);
   const terminalContentRef = useRef<HTMLDivElement>(null);
 
-  const features = [
-    { icon: Package, title: "Proven Architecture", description: "TailStack Architecture — battle-tested for production-grade applications", accent: "from-amber-100 to-orange-100" },
-    { icon: Zap, title: "Hit the Ground Running", description: "Pre-configured tools and beautiful UI system out of the box", accent: "from-yellow-100 to-amber-100" },
-    { icon: Sliders, title: "Fully Customizable", description: "Not a rigid framework — adapt to your specific needs", accent: "from-emerald-100 to-teal-100" },
-    { icon: Shield, title: "Industry-Standard Tooling", description: "Rigorous linting, TypeScript, and best practices built-in", accent: "from-sky-100 to-blue-100" },
-    { icon: Rocket, title: "Scalable Foundation", description: "Perfect for MVPs and large-scale enterprise solutions", accent: "from-violet-100 to-purple-100" },
-    { icon: Code2, title: "Full-Stack Ready", description: "Express, React, and Node.js perfectly integrated", accent: "from-rose-100 to-pink-100" },
-  ];
-
-  const highlights = [
-    { icon: Brain, title: "ERN Stack", description: "Express, React, Node.js — complete full-stack solution with modern tooling", color: "from-blue-50 to-cyan-50", borderColor: "border-blue-200/50" },
-    { icon: Layers, title: "Monorepo Ready", description: "Organized workspace structure with shared configurations", color: "from-purple-50 to-pink-50", borderColor: "border-purple-200/50" },
-    { icon: Settings, title: "Production-Grade", description: "Robust structure tested in real-world applications at scale", color: "from-emerald-50 to-teal-50", borderColor: "border-emerald-200/50" },
-  ];
-
-  const terminalLines: TerminalLine[] = [
-    { type: "section", text: "→ Initializing TailStack environment...", delay: 0 },
-    { type: "command", text: "pnpm install", delay: 800 },
-    { type: "output", text: "Resolving dependencies...", delay: 1200 },
-    { type: "processing", text: "├─ typescript@5.x", delay: 1800 },
-    { type: "processing", text: "├─ vite@6.x", delay: 2200 },
-    { type: "processing", text: "├─ react@19.x", delay: 2600 },
-    { type: "processing", text: "├─ express@5.x", delay: 3000 },
-    { type: "processing", text: "├─ tailwindcss@4.x", delay: 3400 },
-    { type: "processing", text: "└─ shadcn/ui@latest", delay: 3800 },
-    { type: "output", text: "Packages: +847 ++++++++++++++++++++++++++", delay: 4800 },
-    { type: "success", text: "Dependencies installed successfully", delay: 1800 },
-    { type: "section", text: "→ Starting development servers...", delay: 10800 },
-    { type: "command", text: "pnpm dev", delay: 11400 },
-    { type: "success", text: "Frontend ready on http://localhost:3000", delay: 12200 },
-    { type: "success", text: "Backend API on http://localhost:5000", delay: 13000 },
-    { type: "success", text: "Hot reload enabled for all packages", delay: 13800 },
-    { type: "success", text: "TypeScript type checking active", delay: 14600 },
-    { type: "section", text: "→ Setup complete!", delay: 15400 },
-    { type: "ready", text: "Ready to build your next incredible project 🚀", delay: 16200 },
-  ];
-
   useEffect(() => {
     if (!isInView) return;
 
-    const maxDelay = Math.max(...terminalLines.map((line) => line.delay));
+    const maxDelay = Math.max(...TAILSTACK_TERMINAL_LINES.map((line) => line.delay));
     const totalCycle = maxDelay + 5000;
 
     const timer = setInterval(() => {
@@ -121,7 +68,7 @@ export default function TailStack({ align = "right" }: TailStackProps) {
           <div className={`flex flex-col ${alignClass} gap-12 lg:gap-16 items-stretch mb-20`}>
             {/* Features */}
             <div className="flex-1 space-y-3">
-              {features.map((feature, index) => {
+              {TAILSTACK_FEATURES.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
                   <div
@@ -162,7 +109,7 @@ export default function TailStack({ align = "right" }: TailStackProps) {
                   className="p-6 font-mono text-sm space-y-1.5 overflow-y-auto h-[480px] scroll-smooth 
                   [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                 >
-                  {terminalLines.map((line, index) => {
+                  {TAILSTACK_TERMINAL_LINES.map((line, index) => {
                     const isVisible = elapsedTime >= line.delay;
                     if (!isVisible) return null;
 
@@ -199,7 +146,7 @@ export default function TailStack({ align = "right" }: TailStackProps) {
 
           {/* Highlights */}
           <div className="grid md:grid-cols-3 gap-6 mb-14">
-            {highlights.map((h, i) => (
+            {TAILSTACK_HIGHLIGHTS.map((h, i) => (
               <div key={i} className={`p-7 bg-gradient-to-br ${h.color} rounded-2xl border ${h.borderColor} hover:shadow-lg transition-all`}>
                 <h3 className="text-xl font-semibold text-[#37352f] mb-3">{h.title}</h3>
                 <p className="text-sm text-[#787774]">{h.description}</p>

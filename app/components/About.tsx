@@ -3,58 +3,15 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Code, Database, TrendingUp, MapPin, Sparkles, Rocket } from "lucide-react";
+import { Sparkles, Rocket } from "lucide-react";
 import TechIcon from "./TechIcon";
+import { ABOUT_STATS, TECH_CATEGORIES } from "../data/about";
 
 export default function About() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [selectedCategory, setSelectedCategory] = useState(0);
-  const [hoveredTech, setHoveredTech] = useState(null);
-
-  const stats = [
-    { label: "Years Coding", value: "6+", icon: Code },
-    { label: "Web Dev Focus", value: "3 years", icon: TrendingUp },
-    { label: "Python Experience", value: "4 years", icon: Database },
-    { label: "Location", value: "India", icon: MapPin },
-  ];
-
-  const techCategories = [
-    {
-      category: "Frontend",
-      techs: [
-        { name: "HTML5", icon: "html5" },
-        { name: "CSS3", icon: "css3" },
-        { name: "JavaScript", icon: "javascript" },
-        { name: "React", icon: "react" },
-        { name: "Next.js", icon: "next.js" },
-        { name: "TanStack Start", icon: "tanstack start" },
-        { name: "TypeScript", icon: "typescript" },
-        { name: "Tailwind CSS", icon: "tailwindcss" }
-      ]
-    },
-    {
-      category: "Backend",
-      techs: [
-        { name: "Node.js", icon: "nodejs" },
-        { name: "Express.js", icon: "express" },
-        { name: "MongoDB", icon: "mongodb" },
-        { name: "PostgreSQL", icon: "postgresql" },
-        { name: "Supabase", icon: "supabase" },
-      ]
-    },
-    {
-      category: "Data",
-      techs: [
-        { name: "Python", icon: "python" },
-        { name: "Pandas", icon: "pandas" },
-        { name: "NumPy", icon: "numpy" },
-        { name: "Matplotlib", icon: "matplotlib" },
-        { name: "Seaborn", icon: "seaborn" },
-        { name: "Plotly", icon: "plotly" },
-      ]
-    },
-  ];
+  const [hoveredTech, setHoveredTech] = useState<number | null>(null);
 
   return (
     <section id="about" className="py-32 px-4 sm:px-6 lg:px-8 bg-[#f7f6f3]">
@@ -70,7 +27,7 @@ export default function About() {
           </h2>
 
           <div className="grid md:grid-cols-4 gap-6 mb-16">
-            {stats.map((stat, index) => {
+            {ABOUT_STATS.map((stat, index) => {
               return (
                 <motion.div
                   key={stat.label}
@@ -189,7 +146,7 @@ export default function About() {
               className="mb-16 flex justify-center"
             >
               <div className="bg-white border border-[#e9e9e7] rounded-full p-2 inline-flex gap-2 shadow-sm">
-                {techCategories.map((cat, idx) => (
+                {TECH_CATEGORIES.map((cat, idx) => (
                   <motion.button
                     key={cat.category}
                     onClick={() => setSelectedCategory(idx)}
@@ -217,7 +174,7 @@ export default function About() {
                 transition={{ duration: 0.25 }}
               >
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                  {techCategories[selectedCategory].techs.map((tech, idx) => (
+                  {TECH_CATEGORIES[selectedCategory].techs.map((tech, idx) => (
                     <motion.div
                       key={tech.name}
                       initial={{ opacity: 0, scale: 0.9, y: 15 }}
