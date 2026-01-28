@@ -20,7 +20,10 @@ export default function PidifyJs({ align = "left" }: PidifyJsProps) {
   const alignClass = align === "right" ? "lg:flex-row-reverse" : "lg:flex-row";
 
   return (
-    <section className="py-28 sm:py-36 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+    <section
+      id="projects"
+      className="py-28 sm:py-36 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden"
+    >
       {/* Subtle background patterns */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div

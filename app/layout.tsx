@@ -18,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
         <link rel="canonical" href="https://hamdankhubaib.in" />
         <meta name="theme-color" content="#3b82f6" />
         <link rel="icon" href="/favicon.ico" />
