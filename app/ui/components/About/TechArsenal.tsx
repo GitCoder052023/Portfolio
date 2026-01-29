@@ -75,7 +75,7 @@ export default function TechArsenal({ isInView }: InViewProps) {
                                 <motion.div
                                     animate={hoveredTech === idx ? { y: -4 } : { y: 0 }}
                                     transition={{ duration: 0.2, type: "spring", stiffness: 300, damping: 30 }}
-                                    className="rounded-xl p-6 flex flex-col items-center justify-center gap-3 h-full cursor-pointer transition-all duration-300 group-hover:border-[#d4d4d1] group-hover:shadow-md"
+                                    className="rounded-xl p-6 flex flex-col items-center justify-center gap-3 h-full cursor-pointer transition-all duration-100 border-[#d4d4d1] shadow-md group-hover:scale-150"
                                 >
                                     <motion.div
                                         animate={hoveredTech === idx ? { scale: 1.08 } : { scale: 1 }}
