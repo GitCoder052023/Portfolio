@@ -1,0 +1,11 @@
+- Supabase Auth 
+- ClerkJs 
+- BetterAuth
+- Prisma
+- Mongoose
+- Redis 
+- Zod
+- BullMQ
+- Docker
+- Vercel 
+- Render

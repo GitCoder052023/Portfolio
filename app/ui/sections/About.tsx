@@ -6,7 +6,7 @@ import { useRef } from "react";
 import AboutHeader from "@/app/ui/components/About/AboutHeader";
 import AboutStats from "@/app/ui/components/About/AboutStats";
 import AboutDescription from "@/app/ui/components/About/AboutDescription";
-import TechArsenal from "@/app/ui/components/About/TechArsenal";
+import TechMarquee from "@/app/ui/components/Projects/TailStack/TechMarquee";
 
 export default function About() {
   const ref = useRef(null);
@@ -24,7 +24,7 @@ export default function About() {
           <AboutHeader />
           <AboutStats isInView={isInView} />
           <AboutDescription isInView={isInView} />
-          <TechArsenal isInView={isInView} />
+          <TechMarquee />
         </motion.div>
       </div>
     </section>
