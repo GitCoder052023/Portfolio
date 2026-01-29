@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import type { TechIconProps } from "../../types/components";
+import type { TechIconProps } from "@/app/types/components";
 import {
   DEV_ICON_NAMES,
   ICONIFY_ICONS,
   ICON_SLUG_MAP,
   TECH_COLORS,
-} from "../../constants/techIcons";
-import { hexToRgba } from "../../utils/color";
+} from "@/app/constants/techIcons";
+import { hexToRgba } from "@/app/utils/color";
 
 export default function TechIcon({
   name,
@@ -28,9 +28,8 @@ export default function TechIcon({
     iconUrl = `https://icon.icepanel.io/Technology/svg/${DEV_ICON_NAMES[techName]}.svg`;
   } else if (ICONIFY_ICONS[techName]) {
     // Use Iconify CDN for seaborn
-    iconUrl = `https://api.iconify.design/${
-      ICONIFY_ICONS[techName]
-    }.svg?color=${color.replace("#", "%23")}`;
+    iconUrl = `https://api.iconify.design/${ICONIFY_ICONS[techName]
+      }.svg?color=${color.replace("#", "%23")}`;
   } else {
     // Use Simple Icons CDN for everything else
     const iconSlug =

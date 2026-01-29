@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { NAV_ITEMS } from "../../constants/navigation";
-import { useScrolled } from "../../hooks/useScrolled";
+import { NAV_ITEMS } from "@/app/constants/navigation";
+import { useScrolled } from "@/app/hooks/useScrolled";
 
 export default function Navbar() {
   const scrolled = useScrolled(50);
@@ -12,11 +12,10 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${scrolled
           ? "bg-white/80 backdrop-blur-md border-b border-[#e9e9e7] shadow-sm"
           : "bg-transparent"
-      }`}
+        }`}
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
