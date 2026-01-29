@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { Target } from "lucide-react";
-import { YEARLY_GOALS } from "../data/goals";
+import { YEARLY_GOALS } from "../../data/goals";
 
 export default function Goals() {
   const ref = useRef(null);

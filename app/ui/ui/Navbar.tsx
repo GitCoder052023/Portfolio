@@ -1,8 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { NAV_ITEMS } from "../constants/navigation";
-import { useScrolled } from "../hooks/useScrolled";
+import { NAV_ITEMS } from "../../constants/navigation";
+import { useScrolled } from "../../hooks/useScrolled";
 
 export default function Navbar() {
   const scrolled = useScrolled(50);

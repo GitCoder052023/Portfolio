@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { MessageCircle, ArrowRight } from "lucide-react";
-import { CONTACT_METHODS } from "../data/contact";
+import { CONTACT_METHODS } from "../../data/contact";
 
 export default function Contact() {
   const ref = useRef(null);

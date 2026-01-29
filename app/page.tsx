@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import PidifyJs from "./components/PidifyJs";
-import TailStack from "./components/TailStack";
-import Goals from "./components/Goals";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import SmoothScroll from "./components/SmoothScroll";
-import Navbar from "./components/Navbar";
+import Hero from "./ui/sections/Hero";
+import About from "./ui/sections/About";
+import PidifyJs from "./ui/sections/PidifyJs";
+import TailStack from "./ui/sections/TailStack";
+import Goals from "./ui/sections/Goals";
+import Contact from "./ui/sections/Contact";
+import Footer from "./ui/sections/Footer";
+import SmoothScroll from "./ui/utils/SmoothScroll";
+import Navbar from "./ui/ui/Navbar";
 import { HOME_METADATA } from "./config/seo";
 
 export const metadata: Metadata = HOME_METADATA;

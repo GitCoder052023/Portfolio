@@ -4,8 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Sparkles, Rocket } from "lucide-react";
-import TechIcon from "./TechIcon";
-import { ABOUT_STATS, TECH_CATEGORIES } from "../data/about";
+import TechIcon from "../utils/TechIcon";
+import { ABOUT_STATS, TECH_CATEGORIES } from "../../data/about";
 
 export default function About() {
   const ref = useRef(null);

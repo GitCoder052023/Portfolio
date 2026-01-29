@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SOCIAL_LINKS } from "../constants/socialLinks";
+import { SOCIAL_LINKS } from "../../constants/socialLinks";
 
 const SOCIAL_ICON_COLORS: Record<string, string> = {
   GitHub: "hover:text-gray-700",

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SOCIAL_LINKS } from "../constants/socialLinks";
+import { SOCIAL_LINKS } from "../../constants/socialLinks";
 
 export default function Footer() {
   const visibleSocialLinks = SOCIAL_LINKS.filter((link) => link.name !== "Email");

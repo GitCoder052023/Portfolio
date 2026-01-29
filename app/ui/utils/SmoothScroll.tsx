@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 export default function SmoothScroll({ children }: { children: React.ReactNode }) {

@@ -8,8 +8,8 @@ import {
   PIDIFY_CORE_FEATURES,
   PIDIFY_FEATURES,
   PIDIFY_PREVIEW_TOOLS,
-} from "../data/pidify";
-import type { PidifyJsProps } from "../types/components";
+} from "../../data/pidify";
+import type { PidifyJsProps } from "../../types/components";
 
 export default function PidifyJs({ align = "left" }: PidifyJsProps) {
   const ref = useRef(null);

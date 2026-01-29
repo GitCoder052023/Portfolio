@@ -8,8 +8,8 @@ import {
   TAILSTACK_FEATURES,
   TAILSTACK_HIGHLIGHTS,
   TAILSTACK_TERMINAL_LINES,
-} from "../data/tailstack";
-import type { TailStackProps } from "../types/components";
+} from "../../data/tailstack";
+import type { TailStackProps } from "../../types/components";
 
 export default function TailStack({ align = "right" }: TailStackProps) {
   const ref = useRef(null);
