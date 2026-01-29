@@ -26,7 +26,7 @@ const TECH_STACK_ICONS = [
     { name: "Clerk", slug: "clerk" },
     { name: "Zod", slug: "zod" },
     // Async & Queues
-    { name: "BullMQ", slug: "bull" },
+    { name: "BullMQ", slug: "bull", iconUrl: "https://docs.bullmq.io/~gitbook/image?url=https%3A%2F%2F1340146492-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F-LUuDmt_xXMfG66Rn1GA%252Ficon%252FHOq80FSJicAlE4bVptC9%252Fbull.png%3Falt%3Dmedia%26token%3D10a2ba71-db1f-4d5c-8787-3dbedc8dd3ce&width=32&dpr=2&quality=100&sign=929d1d52&sv=2" },
     // Data & Tools
     { name: "Python", slug: "python" },
     { name: "Pandas", slug: "pandas" },
@@ -44,9 +44,10 @@ const TECH_STACK_ICONS = [
 interface TechIconItemProps {
     name: string;
     slug: string;
+    iconUrl?: string;
 }
 
-function TechIconItem({ name, slug }: TechIconItemProps) {
+function TechIconItem({ name, slug, iconUrl }: TechIconItemProps) {
     return (
         <motion.div
             className="group relative flex-shrink-0 mx-6 md:mx-8"
@@ -55,9 +56,9 @@ function TechIconItem({ name, slug }: TechIconItemProps) {
         >
             <div className="relative w-12 h-12 md:w-14 md:h-14 flex items-center justify-center rounded-xl bg-[#f0efed] group-hover:bg-white border border-[#e5e4e2] group-hover:border-[#d4d4d1] group-hover:shadow-lg transition-all duration-300">
                 <img
-                    src={`https://cdn.simpleicons.org/${slug}/9a9a96`}
+                    src={iconUrl || `https://cdn.simpleicons.org/${slug}/9a9a96`}
                     alt={name}
-                    className="w-6 h-6 md:w-7 md:h-7 opacity-50 group-hover:opacity-100 transition-all duration-300 filter group-hover:brightness-100"
+                    className={`w-6 h-6 md:w-7 md:h-7 opacity-50 group-hover:opacity-100 transition-all duration-300 filter group-hover:brightness-100 ${iconUrl ? 'grayscale group-hover:grayscale-0' : ''}`}
                     loading="lazy"
                     onError={(e) => {
                         // Fallback to a different icon service
