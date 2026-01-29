@@ -3,11 +3,9 @@
 import { motion } from "framer-motion";
 import { Target } from "lucide-react";
 
-interface GoalsHeaderProps {
-    isInView: boolean;
-}
+import { InViewProps } from "@/app/types/components";
 
-export default function GoalsHeader({ isInView }: GoalsHeaderProps) {
+export default function GoalsHeader({ isInView }: InViewProps) {
     return (
         <div className="mb-16 text-center">
             <motion.div

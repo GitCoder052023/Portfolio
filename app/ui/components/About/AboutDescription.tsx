@@ -3,11 +3,9 @@
 import { motion } from "framer-motion";
 import { Rocket, Sparkles } from "lucide-react";
 
-interface AboutDescriptionProps {
-    isInView: boolean;
-}
+import { InViewProps } from "@/app/types/components";
 
-export default function AboutDescription({ isInView }: AboutDescriptionProps) {
+export default function AboutDescription({ isInView }: InViewProps) {
     return (
         <div className="grid md:grid-cols-2 gap-8 mb-20">
             <motion.div

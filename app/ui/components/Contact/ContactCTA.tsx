@@ -3,11 +3,9 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-interface ContactCTAProps {
-    isInView: boolean;
-}
+import { InViewProps } from "@/app/types/components";
 
-export default function ContactCTA({ isInView }: ContactCTAProps) {
+export default function ContactCTA({ isInView }: InViewProps) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}

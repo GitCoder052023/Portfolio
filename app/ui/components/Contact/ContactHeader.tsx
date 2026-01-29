@@ -3,11 +3,9 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 
-interface ContactHeaderProps {
-    isInView: boolean;
-}
+import { InViewProps } from "@/app/types/components";
 
-export default function ContactHeader({ isInView }: ContactHeaderProps) {
+export default function ContactHeader({ isInView }: InViewProps) {
     return (
         <div className="text-center mb-16">
             <motion.div

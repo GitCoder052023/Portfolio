@@ -1,17 +1,14 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+
+import { InViewProps } from "@/app/types/components";
+import { useTechArsenal } from "@/app/hooks/useTechArsenal";
 import { TECH_CATEGORIES } from "@/app/data/about";
 import TechIcon from "@/app/ui/utils/TechIcon";
 
-interface TechArsenalProps {
-    isInView: boolean;
-}
-
-export default function TechArsenal({ isInView }: TechArsenalProps) {
-    const [selectedCategory, setSelectedCategory] = useState(0);
-    const [hoveredTech, setHoveredTech] = useState<number | null>(null);
+export default function TechArsenal({ isInView }: InViewProps) {
+    const { selectedCategory, hoveredTech, selectCategory, setHovered } = useTechArsenal();
 
     return (
         <motion.div
@@ -40,7 +37,7 @@ export default function TechArsenal({ isInView }: TechArsenalProps) {
                     {TECH_CATEGORIES.map((cat, idx) => (
                         <motion.button
                             key={cat.category}
-                            onClick={() => setSelectedCategory(idx)}
+                            onClick={() => selectCategory(idx)}
                             className={`px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 ${selectedCategory === idx
                                 ? "bg-[#37352f] text-white shadow-md"
                                 : "bg-transparent text-[#37352f] hover:bg-[#f0f0ed]"
@@ -71,8 +68,8 @@ export default function TechArsenal({ isInView }: TechArsenalProps) {
                                 initial={{ opacity: 0, scale: 0.9, y: 15 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 transition={{ duration: 0.35, delay: idx * 0.05 }}
-                                onMouseEnter={() => setHoveredTech(idx)}
-                                onMouseLeave={() => setHoveredTech(null)}
+                                onMouseEnter={() => setHovered(idx)}
+                                onMouseLeave={() => setHovered(null)}
                                 className="group"
                             >
                                 <motion.div

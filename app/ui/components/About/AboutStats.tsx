@@ -1,13 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+
 import { ABOUT_STATS } from "@/app/data/about";
+import { InViewProps } from "@/app/types/components";
 
-interface AboutStatsProps {
-    isInView: boolean;
-}
-
-export default function AboutStats({ isInView }: AboutStatsProps) {
+export default function AboutStats({ isInView }: InViewProps) {
     return (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
             {ABOUT_STATS.map((stat, index) => {

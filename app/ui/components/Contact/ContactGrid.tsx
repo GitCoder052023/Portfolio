@@ -2,13 +2,11 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+
 import { CONTACT_METHODS } from "@/app/data/contact";
+import { InViewProps } from "@/app/types/components";
 
-interface ContactGridProps {
-    isInView: boolean;
-}
-
-export default function ContactGrid({ isInView }: ContactGridProps) {
+export default function ContactGrid({ isInView }: InViewProps) {
     return (
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {CONTACT_METHODS.map((method, index) => {

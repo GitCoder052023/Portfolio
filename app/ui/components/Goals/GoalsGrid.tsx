@@ -1,13 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+
 import { YEARLY_GOALS } from "@/app/data/goals";
+import { InViewProps } from "@/app/types/components";
 
-interface GoalsGridProps {
-    isInView: boolean;
-}
-
-export default function GoalsGrid({ isInView }: GoalsGridProps) {
+export default function GoalsGrid({ isInView }: InViewProps) {
     return (
         <div className="grid sm:grid-cols-2 gap-6">
             {YEARLY_GOALS.map((goal, index) => {

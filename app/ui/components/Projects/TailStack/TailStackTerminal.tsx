@@ -1,35 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { InViewProps } from "@/app/types/components";
+import { useTailStackTerminal } from "@/app/hooks/useTailStackTerminal";
 import { TAILSTACK_TERMINAL_LINES } from "@/app/data/tailstack";
 
-interface TailStackTerminalProps {
-    isInView: boolean;
-}
-
-export default function TailStackTerminal({ isInView }: TailStackTerminalProps) {
-    const [elapsedTime, setElapsedTime] = useState(0);
-    const terminalContentRef = useRef<HTMLDivElement>(null);
-
-    useEffect(() => {
-        if (!isInView) return;
-
-        const maxDelay = Math.max(...TAILSTACK_TERMINAL_LINES.map((line) => line.delay));
-        const totalCycle = maxDelay + 5000;
-
-        const timer = setInterval(() => {
-            setElapsedTime((prev) => (prev >= totalCycle ? 0 : prev + 100));
-        }, 100);
-
-        return () => clearInterval(timer);
-    }, [isInView]);
-
-    useEffect(() => {
-        if (terminalContentRef.current) {
-            terminalContentRef.current.scrollTop = terminalContentRef.current.scrollHeight;
-        }
-    }, [elapsedTime]);
+export default function TailStackTerminal({ isInView }: InViewProps) {
+    const { elapsedTime, terminalContentRef } = useTailStackTerminal(isInView);
 
     return (
         <div className="flex-1">

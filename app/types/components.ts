@@ -1,3 +1,7 @@
+export interface InViewProps {
+  isInView: boolean;
+}
+
 export interface PidifyJsProps {
   align?: "left" | "right";
 }
@@ -20,13 +24,13 @@ export interface TerminalLine {
   delay: number;
 }
 
-export interface StreamNetProps {
-  align?: "left" | "right";
-}
-
 export interface TechIconProps {
   name: string;
   size?: number;
   className?: string;
+}
+
+export interface PidifyFeaturesProps extends InViewProps {
+  align: "left" | "right";
 }
 

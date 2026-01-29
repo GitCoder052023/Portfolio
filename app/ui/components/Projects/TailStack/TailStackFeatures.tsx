@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useActiveState } from "@/app/hooks/useActiveState";
 import { TAILSTACK_FEATURES } from "@/app/data/tailstack";
 
 export default function TailStackFeatures() {
-    const [activeFeature, setActiveFeature] = useState<number | null>(null);
+    const { active: activeFeature, setActive: setActiveFeature, clearActive } = useActiveState<number>();
 
     return (
         <div className="flex-1 space-y-3">
@@ -14,7 +14,7 @@ export default function TailStackFeatures() {
                     <div
                         key={index}
                         onMouseEnter={() => setActiveFeature(index)}
-                        onMouseLeave={() => setActiveFeature(null)}
+                        onMouseLeave={clearActive}
                         className={`flex gap-4 p-4 sm:p-5 bg-white rounded-xl border transition-all duration-300 ${activeFeature === index ? "border-[#d4d4d1] shadow-md translate-x-1" : "border-[#e9e9e7] shadow-sm"
                             }`}
                     >

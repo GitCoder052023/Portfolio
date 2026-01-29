@@ -1,12 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { InViewProps } from "@/app/types/components";
 
-interface PidifyHeaderProps {
-    isInView: boolean;
-}
-
-export default function PidifyHeader({ isInView }: PidifyHeaderProps) {
+export default function PidifyHeader({ isInView }: InViewProps) {
     return (
         <div className="mb-16">
             <motion.div

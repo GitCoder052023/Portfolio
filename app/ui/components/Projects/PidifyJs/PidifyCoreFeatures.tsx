@@ -1,13 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
+
 import { PIDIFY_CORE_FEATURES } from "@/app/data/pidify";
+import { InViewProps } from "@/app/types/components";
 
-interface PidifyCoreFeaturesProps {
-    isInView: boolean;
-}
-
-export default function PidifyCoreFeatures({ isInView }: PidifyCoreFeaturesProps) {
+export default function PidifyCoreFeatures({ isInView }: InViewProps) {
     return (
         <div className="grid md:grid-cols-3 gap-5 sm:gap-6 mb-14">
             {PIDIFY_CORE_FEATURES.map((feature, index) => {

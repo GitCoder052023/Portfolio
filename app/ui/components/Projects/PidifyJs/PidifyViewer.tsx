@@ -1,16 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+
+import { InViewProps } from "@/app/types/components";
+import { usePidifyViewer } from "@/app/hooks/usePidifyViewer";
 import { FileText, ArrowRight } from "lucide-react";
 import { PIDIFY_PREVIEW_TOOLS } from "@/app/data/pidify";
 
-interface PidifyViewerProps {
-    isInView: boolean;
-}
-
-export default function PidifyViewer({ isInView }: PidifyViewerProps) {
-    const [previewPage, setPreviewPage] = useState(1);
+export default function PidifyViewer({ isInView }: InViewProps) {
+    const { previewPage, nextPage, prevPage } = usePidifyViewer();
 
     return (
         <motion.div
@@ -68,7 +66,7 @@ export default function PidifyViewer({ isInView }: PidifyViewerProps) {
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                onClick={() => setPreviewPage(Math.max(1, previewPage - 1))}
+                                onClick={prevPage}
                                 className="p-2 hover:bg-[#f7f6f3] rounded-lg transition-colors text-[#787774] hover:text-[#37352f]"
                             >
                                 <ArrowRight className="w-4 h-4 rotate-180" />
@@ -76,7 +74,7 @@ export default function PidifyViewer({ isInView }: PidifyViewerProps) {
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                onClick={() => setPreviewPage(Math.min(12, previewPage + 1))}
+                                onClick={nextPage}
                                 className="p-2 hover:bg-[#f7f6f3] rounded-lg transition-colors text-[#787774] hover:text-[#37352f]"
                             >
                                 <ArrowRight className="w-4 h-4" />

@@ -3,11 +3,9 @@
 import { motion } from "framer-motion";
 import { Github, ArrowRight, Sparkles } from "lucide-react";
 
-interface PidifyActionsProps {
-    isInView: boolean;
-}
+import { InViewProps } from "@/app/types/components";
 
-export default function PidifyActions({ isInView }: PidifyActionsProps) {
+export default function PidifyActions({ isInView }: InViewProps) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}

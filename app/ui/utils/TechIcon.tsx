@@ -2,12 +2,7 @@
 
 import { useState } from "react";
 import type { TechIconProps } from "@/app/types/components";
-import {
-  DEV_ICON_NAMES,
-  ICONIFY_ICONS,
-  ICON_SLUG_MAP,
-  TECH_COLORS,
-} from "@/app/constants/techIcons";
+import { getTechIconConfig } from "@/app/utils/techIcons";
 import { hexToRgba } from "@/app/utils/color";
 
 export default function TechIcon({
@@ -16,29 +11,7 @@ export default function TechIcon({
   className = "",
 }: TechIconProps) {
   const [imageError, setImageError] = useState(false);
-
-  const techName = name.toLowerCase().trim();
-  const color = TECH_COLORS[techName] || "#787774";
-
-  // Check which CDN to use
-  let iconUrl: string;
-
-  if (DEV_ICON_NAMES[techName]) {
-    // Use DevIcon/TechIcons CDN for matplotlib
-    iconUrl = `https://icon.icepanel.io/Technology/svg/${DEV_ICON_NAMES[techName]}.svg`;
-  } else if (ICONIFY_ICONS[techName]) {
-    // Use Iconify CDN for seaborn
-    iconUrl = `https://api.iconify.design/${ICONIFY_ICONS[techName]
-      }.svg?color=${color.replace("#", "%23")}`;
-  } else {
-    // Use Simple Icons CDN for everything else
-    const iconSlug =
-      ICON_SLUG_MAP[techName] || techName.replace(/[^a-z0-9]/g, "");
-    iconUrl = `https://cdn.simpleicons.org/${iconSlug}/${color.replace(
-      "#",
-      ""
-    )}`;
-  }
+  const { iconUrl, color } = getTechIconConfig(name);
 
   if (imageError) {
     // Fallback: show a colored badge with text

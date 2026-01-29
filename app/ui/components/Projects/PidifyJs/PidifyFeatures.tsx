@@ -1,16 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
-import { PIDIFY_FEATURES } from "@/app/data/pidify";
 
-interface PidifyFeaturesProps {
-    isInView: boolean;
-    align: "left" | "right";
-}
+import { PIDIFY_FEATURES } from "@/app/data/pidify";
+import { PidifyFeaturesProps } from "@/app/types/components";
+import { useActiveState } from "@/app/hooks/useActiveState";
 
 export default function PidifyFeatures({ isInView, align }: PidifyFeaturesProps) {
-    const [activeFeature, setActiveFeature] = useState<number | null>(null);
+    const { active: activeFeature, setActive: setActiveFeature, clearActive } = useActiveState<number>();
 
     return (
         <motion.div
@@ -30,7 +27,7 @@ export default function PidifyFeatures({ isInView, align }: PidifyFeaturesProps)
                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                             transition={{ duration: 0.4, delay: 0.25 + index * 0.05 }}
                             onMouseEnter={() => setActiveFeature(index)}
-                            onMouseLeave={() => setActiveFeature(null)}
+                            onMouseLeave={clearActive}
                             className="group"
                         >
                             <motion.div
