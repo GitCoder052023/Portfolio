@@ -22,7 +22,6 @@ export default function Home() {
         <About />
         <PidifyJs align="left" />
         <TailStack align="right" />
-        <StreamNet align="left" />
         <Goals />
         <Contact />
       </main>
