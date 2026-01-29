@@ -18,12 +18,12 @@ export default function TechArsenal({ isInView }: InViewProps) {
             className="mt-24"
         >
             <div className="mb-16">
-                <h3 className="text-4xl sm:text-5xl font-bold mb-6 text-[#37352f]">
+                <h3 className="text-4xl sm:text-5xl font-bold mb-4 text-[#37352f]">
                     Tech Arsenal
                 </h3>
-                <p className="text-[#787774] text-lg">
-                    The tools and technologies I use to build modern, scalable solutions
-                </p>
+                <h4 className="text-xl text-[#37352f]/70 font-medium mb-6">
+                    Technologies I use to build scalable & production-ready systems.
+                </h4>
             </div>
 
             {/* Centered Capsule Navigation */}
