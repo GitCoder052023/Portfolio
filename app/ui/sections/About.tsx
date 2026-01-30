@@ -6,7 +6,7 @@ import { useRef } from "react";
 import AboutHeader from "@/app/ui/components/About/AboutHeader";
 import AboutStats from "@/app/ui/components/About/AboutStats";
 import AboutDescription from "@/app/ui/components/About/AboutDescription";
-import TechMarquee from "@/app/ui/components/Projects/TailStack/TechMarquee";
+import TechMarquee from "@/app/ui/components/About/TechMarquee";
 
 export default function About() {
   const ref = useRef(null);
