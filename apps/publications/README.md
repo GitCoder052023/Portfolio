@@ -1,36 +1,216 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Publications Platform
+
+A professional, formal publication platform for academic writings, research papers, theses, ideas, and proposals. Built with Next.js, TailwindCSS, Motion, Supabase, and Clerk.
+
+## Features
+
+### For Readers (No Login Required)
+- 📖 **Read Publications** - Browse and read all publications freely
+- 📥 **Download PDFs** - Download any publication as PDF
+- 🔗 **Share** - Share publications via social media or copy link
+- 🏷️ **Browse by Category** - Filter by Research Papers, Theses, Ideas, Proposals
+
+### For Registered Users
+- ❤️ **Like Publications** - Show appreciation for papers you enjoy
+- 💬 **Comment** - Join discussions on publications
+- 👤 **Profile** - Manage your account via Clerk
+
+### Technical Highlights
+- 🔒 **Secure by Design** - Row Level Security (RLS) on all database tables
+- 📊 **Analytics** - Track downloads per publication
+- ⚡ **Performance** - Server Components, optimized images, lazy loading
+- 🎨 **Modern UI** - Clean, professional, academic aesthetic
+- 📱 **Responsive** - Works on all device sizes
+
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Framework | Next.js 16 (App Router) |
+| Styling | Tailwind CSS 4 |
+| Animations | Motion (Framer Motion) |
+| Toasts | Sonner |
+| Database | Supabase (PostgreSQL) |
+| Storage | Supabase Storage |
+| Auth | Clerk |
+| Language | TypeScript |
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 20+
+- pnpm (recommended) or npm
+- Supabase account
+- Clerk account
+
+### 1. Clone and Install
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd apps/publications
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Set Up Supabase
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Create a new Supabase project at [supabase.com](https://supabase.com)
+2. Go to **SQL Editor** and run the schema from `supabase/schema.sql`
+3. Create a storage bucket named `publications` with public access
+4. Get your keys from **Project Settings > API**
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Set Up Clerk
 
-## Learn More
+1. Create a new Clerk application at [clerk.com](https://clerk.com)
+2. Enable Email/Password authentication
+3. Set up a webhook for user sync:
+   - URL: `https://your-domain.com/api/webhooks/clerk`
+   - Events: `user.created`, `user.updated`, `user.deleted`
+4. Get your keys from the dashboard
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Configure Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Copy `.env.example` to `.env.local` and fill in your values:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+cp .env.example .env.local
+```
 
-## Deploy on Vercel
+Required variables:
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+# Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_...
+CLERK_SECRET_KEY=sk_test_...
+CLERK_WEBHOOK_SECRET=whsec_...
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# App
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_APP_NAME=Publications
+NEXT_PUBLIC_AUTHOR_NAME=Your Name
+```
+
+### 5. Run Development Server
+
+```bash
+pnpm dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000)
+
+## Adding Publications
+
+### 1. Upload PDFs to Supabase Storage
+
+Upload PDF files to the `publications` bucket with paths like:
+- `research-papers/your-paper-slug.pdf`
+- `theses/your-thesis-slug.pdf`
+- `ideas/your-idea-slug.pdf`
+- `proposals/your-proposal-slug.pdf`
+
+### 2. Add Publication Metadata
+
+Insert a row into the `publications` table:
+
+```sql
+INSERT INTO publications (
+  slug,
+  title,
+  description,
+  abstract,
+  category,
+  tags,
+  pdf_path,
+  pdf_size_bytes,
+  page_count,
+  is_featured
+) VALUES (
+  'your-paper-slug',
+  'Your Paper Title',
+  'A brief description of your paper.',
+  'The full abstract text...',
+  'research-paper', -- or 'thesis', 'idea', 'proposal'
+  ARRAY['tag1', 'tag2', 'tag3'],
+  'research-papers/your-paper-slug.pdf',
+  1234567, -- file size in bytes
+  42, -- number of pages
+  true -- set to true to feature on homepage
+);
+```
+
+## Project Structure
+
+```
+apps/publications/
+├── app/                          # Next.js App Router
+│   ├── api/                      # API Routes
+│   │   ├── publications/         # Publication endpoints
+│   │   └── webhooks/             # Clerk webhook
+│   ├── about/                    # About page
+│   ├── categories/               # Category pages
+│   ├── publications/             # Publication pages
+│   ├── sign-in/                  # Auth pages
+│   ├── sign-up/
+│   ├── globals.css               # Global styles
+│   ├── layout.tsx                # Root layout
+│   └── page.tsx                  # Home page
+├── components/                   # React components
+│   ├── layout/                   # Header, Footer, Container
+│   ├── motion/                   # Animation wrappers
+│   └── publications/             # Publication components
+├── lib/                          # Utilities & business logic
+│   ├── clerk/                    # Clerk utilities
+│   ├── supabase/                 # Supabase clients & queries
+│   ├── config.ts                 # App configuration
+│   ├── constants.ts              # Static constants
+│   └── utils.ts                  # Utility functions
+├── types/                        # TypeScript types
+├── supabase/
+│   └── schema.sql                # Database schema
+├── middleware.ts                 # Clerk middleware
+└── .env.example                  # Environment template
+```
+
+## Architecture Principles
+
+- **Modular Monolith** - Organized by feature with clear boundaries
+- **DRY** - Shared utilities and components
+- **Single Responsibility** - Each module has one job
+- **Separation of Concerns** - UI, logic, and data are separated
+- **Security First** - RLS policies, read-only client access
+
+## Security
+
+- **Row Level Security (RLS)** - Database access controlled at row level
+- **Service Role Isolation** - Admin operations only in API routes
+- **Webhook Verification** - Clerk webhooks verified with Svix
+- **Input Validation** - All user input validated server-side
+- **Security Headers** - X-Frame-Options, CSP, etc.
+
+## Deployment
+
+### Vercel (Recommended)
+
+1. Push to GitHub
+2. Import project to Vercel
+3. Add environment variables
+4. Deploy
+
+### Other Platforms
+
+Build the production bundle:
+```bash
+pnpm build
+pnpm start
+```
+
+## License
+
+All content (publications) is under the author's copyright.
+The codebase is available for reference.
+
+---
+
+Built with ❤️ for sharing knowledge freely.
