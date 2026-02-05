@@ -21,11 +21,11 @@ interface FadeInProps {
     once?: boolean;
 }
 
-const directionOffset = {
-    up: { y: 1 },
-    down: { y: -1 },
-    left: { x: 1 },
-    right: { x: -1 },
+const directionOffset: Record<Direction, { x: number; y: number }> = {
+    up: { x: 0, y: 1 },
+    down: { x: 0, y: -1 },
+    left: { x: 1, y: 0 },
+    right: { x: -1, y: 0 },
 };
 
 export function FadeIn({
@@ -43,8 +43,8 @@ export function FadeIn({
         <motion.div
             initial={{
                 opacity: 0,
-                x: offset.x ? offset.x * distance : 0,
-                y: offset.y ? offset.y * distance : 0,
+                x: offset.x * distance,
+                y: offset.y * distance,
             }}
             whileInView={{
                 opacity: 1,

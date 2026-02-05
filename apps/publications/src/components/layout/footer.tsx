@@ -8,6 +8,7 @@ import { FileText, Github, Twitter, Linkedin } from "lucide-react";
 import { Container } from "./container";
 import { PAGE_ROUTES } from "@/constants";
 import { appConfig } from "@/configs/app.config";
+import { authorConfig } from "@/configs/author.config";
 
 const footerLinks = {
     browse: [
@@ -18,7 +19,7 @@ const footerLinks = {
         { href: PAGE_ROUTES.category("proposal"), label: "Proposals" },
     ],
     about: [
-        { href: PAGE_ROUTES.about, label: "About the Author" },
+        { href: PAGE_ROUTES.about, label: "About the Writer" },
         { href: "#", label: "Contact" },
     ],
 };
@@ -47,12 +48,14 @@ export function Footer() {
                                     <FileText className="h-5 w-5 text-white" strokeWidth={2} />
                                 </div>
                                 <span className="font-serif text-xl font-semibold tracking-tight">
-                                    {appConfig.name}
+                                    {authorConfig.name}
                                 </span>
                             </Link>
-                            <p className="mt-4 max-w-sm text-sm text-neutral-600 leading-relaxed">
-                                A professional publication platform for formal academic writings,
-                                research papers, theses, ideas, and proposals.
+                            <p className="mt-4 max-w-sm text-sm text-neutral-600 leading-relaxed italic">
+                                "{authorConfig.credo}"
+                            </p>
+                            <p className="mt-3 max-w-sm text-sm text-neutral-500 leading-relaxed">
+                                A public journal of philosophical and scientific inquiry.
                             </p>
                             {/* Social links */}
                             <div className="mt-6 flex gap-3">

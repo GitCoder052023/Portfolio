@@ -1,6 +1,18 @@
-# Publications Platform
+# Writings — Hamdan Khubaib
 
-A professional, formal publication platform for academic writings, research papers, theses, ideas, and proposals. Built with Next.js, TailwindCSS, Motion, Supabase, and Clerk.
+> *"To find truth, stop believing — start thinking."*
+
+A public journal of philosophical and scientific inquiry. Research papers, formal theories, and serious writings on epistemology, consciousness, physics, ethics, and the questions that resist easy answers.
+
+This is not a blog. This is not a portfolio. This is a space where ideas are documented, exposed to scrutiny, and opened for intellectual conversation.
+
+---
+
+## What This Space Is
+
+- **A Public Journal** — Formal writings published openly, accessible to anyone
+- **An Invitation to Think** — Every publication is an invitation to engage, question, and respond
+- **Domains of Inquiry** — Epistemology, consciousness, physics, AI, ethics, religion, power dynamics, and more
 
 ## Features
 
@@ -208,9 +220,8 @@ pnpm start
 
 ## License
 
-All content (publications) is under the author's copyright.
-The codebase is available for reference.
+All writings are authored by Hamdan Khubaib. The content is publicly accessible for reading, discussion, and citation.
 
 ---
 
-Built with ❤️ for sharing knowledge freely.
+*Ideas are meant to be challenged. If you disagree, make your argument.*

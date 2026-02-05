@@ -84,9 +84,22 @@ export const UI = {
 // =============================================================================
 
 export const SEO = {
-    titleTemplate: '%s | Publications',
-    defaultTitle: 'Publications - Formal Writings & Research',
-    defaultDescription: 'A professional publication platform for academic writings, research papers, theses, ideas, and proposals.',
-    keywords: ['research', 'publications', 'academic', 'thesis', 'papers', 'ideas', 'proposals'],
+    titleTemplate: '%s | Hamdan Khubaib',
+    defaultTitle: 'Writings — Hamdan Khubaib',
+    defaultDescription: 'A public journal of philosophical and scientific inquiry. Research papers, theories, and formal writings on epistemology, consciousness, physics, ethics, and the questions that resist easy answers.',
+    keywords: [
+        'philosophy',
+        'epistemology',
+        'consciousness',
+        'metaphysics',
+        'physics',
+        'ethics',
+        'logic',
+        'computer science',
+        'artificial intelligence',
+        'formal writings',
+        'research',
+        'Hamdan Khubaib',
+    ],
 } as const;
 

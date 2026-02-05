@@ -46,9 +46,6 @@ export function PublicationCard({ publication, variant = "default" }: Publicatio
             >
                 {/* Header: Category & Date */}
                 <div className="flex items-center justify-between gap-4">
-                    <span className="badge badge-primary">
-                        {category?.label || publication.category}
-                    </span>
                     <div className="flex items-center gap-1.5 text-xs text-neutral-500">
                         <Calendar className="h-3.5 w-3.5" />
                         <time dateTime={publication.publishedAt}>{formattedDate}</time>
