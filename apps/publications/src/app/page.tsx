@@ -4,7 +4,7 @@
  */
 
 import Link from "next/link";
-import { ArrowRight, BookOpen, Compass, MessageCircle, Feather, Quote } from "lucide-react";
+import { ArrowRight, MessageCircle, Feather, Quote } from "lucide-react";
 import { Container } from "@/components/layout";
 import { PublicationGrid } from "@/components/publications";
 import { FadeIn, StaggerChildren } from "@/components/motion";
@@ -14,7 +14,7 @@ import { authorConfig } from "@/configs/author.config";
 
 export default async function HomePage() {
   // Fetch featured publications and stats
-  const [featuredPublications, totalPublications] = await Promise.all([
+  const [featuredPublications] = await Promise.all([
     getFeaturedPublications(6),
     getPublicationCount(),
   ]);

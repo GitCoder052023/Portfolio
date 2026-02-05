@@ -19,7 +19,6 @@ export function PublicationMeta({
     variant = "default",
     className,
 }: PublicationMetaProps) {
-    const category = appConfig.categories.find((c) => c.id === publication.category);
     const formattedDate = new Date(publication.publishedAt).toLocaleDateString("en-US", {
         year: "numeric",
         month: "long",
@@ -29,7 +28,6 @@ export function PublicationMeta({
     if (variant === "compact") {
         return (
             <div className={cn("flex flex-wrap items-center gap-4 text-sm text-neutral-500", className)}>
-                <span className="badge badge-primary">{category?.label}</span>
                 <div className="flex items-center gap-1.5">
                     <Calendar className="h-4 w-4" />
                     <time dateTime={publication.publishedAt}>{formattedDate}</time>
@@ -46,7 +44,6 @@ export function PublicationMeta({
         <div className={cn("space-y-4", className)}>
             {/* Category & Date */}
             <div className="flex flex-wrap items-center gap-3">
-                <span className="badge badge-primary text-sm">{category?.label}</span>
                 <span className="text-neutral-300">|</span>
                 <div className="flex items-center gap-1.5 text-neutral-600">
                     <Calendar className="h-4 w-4" />

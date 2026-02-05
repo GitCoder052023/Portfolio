@@ -7,7 +7,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { Menu, X, FileText, Search } from "lucide-react";
+import { Menu, X, FileText } from "lucide-react";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { motion, AnimatePresence } from "motion/react";
 import { Container } from "./container";
@@ -61,14 +61,6 @@ export function Header() {
 
                     {/* Right side actions */}
                     <div className="flex items-center gap-3">
-                        {/* Search button */}
-                        <button
-                            type="button"
-                            className="btn btn-ghost btn-icon hidden md:flex"
-                            aria-label="Search publications"
-                        >
-                            <Search className="h-4.5 w-4.5" />
-                        </button>
 
                         {/* Auth buttons */}
                         <SignedOut>

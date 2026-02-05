@@ -9,7 +9,6 @@ import Link from "next/link";
 import { Download, Heart, MessageCircle, Calendar, FileText } from "lucide-react";
 import { motion } from "motion/react";
 import { PAGE_ROUTES } from "@/constants";
-import { appConfig } from "@/configs/app.config";
 import type { PublicationWithStats } from "@/types";
 import { cn } from "@/utils";
 
@@ -19,7 +18,6 @@ interface PublicationCardProps {
 }
 
 export function PublicationCard({ publication, variant = "default" }: PublicationCardProps) {
-    const category = appConfig.categories.find((c) => c.id === publication.category);
     const formattedDate = new Date(publication.publishedAt).toLocaleDateString("en-US", {
         year: "numeric",
         month: "short",
