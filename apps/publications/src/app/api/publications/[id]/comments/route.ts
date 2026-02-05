@@ -8,6 +8,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { getComments, createComment, deleteComment, getUserByClerkId } from '@/database/interactions';
+import { ensureUserExists } from '@/services/clerk';
 
 export async function GET(
     request: NextRequest,
@@ -48,13 +49,13 @@ export async function POST(
             );
         }
 
-        // Get the user from our database
-        const user = await getUserByClerkId(clerkUserId);
+        // Get or sync the user in our database
+        const user = await ensureUserExists(clerkUserId);
 
         if (!user) {
             return NextResponse.json(
-                { error: 'User not found. Please try signing out and back in.' },
-                { status: 404 }
+                { error: 'Failed to synchronize your user profile. Please try again or sign out and back in.' },
+                { status: 500 }
             );
         }
 
@@ -130,8 +131,8 @@ export async function DELETE(
             );
         }
 
-        // Get the user from our database
-        const user = await getUserByClerkId(clerkUserId);
+        // Get or sync the user
+        const user = await ensureUserExists(clerkUserId);
 
         if (!user) {
             return NextResponse.json(

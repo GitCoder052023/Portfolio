@@ -5,8 +5,8 @@
 
 import { NextResponse, type NextRequest } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
-import { toggleLike, getLikeCount, hasUserLiked } from '@/database/interactions';
-import { getUserByClerkId } from '@/database/interactions';
+import { toggleLike, getLikeCount, hasUserLiked, getUserByClerkId } from '@/database/interactions';
+import { ensureUserExists } from '@/services/clerk';
 
 export async function POST(
     request: NextRequest,
@@ -25,13 +25,14 @@ export async function POST(
             );
         }
 
-        // Get the user from our database
-        const user = await getUserByClerkId(clerkUserId);
+        // Get or sync the user in our database
+        // This ensures the user exists even if the webhook hasn't fired (e.g. local dev)
+        const user = await ensureUserExists(clerkUserId);
 
         if (!user) {
             return NextResponse.json(
-                { error: 'User not found. Please try signing out and back in.' },
-                { status: 404 }
+                { error: 'Failed to synchronize your user profile. Please try again or sign out and back in.' },
+                { status: 500 }
             );
         }
 
@@ -79,7 +80,7 @@ export async function GET(
             });
         }
 
-        const user = await getUserByClerkId(clerkUserId);
+        const user = await ensureUserExists(clerkUserId);
 
         if (!user) {
             return NextResponse.json({
