@@ -6,6 +6,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { getPublicationById, trackDownload, getSignedDownloadUrl } from '@/database/interactions';
 import { createHash } from 'crypto';
+import { STORAGE } from '@/constants';
 
 export async function GET(
     request: NextRequest,
@@ -47,8 +48,16 @@ export async function GET(
             referrer,
         }).catch(err => console.error('Failed to track download:', err));
 
-        // Get a signed URL for the PDF (valid for 1 hour)
-        const signedUrl = await getSignedDownloadUrl(publication.pdfPath, 3600);
+        // Get a signed URL for the PDF (valid for 2 Minute)
+        // CONSTRUCTION: folder/Title.pdf
+        const categoryFolder = STORAGE.folders[publication.category as keyof typeof STORAGE.folders];
+        const correctPdfPath = `${categoryFolder}/${publication.title}.pdf`;
+
+        console.log(`Generating signed URL for publication ${id}`);
+        console.log(`Original PDF path (DB): ${publication.pdfPath}`);
+        console.log(`Using Storage path: ${correctPdfPath}`);
+
+        const signedUrl = await getSignedDownloadUrl(correctPdfPath, 120);
 
         if (!signedUrl) {
             return NextResponse.json(

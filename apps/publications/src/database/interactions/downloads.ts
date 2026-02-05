@@ -77,7 +77,7 @@ export async function trackDownload(params: TrackDownloadParams): Promise<boolea
  */
 export async function getSignedDownloadUrl(
     pdfPath: string,
-    expiresInSeconds: number = 3600 // 1 hour default
+    expiresInSeconds: number = 120 // 2 Minutes
 ): Promise<string | null> {
     const supabase = getSupabaseServerClient();
 

@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "dev:publications": "cd apps/publications && pnpm dev",
+    "build:publications": "cd apps/publications && pnpm build",
+    "start:publications": "cd apps/publications && pnpm start"
   },
   "dependencies": {
     "framer-motion": "^12.24.0",
