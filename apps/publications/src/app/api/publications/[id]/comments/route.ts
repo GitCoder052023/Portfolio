@@ -9,6 +9,13 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { getComments, createComment, deleteComment, getUserByClerkId } from '@/database/interactions';
 import { ensureUserExists } from '@/services/clerk';
+import { rateLimit } from '@/lib/rate-limit';
+import { commentSchema, deleteCommentSchema } from '@/lib/validations';
+
+const limiter = rateLimit({
+    interval: 60 * 1000, // 60 seconds
+    uniqueTokenPerInterval: 500, // Max 500 users per second
+});
 
 export async function GET(
     request: NextRequest,
@@ -39,6 +46,17 @@ export async function POST(
     try {
         const { id: publicationId } = await params;
 
+        // Rate Limiting
+        const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+        const { isRateLimited } = limiter.check(10, `COMMENT_POST_${ip}`); // 10 comments per minute per IP
+
+        if (isRateLimited) {
+            return NextResponse.json(
+                { error: 'Too many requests. Please try again later.' },
+                { status: 429 }
+            );
+        }
+
         // Check authentication
         const { userId: clerkUserId } = await auth();
 
@@ -59,23 +77,25 @@ export async function POST(
             );
         }
 
-        // Parse request body
+        // Parse and Validate request body
         const body = await request.json();
-        const { content, parentId } = body;
+        const validation = commentSchema.safeParse(body);
 
-        if (!content || typeof content !== 'string') {
+        if (!validation.success) {
             return NextResponse.json(
-                { error: 'Comment content is required' },
+                { error: validation.error.issues[0].message },
                 { status: 400 }
             );
         }
+
+        const { content, parentId } = validation.data;
 
         // Create the comment
         const result = await createComment({
             publicationId,
             userId: user.id,
             content,
-            parentId,
+            parentId: parentId || undefined,
         });
 
         if (!result.success) {
@@ -141,16 +161,18 @@ export async function DELETE(
             );
         }
 
-        // Parse request body
+        // Parse and Validate request body
         const body = await request.json();
-        const { commentId } = body;
+        const validation = deleteCommentSchema.safeParse(body);
 
-        if (!commentId) {
+        if (!validation.success) {
             return NextResponse.json(
-                { error: 'Comment ID is required' },
+                { error: validation.error.issues[0].message },
                 { status: 400 }
             );
         }
+
+        const { commentId } = validation.data;
 
         // Delete the comment (will verify ownership)
         const result = await deleteComment(commentId, user.id);

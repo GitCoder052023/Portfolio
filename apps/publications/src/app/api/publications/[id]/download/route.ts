@@ -7,6 +7,12 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { getPublicationById, trackDownload, getSignedDownloadUrl } from '@/database/interactions';
 import { createHash } from 'crypto';
 import { STORAGE } from '@/constants';
+import { rateLimit } from '@/lib/rate-limit';
+
+const limiter = rateLimit({
+    interval: 60 * 1000,
+    uniqueTokenPerInterval: 500,
+});
 
 export async function GET(
     request: NextRequest,
@@ -14,6 +20,21 @@ export async function GET(
 ) {
     try {
         const { id } = await params;
+
+        // Rate Limiting & Metadata
+        const userAgent = request.headers.get('user-agent') || undefined;
+        const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+            request.headers.get('x-real-ip') ||
+            'unknown';
+
+        const { isRateLimited } = limiter.check(10, `DOWNLOAD_GET_${ip}`); // 10 downloads per minute per IP
+
+        if (isRateLimited) {
+            return NextResponse.json(
+                { error: 'Too many requests. Please try again later.' },
+                { status: 429 }
+            );
+        }
 
         // Get the publication to verify it exists and get the PDF path
         const publication = await getPublicationById(id);
@@ -24,12 +45,6 @@ export async function GET(
                 { status: 404 }
             );
         }
-
-        // Get request metadata for tracking
-        const userAgent = request.headers.get('user-agent') || undefined;
-        const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
-            request.headers.get('x-real-ip') ||
-            'unknown';
 
         // Hash the IP for privacy
         const ipHash = ip !== 'unknown'

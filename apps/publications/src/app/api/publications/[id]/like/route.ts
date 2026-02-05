@@ -8,12 +8,30 @@ import { auth } from '@clerk/nextjs/server';
 import { toggleLike, getLikeCount, hasUserLiked, getUserByClerkId } from '@/database/interactions';
 import { ensureUserExists } from '@/services/clerk';
 
+import { rateLimit } from '@/lib/rate-limit';
+
+const limiter = rateLimit({
+    interval: 60 * 1000,
+    uniqueTokenPerInterval: 500,
+});
+
 export async function POST(
     request: NextRequest,
     { params }: { params: Promise<{ id: string }> }
 ) {
     try {
         const { id: publicationId } = await params;
+
+        // Rate Limiting
+        const ip = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+        const { isRateLimited } = limiter.check(10, `LIKE_POST_${ip}`); // 10 likes per minute per IP
+
+        if (isRateLimited) {
+            return NextResponse.json(
+                { error: 'Too many requests. Please try again later.' },
+                { status: 429 }
+            );
+        }
 
         // Check authentication
         const { userId: clerkUserId } = await auth();
