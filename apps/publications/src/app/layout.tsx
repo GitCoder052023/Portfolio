@@ -6,6 +6,7 @@
 import type { Metadata, Viewport } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "sonner";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header, Footer } from "@/components/layout";
 import { appConfig } from "@/configs/app.config";
 import { SEO } from "@/constants";
@@ -81,6 +82,7 @@ export default function RootLayout({
               className: "text-sm",
             }}
           />
+          <SpeedInsights />
         </body>
       </html>
     </ClerkProvider>
