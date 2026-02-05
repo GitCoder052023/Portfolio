@@ -99,43 +99,6 @@ export default async function AboutPage() {
                 </Container>
             </section>
 
-            {/* Topics Section */}
-            <section className="section bg-neutral-50">
-                <Container>
-                    <FadeIn>
-                        <div className="text-center mb-12">
-                            <h2 className="font-serif text-2xl font-semibold text-neutral-900 sm:text-3xl">
-                                Publication Categories
-                            </h2>
-                            <p className="mt-3 text-neutral-600 max-w-lg mx-auto">
-                                Explore writings across different formats and subject areas
-                            </p>
-                        </div>
-                    </FadeIn>
-
-                    <StaggerChildren className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-                        {appConfig.categories.map((category) => (
-                            <Link
-                                key={category.id}
-                                href={PAGE_ROUTES.category(category.id)}
-                                className="group card card-interactive"
-                            >
-                                <h3 className="font-serif text-lg font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">
-                                    {category.label}
-                                </h3>
-                                <p className="mt-2 text-sm text-neutral-500 leading-relaxed">
-                                    {category.description}
-                                </p>
-                                <div className="mt-4 flex items-center gap-1 text-sm font-medium text-primary-600">
-                                    <span>Browse</span>
-                                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                                </div>
-                            </Link>
-                        ))}
-                    </StaggerChildren>
-                </Container>
-            </section>
-
             {/* Access Section */}
             <section className="section bg-white">
                 <Container>

@@ -135,39 +135,6 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* Categories Section */}
-      <section className="section bg-neutral-50">
-        <Container>
-          <FadeIn>
-            <div className="text-center mb-12">
-              <h2 className="font-serif text-2xl font-semibold text-neutral-900 sm:text-3xl">
-                Browse by Category
-              </h2>
-              <p className="mt-3 text-neutral-600 max-w-lg mx-auto">
-                Explore publications organized by type and subject matter
-              </p>
-            </div>
-          </FadeIn>
-
-          <StaggerChildren className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {appConfig.categories.map((category) => (
-              <Link
-                key={category.id}
-                href={PAGE_ROUTES.category(category.id)}
-                className="group card card-interactive text-center"
-              >
-                <h3 className="font-serif text-lg font-semibold text-neutral-900 group-hover:text-primary-600 transition-colors">
-                  {category.label}
-                </h3>
-                <p className="mt-2 text-sm text-neutral-500">
-                  {category.description}
-                </p>
-              </Link>
-            ))}
-          </StaggerChildren>
-        </Container>
-      </section>
-
       {/* CTA Section */}
       <section className="section bg-primary-600">
         <Container>
