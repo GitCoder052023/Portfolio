@@ -20,10 +20,10 @@ export default function ContactCTA({ isInView }: InViewProps) {
                 Whether you're looking for a full-stack developer, need help with a project, or want to discuss potential collaborations, I'm always open to new opportunities.
             </p>
             <motion.a
-                href="mailto:your.email@example.com"
+                href="mailto:hamdankhubaib959@gmail.com"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-[#37352f] text-white rounded-lg hover:bg-[#2e2d29] transition-colors duration-200 font-medium text-lg"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-[#37352f] text-white rounded-lg hover:bg-[#2e2d29] transition-colors duration-200 font-medium text-lg shadow-lg hover:shadow-xl"
             >
                 Get In Touch
                 <ArrowRight className="w-5 h-5" />
