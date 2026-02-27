@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { HiArrowRight } from "react-icons/hi";
 
 import { CONTACT_METHODS } from "@/app/data/contact";
 import { InViewProps } from "@/app/types/components";
@@ -60,7 +60,7 @@ export default function ContactGrid({ isInView }: InViewProps) {
                                 className="p-2 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 -translate-x-2 group-hover:translate-x-0"
                                 style={{ color: (method as any).brandColor }}
                             >
-                                <ArrowRight className="w-5 h-5" />
+                                <HiArrowRight className="w-5 h-5" />
                             </div>
                         </div>
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Rocket, Sparkles } from "lucide-react";
+import { IoRocket, IoSparkles } from "react-icons/io5";
 
 import { InViewProps } from "@/app/types/components";
 
@@ -16,7 +16,7 @@ export default function AboutDescription({ isInView }: InViewProps) {
             >
                 <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-                        <Rocket className="w-5 h-5 text-[#37352f]" />
+                        <IoRocket className="w-5 h-5 text-[#37352f]" />
                     </div>
                     <h3 className="text-2xl font-semibold text-[#37352f]">
                         Backend-first Full-Stack Developer
@@ -52,7 +52,7 @@ export default function AboutDescription({ isInView }: InViewProps) {
             >
                 <div className="flex items-center gap-3 mb-4">
                     <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-100 to-teal-100 flex items-center justify-center">
-                        <Sparkles className="w-5 h-5 text-[#37352f]" />
+                        <IoSparkles className="w-5 h-5 text-[#37352f]" />
                     </div>
                     <h3 className="text-2xl font-semibold text-[#37352f]">
                         Architecture & Open Source

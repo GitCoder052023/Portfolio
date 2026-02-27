@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PidifyJs from "./PidifyJs";
 import TailStack from "./TailStack";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 const PROJECTS = [
   { id: "pidify", component: PidifyJs, name: "Pidify.js" },
@@ -45,7 +45,7 @@ export default function Projects() {
           className="p-2 rounded-full border border-[#e9e9e7] bg-white/80 backdrop-blur-sm hover:bg-white transition-colors shadow-sm group"
           aria-label="Previous project"
         >
-          <ChevronLeft className="w-5 h-5 text-[#787774] group-hover:text-[#37352f]" />
+          <HiChevronLeft className="w-5 h-5 text-[#787774] group-hover:text-[#37352f]" />
         </button>
         
         <div className="flex gap-2">
@@ -68,7 +68,7 @@ export default function Projects() {
           className="p-2 rounded-full border border-[#e9e9e7] bg-white/80 backdrop-blur-sm hover:bg-white transition-colors shadow-sm group"
           aria-label="Next project"
         >
-          <ChevronRight className="w-5 h-5 text-[#787774] group-hover:text-[#37352f]" />
+          <HiChevronRight className="w-5 h-5 text-[#787774] group-hover:text-[#37352f]" />
         </button>
       </div>
     </section>

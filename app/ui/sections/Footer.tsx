@@ -1,14 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { FiArrowUpRight } from "react-icons/fi";
 
 export default function Footer() {
   const sitemap = [
     { name: "Home", href: "#hero" },
     { name: "About", href: "#about" },
     { name: "Projects", href: "#projects" },
-    { name: "DevOps", href: "#goals" },
     { name: "Contact", href: "#contact" },
   ];
 
@@ -82,7 +81,7 @@ export default function Footer() {
                     className="group flex items-center gap-1 text-base font-medium text-[#37352f] hover:text-[#787774] transition-colors"
                   >
                     {social.name}
-                    <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
+                    <FiArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" />
                   </a>
                 ))}
               </div>

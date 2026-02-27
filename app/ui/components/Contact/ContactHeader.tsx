@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MessageCircle } from "lucide-react";
+import { FaComment } from "react-icons/fa";
 
 import { InViewProps } from "@/app/types/components";
 
@@ -15,7 +15,7 @@ export default function ContactHeader({ isInView }: InViewProps) {
                 className="inline-block mb-4"
             >
                 <div className="w-16 h-16 rounded-2xl bg-[#f7f6f3] border border-[#e9e9e7] flex items-center justify-center mx-auto">
-                    <MessageCircle className="w-8 h-8 text-[#37352f]" />
+                    <FaComment className="w-8 h-8 text-[#37352f]" />
                 </div>
             </motion.div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-[#37352f]">

@@ -1,17 +1,19 @@
 import {
-  Mail,
-  Phone,
-  Github,
-  Linkedin,
-  Twitter,
-  Instagram,
-  Facebook,
-  MessageCircle,
-} from "lucide-react";
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
+  FaInstagram,
+  FaFacebook,
+  FaComment,
+} from "react-icons/fa";
+import {
+  IoMail,
+  IoCall,
+} from "react-icons/io5";
 
 export const CONTACT_METHODS = [
   {
-    icon: Mail,
+    icon: IoMail,
     label: "Email",
     value: "hamdankhubaib959@gmail.com",
     href: "mailto:hamdankhubaib959@gmail.com",
@@ -19,7 +21,7 @@ export const CONTACT_METHODS = [
     brandColor: "#EA4335",
   },
   {
-    icon: Phone,
+    icon: IoCall,
     label: "Phone",
     value: "+91 9236785599",
     href: "tel:+919236785599",
@@ -27,7 +29,7 @@ export const CONTACT_METHODS = [
     brandColor: "#25D366",
   },
   {
-    icon: Github,
+    icon: FaGithub,
     label: "GitHub",
     value: "github.com/GitCoder052023",
     href: "https://github.com/GitCoder052023",
@@ -35,7 +37,7 @@ export const CONTACT_METHODS = [
     brandColor: "#181717",
   },
   {
-    icon: Linkedin,
+    icon: FaLinkedin,
     label: "LinkedIn",
     value: "linkedin.com/in/hamdan-khubaib",
     href: "https://www.linkedin.com/in/hamdan-khubaib-3046b8331",
@@ -43,7 +45,7 @@ export const CONTACT_METHODS = [
     brandColor: "#0077B5",
   },
   {
-    icon: Twitter,
+    icon: FaTwitter,
     label: "X (Twitter)",
     value: "@HamdanKhu41893",
     href: "https://x.com/HamdanKhu41893",
@@ -51,7 +53,7 @@ export const CONTACT_METHODS = [
     brandColor: "#000000",
   },
   {
-    icon: Instagram,
+    icon: FaInstagram,
     label: "Instagram",
     value: "@hamdankhubaib.code",
     href: "https://instagram.com/hamdankhubaib.code",
@@ -60,7 +62,7 @@ export const CONTACT_METHODS = [
     bgGradient: "linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%)",
   },
   {
-    icon: Facebook,
+    icon: FaFacebook,
     label: "Facebook",
     value: "HamdanKhubaib",
     href: "https://www.facebook.com/HamdanKhubaib",
@@ -68,7 +70,7 @@ export const CONTACT_METHODS = [
     brandColor: "#1877F2",
   },
   {
-    icon: MessageCircle,
+    icon: FaComment,
     label: "Threads",
     value: "@hamdankhubaib.code",
     href: "https://threads.com/@hamdankhubaib.code",

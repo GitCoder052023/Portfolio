@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Hero from "@/app/ui/sections/Hero";
 import About from "@/app/ui/sections/About";
 import Projects from "@/app/ui/sections/Projects";
-import Goals from "@/app/ui/sections/Goals";
 import Contact from "@/app/ui/sections/Contact";
 import Footer from "@/app/ui/sections/Footer";
 import SmoothScroll from "@/app/ui/utils/SmoothScroll";
@@ -14,12 +13,13 @@ export const metadata: Metadata = HOME_METADATA;
 export default function Home() {
   return (
     <SmoothScroll>
-      <Navbar />
+      <header className="mb-14">
+        <Navbar />
+      </header>
       <main className="min-h-screen">
         <Hero />
         <About />
         <Projects />
-        <Goals />
         <Contact />
       </main>
       <Footer />

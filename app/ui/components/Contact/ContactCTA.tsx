@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { HiArrowRight } from "react-icons/hi";
 
 import { InViewProps } from "@/app/types/components";
 
@@ -26,7 +26,7 @@ export default function ContactCTA({ isInView }: InViewProps) {
                 className="inline-flex items-center gap-2 px-8 py-4 bg-[#37352f] text-white rounded-lg hover:bg-[#2e2d29] transition-colors duration-200 font-medium text-lg shadow-lg hover:shadow-xl"
             >
                 Get In Touch
-                <ArrowRight className="w-5 h-5" />
+                <HiArrowRight className="w-5 h-5" />
             </motion.a>
         </motion.div>
     );
