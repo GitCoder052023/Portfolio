@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Hero from "@/app/ui/sections/Hero";
 import About from "@/app/ui/sections/About";
 import Projects from "@/app/ui/sections/Projects";
+import GithubStats from "@/app/ui/sections/GithubStats";
 import Contact from "@/app/ui/sections/Contact";
 import Footer from "@/app/ui/sections/Footer";
 import SmoothScroll from "@/app/ui/utils/SmoothScroll";
@@ -20,6 +21,7 @@ export default function Home() {
         <Hero />
         <About />
         <Projects />
+        <GithubStats />
         <Contact />
       </main>
       <Footer />
