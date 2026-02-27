@@ -5,12 +5,13 @@ import { useRef } from "react";
 import { useInView } from "framer-motion";
 import { GitHubCalendar } from "react-github-calendar";
 import { ExternalLink } from "lucide-react";
+import { GITHUB_CONTENT } from "@/app/data/github";
 
 export default function GithubStats() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const username = "GitCoder052023";
+  const username = GITHUB_CONTENT.username;
 
   return (
     <section id="github" className="py-32 px-4 sm:px-6 lg:px-8 bg-[#f7f6f3]">
@@ -23,10 +24,10 @@ export default function GithubStats() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-[#37352f]">
-            Github <span className="italic font-serif">Contributions</span>
+            {GITHUB_CONTENT.title.text} <span className="italic font-serif">{GITHUB_CONTENT.title.highlight}</span>
           </h2>
           <p className="text-xl text-[#787774] max-w-2xl mx-auto mb-8">
-            My open-source journey, contributions, and coding activity.
+            {GITHUB_CONTENT.description}
           </p>
           <motion.a
             href={`https://github.com/${username}`}
@@ -36,7 +37,7 @@ export default function GithubStats() {
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-2 px-6 py-3 bg-[#37352f] text-white rounded-full font-medium hover:bg-black transition-colors"
           >
-            View GitHub Profile <ExternalLink size={18} />
+            {GITHUB_CONTENT.buttonLabel} <ExternalLink size={18} />
           </motion.a>
         </motion.div>
 

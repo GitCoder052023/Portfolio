@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
+import { SITE_CONFIG } from "./site";
 
 export const ROOT_METADATA: Metadata = {
-  metadataBase: new URL("https://hamdankhubaib.in"),
-  title: "Hamdan Khubaib | Full-Stack Developer & Creator",
-  description:
-    "Backend-first full-stack developer focused on building scalable, reliable, and maintainable software solutions. Experienced in designing systems that solve real-world problems and scale with growth.",
+  metadataBase: new URL(SITE_CONFIG.url),
+  title: SITE_CONFIG.name + " | Full-Stack Developer & Creator",
+  description: SITE_CONFIG.description,
   keywords: [
     "Hamdan Khubaib",
     "Hamdan khubaib",
@@ -33,34 +33,32 @@ export const ROOT_METADATA: Metadata = {
     "Young Developer",
     "Web Developer",
   ],
-  authors: [{ name: "Hamdan Khubaib", url: "https://hamdankhubaib.in" }],
-  creator: "Hamdan Khubaib",
+  authors: [{ name: SITE_CONFIG.name, url: SITE_CONFIG.url }],
+  creator: SITE_CONFIG.name,
   category: "Technology",
-  applicationName: "Hamdan Khubaib Portfolio",
+  applicationName: SITE_CONFIG.name + " Portfolio",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://hamdankhubaib.in",
-    title: "Hamdan Khubaib | Full-Stack Developer & Creator",
-    description:
-      "Backend-first full-stack developer focused on building scalable, reliable, and maintainable software solutions. Experienced in designing systems that solve real-world problems and scale with growth.",
-    siteName: "Hamdan Khubaib Portfolio",
+    url: SITE_CONFIG.url,
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
+    siteName: SITE_CONFIG.name + " Portfolio",
     images: [
       {
-        url: "https://img.genillu.com/gen/dBCBh5E8lS1T.png",
+        url: SITE_CONFIG.ogImage,
         width: 1200,
         height: 1200,
-        alt: "Hamdan Khubaib - Full-Stack Developer",
+        alt: SITE_CONFIG.name + " - Full-Stack Developer",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hamdan Khubaib | Full-Stack Developer & Creator",
-    description:
-      "Backend-first full-stack developer focused on building scalable, reliable, and maintainable software solutions. Experienced in designing systems that solve real-world problems and scale with growth.",
-    images: ["https://img.genillu.com/gen/dBCBh5E8lS1T.png"],
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
+    images: [SITE_CONFIG.ogImage],
   },
   robots: {
     index: true,
@@ -85,14 +83,13 @@ export const ROOT_METADATA: Metadata = {
 };
 
 export const HOME_METADATA: Metadata = {
-  title: "Hamdan Khubaib | Full-Stack Developer & Creator",
-  description:
-    "Backend-first full-stack developer focused on building scalable, reliable, and maintainable software solutions. Experienced in designing systems that solve real-world problems and scale with growth.",
+  title: SITE_CONFIG.title,
+  description: SITE_CONFIG.description,
   openGraph: {
-    title: "Hamdan Khubaib | Full-Stack Developer & Creator",
-    description:
-      "Backend-first full-stack developer focused on building scalable, reliable, and maintainable software solutions. Experienced in designing systems that solve real-world problems and scale with growth.",
-    url: "https://hamdankhubaib.in",
+    title: SITE_CONFIG.title,
+    description: SITE_CONFIG.description,
+    url: SITE_CONFIG.url,
   },
 };
+
 

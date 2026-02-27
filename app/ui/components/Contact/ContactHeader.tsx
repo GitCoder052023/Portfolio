@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { FaComment } from "react-icons/fa";
 
 import { InViewProps } from "@/app/types/components";
+import { CONTACT_CONTENT } from "@/app/data/contact";
 
 export default function ContactHeader({ isInView }: InViewProps) {
     return (
@@ -19,11 +20,12 @@ export default function ContactHeader({ isInView }: InViewProps) {
                 </div>
             </motion.div>
             <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-[#37352f]">
-                Let's Build Together
+                {CONTACT_CONTENT.header.title}
             </h2>
             <p className="text-xl text-[#787774] max-w-2xl mx-auto leading-relaxed">
-                Have a project in mind or want to collaborate? I'd love to hear from you. Let's create something amazing together.
+                {CONTACT_CONTENT.header.description}
             </p>
         </div>
     );
 }
+

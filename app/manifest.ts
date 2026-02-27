@@ -1,12 +1,13 @@
 import { MetadataRoute } from 'next'
+import { SITE_CONFIG } from './config/site'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Hamdan Khubaib - Full-Stack Developer',
-    short_name: 'Hamdan Khubaib',
-    description:
-      'Backend-first full-stack developer focused on building scalable, reliable, and maintainable software solutions. Experienced in designing systems that solve real-world problems and scale with growth.',
+    name: SITE_CONFIG.name + ' - Full-Stack Developer',
+    short_name: SITE_CONFIG.name,
+    description: SITE_CONFIG.description,
     start_url: '/',
+
     display: 'standalone',
     background_color: '#ffffff',
     theme_color: '#3b82f6',

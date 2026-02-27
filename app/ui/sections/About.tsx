@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
+import { ABOUT_CONTENT } from "@/app/data/about";
 
 export default function About() {
   const ref = useRef(null);
@@ -20,21 +21,20 @@ export default function About() {
         >
 
           <h2 className="text-4xl sm:text-5xl font-bold mb-12 text-[#37352f] flex items-center gap-3">
-            A little about <span className="italic font-serif">me</span>
+            {ABOUT_CONTENT.title.prefix} <span className="italic font-serif">{ABOUT_CONTENT.title.highlight}</span>
           </h2>
 
           <div className="space-y-8">
             <p className="text-xl text-[#787774] leading-relaxed max-w-3xl mx-auto">
-              I&apos;m a backend-first developer focused on building reliable, scalable software systems from the ground up. With over six years of experience, I specialize in turning ambiguous problems into well-structured solutions that are easy to maintain, extend, and operate in real-world environments.
+              {ABOUT_CONTENT.description}
             </p>
 
             <div className="space-y-8 text-left max-w-2xl mx-auto">
-              <p className="text-[#787774] leading-relaxed">
-                I work comfortably across the entire development lifecycle, with a strong emphasis on backend architecture and system design. My approach prioritizes clean abstractions, secure and well-defined interfaces, and thoughtful trade-offs that support long-term scalability rather than short-term fixes.
-              </p>
-              <p className="text-[#787774] leading-relaxed">
-                Alongside product work, I actively contribute to open-source projects, helping design and maintain production-ready tools and architectures that enable developers to ship higher-quality applications with confidence.
-              </p>
+              {ABOUT_CONTENT.detailedDescription.map((paragraph, index) => (
+                <p key={index} className="text-[#787774] leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
             </div>
           </div>
         </motion.div>

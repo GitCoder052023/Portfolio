@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { HERO_CONTENT } from "@/app/data/hero";
 
 export default function HeroProfile() {
     return (
@@ -20,8 +21,8 @@ export default function HeroProfile() {
                 <div className="relative w-full h-full rounded-full overflow-hidden bg-white p-1">
                     <div className="w-full h-full rounded-full bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center">
                         <Image
-                            src="https://img.genillu.com/gen/dBCBh5E8lS1T.png"
-                            alt="Hamdan Khubaib"
+                            src={HERO_CONTENT.profileImage}
+                            alt={HERO_CONTENT.name}
                             width={128}
                             height={128}
                             className="w-full h-full object-cover"
@@ -33,3 +34,4 @@ export default function HeroProfile() {
         </motion.div>
     );
 }
+

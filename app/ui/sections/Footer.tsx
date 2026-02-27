@@ -2,20 +2,12 @@
 
 import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
+import { NAV_ITEMS } from "@/app/constants/navigation";
+import { FOOTER_CONTENT } from "@/app/data/footer";
 
 export default function Footer() {
-  const sitemap = [
-    { name: "Home", href: "#hero" },
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
-  ];
-
-  const socials = [
-    { name: "LinkedIn", href: "https://www.linkedin.com/in/hamdan-khubaib-3046b8331" },
-    { name: "GitHub", href: "https://github.com/GitCoder052023" },
-    { name: "X", href: "https://x.com/HamdanKhu41893" },
-  ];
+  const sitemap = NAV_ITEMS;
+  const socials = FOOTER_CONTENT.socials;
 
   return (
     <footer className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-t border-[#e9e9e7]">
@@ -29,10 +21,11 @@ export default function Footer() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-6xl md:text-[80px] font-bold text-[#1a1a1a] leading-[0.95] tracking-tighter">
-              Let&apos;s build the <br />
-              <span className="font-serif italic text-[#d1d1cf] font-normal tracking-tight">impossible.</span>
+              {FOOTER_CONTENT.heading.text} <br />
+              <span className="font-serif italic text-[#d1d1cf] font-normal tracking-tight">{FOOTER_CONTENT.heading.highlight}</span>
             </h2>
           </motion.div>
+
 
           {/* Right Side: Navigation Columns */}
           <div className="flex flex-row gap-16 lg:gap-24 lg:justify-end">
@@ -98,13 +91,14 @@ export default function Footer() {
           className="mt-32 pt-8 border-t border-[#f0f0f0] flex flex-col md:flex-row justify-between items-center gap-4"
         >
           <p className="text-xs font-medium text-[#a1a1a1] tracking-wide uppercase">
-            © {new Date().getFullYear()} Hamdan Khubaib
+            © {new Date().getFullYear()} {FOOTER_CONTENT.copyright}
           </p>
           <div className="h-[1px] flex-grow mx-8 bg-[#f0f0f0] hidden md:block" />
           <p className="text-xs font-medium text-[#a1a1a1] tracking-wide uppercase">
-            Build with passion
+            {FOOTER_CONTENT.bottomText}
           </p>
         </motion.div>
+
       </div>
     </footer>
   );

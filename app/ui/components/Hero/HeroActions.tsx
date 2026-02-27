@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { HERO_CONTENT } from "@/app/data/hero";
 
 export default function HeroActions() {
     return (
@@ -10,22 +11,21 @@ export default function HeroActions() {
             transition={{ duration: 0.8, delay: 0.4, type: "spring" }}
             className="flex flex-wrap gap-4 justify-center"
         >
-            <motion.a
-                href="#about"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-[#37352f] text-white rounded-lg hover:bg-[#2e2d29] transition-colors duration-200 font-medium shadow-lg"
-            >
-                About Me
-            </motion.a>
-            <motion.a
-                href="#projects"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 py-3 bg-transparent border-2 border-[#e9e9e7] text-[#37352f] rounded-lg hover:border-[#d4d4d1] transition-colors duration-200 font-medium"
-            >
-                Projects
-            </motion.a>
+            {HERO_CONTENT.actions.map((action) => (
+                <motion.a
+                    key={action.label}
+                    href={action.href}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`px-6 py-3 rounded-lg transition-colors duration-200 font-medium ${action.primary
+                        ? "bg-[#37352f] text-white hover:bg-[#2e2d29] shadow-lg"
+                        : "bg-transparent border-2 border-[#e9e9e7] text-[#37352f] hover:border-[#d4d4d1]"
+                        }`}
+                >
+                    {action.label}
+                </motion.a>
+            ))}
         </motion.div>
     );
 }
+

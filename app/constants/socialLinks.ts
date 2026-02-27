@@ -7,49 +7,51 @@ import {
   MessageCircle,
   Mail,
 } from "lucide-react";
+import { SITE_CONFIG } from "../config/site";
 
 export const SOCIAL_LINKS = [
   {
     name: "GitHub",
-    url: "https://github.com/GitCoder052023",
+    url: SITE_CONFIG.links.github,
     icon: Github,
     rel: "external nofollow",
   },
   {
     name: "LinkedIn",
-    url: "https://www.linkedin.com/in/hamdan-khubaib-3046b8331",
+    url: SITE_CONFIG.links.linkedin,
     icon: Linkedin,
     rel: "external nofollow",
   },
   {
     name: "X",
-    url: "https://x.com/HamdanKhu41893",
+    url: SITE_CONFIG.links.twitter,
     icon: X,
     rel: "external nofollow",
   },
   {
     name: "Instagram",
-    url: "https://instagram.com/hamdankhubaib.code",
+    url: SITE_CONFIG.links.instagram,
     icon: Instagram,
     rel: "external nofollow",
   },
   {
     name: "Facebook",
-    url: "https://www.facebook.com/HamdanKhubaib",
+    url: SITE_CONFIG.links.facebook,
     icon: Facebook,
     rel: "external nofollow",
   },
   {
     name: "Threads",
-    url: "https://threads.com/@hamdankhubaib.code",
+    url: SITE_CONFIG.links.threads,
     icon: MessageCircle,
     rel: "external nofollow",
   },
   {
     name: "Email",
-    url: "mailto:hamdankhubaib959@gmail.com",
+    url: SITE_CONFIG.links.mail,
     icon: Mail,
     rel: "nofollow",
   },
 ];
+
 

@@ -16,6 +16,7 @@ import {
   IoMenu,
   IoClose,
 } from "react-icons/io5";
+import { SITE_CONFIG } from "@/app/config/site";
 import { NAV_ITEMS } from "@/app/constants/navigation";
 
 export default function Navbar() {
@@ -30,10 +31,11 @@ export default function Navbar() {
   const { scrollY } = useScroll();
 
   const socialLinks = [
-    { icon: <FaGithub size={18} />, url: "#github", name: "GitHub" },
-    { icon: <FaXTwitter size={18} />, url: "#x", name: "X" },
-    { icon: <IoMail size={18} />, url: "#email", name: "Email" },
+    { icon: <FaGithub size={18} />, url: SITE_CONFIG.links.github, name: "GitHub" },
+    { icon: <FaXTwitter size={18} />, url: SITE_CONFIG.links.twitter, name: "X" },
+    { icon: <IoMail size={18} />, url: SITE_CONFIG.links.mail, name: "Email" },
   ];
+
 
   const colors = {
     glass: "rgba(255, 255, 255, 0.9)",
@@ -123,15 +125,16 @@ export default function Navbar() {
         >
           {/* Logo */}
           <div
-            onClick={() => scrollToSection("home")}
+            onClick={() => scrollToSection("hero")}
             className="cursor-pointer"
           >
             <span
               className="font-sans font-bold text-xl tracking-tight whitespace-nowrap text-black"
             >
-              Hamdan Khubaib
+              {SITE_CONFIG.name}
             </span>
           </div>
+
 
           {/* Desktop Links */}
           <div className="hidden lg:flex items-center gap-1">

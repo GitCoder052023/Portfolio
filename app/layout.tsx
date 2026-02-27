@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ROOT_METADATA } from "./config/seo";
+import { SITE_CONFIG } from "./config/site";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -19,7 +20,7 @@ export default function RootLayout({
     <html lang="en" className={inter.variable}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-        <link rel="canonical" href="https://hamdankhubaib.in" />
+        <link rel="canonical" href={SITE_CONFIG.url} />
         <meta name="theme-color" content="#3b82f6" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="mobile-web-app-capable" content="yes" />
@@ -31,22 +32,22 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              name: "Hamdan Khubaib",
+              name: SITE_CONFIG.name,
               jobTitle: "Full-Stack Developer",
               worksFor: {
                 "@type": "Organization",
                 name: "Self-Employed",
               },
-              description: "Backend-first full-stack developer focused on building scalable, reliable, and maintainable software solutions. Experienced in designing systems that solve real-world problems and scale with growth.",
-              url: "https://hamdankhubaib.in",
-              image: "https://img.genillu.com/gen/dBCBh5E8lS1T.png",
+              description: SITE_CONFIG.description,
+              url: SITE_CONFIG.url,
+              image: SITE_CONFIG.ogImage,
               sameAs: [
-                "https://github.com/GitCoder052023",
-                "https://www.linkedin.com/in/hamdan-khubaib-3046b8331",
-                "https://instagram.com/hamdankhubaib.code",
-                "https://x.com/HamdanKhu41893",
-                "https://www.facebook.com/HamdanKhubaib",
-                "https://threads.com/@hamdankhubaib.code",
+                SITE_CONFIG.links.github,
+                SITE_CONFIG.links.linkedin,
+                SITE_CONFIG.links.instagram,
+                SITE_CONFIG.links.twitter,
+                SITE_CONFIG.links.facebook,
+                SITE_CONFIG.links.threads,
               ],
               knowsAbout: [
                 "React",
@@ -86,7 +87,7 @@ export default function RootLayout({
                   "@type": "ListItem",
                   position: 1,
                   name: "Home",
-                  item: "https://hamdankhubaib.in",
+                  item: SITE_CONFIG.url,
                 },
               ],
             }),
@@ -98,20 +99,20 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              url: "https://hamdankhubaib.in",
-              name: "Hamdan Khubaib - Full-Stack Developer",
-              description: "Backend-first full-stack developer focused on building scalable, reliable, and maintainable software solutions. Experienced in designing systems that solve real-world problems and scale with growth.",
+              url: SITE_CONFIG.url,
+              name: SITE_CONFIG.name + " - Full-Stack Developer",
+              description: SITE_CONFIG.description,
               author: {
                 "@type": "Person",
-                name: "Hamdan Khubaib",
+                name: SITE_CONFIG.name,
               },
               socialMediaAccount: [
-                "https://github.com/GitCoder052023",
-                "https://www.linkedin.com/in/hamdan-khubaib-3046b8331",
-                "https://x.com/HamdanKhu41893",
-                "https://instagram.com/hamdankhubaib.code",
-                "https://www.facebook.com/HamdanKhubaib",
-                "https://threads.com/@hamdankhubaib.code",
+                SITE_CONFIG.links.github,
+                SITE_CONFIG.links.linkedin,
+                SITE_CONFIG.links.twitter,
+                SITE_CONFIG.links.instagram,
+                SITE_CONFIG.links.facebook,
+                SITE_CONFIG.links.threads,
               ],
             }),
           }}
