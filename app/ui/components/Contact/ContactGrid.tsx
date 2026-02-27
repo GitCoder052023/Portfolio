@@ -34,7 +34,7 @@ export default function ContactGrid({ isInView }: InViewProps) {
 
                         <div className="flex items-start gap-4 relative z-10">
                             <motion.div 
-                                whileHover={{ scale: 1.1, rotate: 5 }}
+                                whileHover={{ scale: 1.1 }}
                                 className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-500 ease-out relative overflow-hidden"
                                 style={{ 
                                     backgroundColor: '#f7f6f3',

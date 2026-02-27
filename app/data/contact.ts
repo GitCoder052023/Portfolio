@@ -1,11 +1,11 @@
 import {
   FaGithub,
   FaLinkedin,
-  FaTwitter,
+  FaXTwitter,
   FaInstagram,
   FaFacebook,
   FaComment,
-} from "react-icons/fa";
+} from "react-icons/fa6";
 import {
   IoMail,
   IoCall,
@@ -45,8 +45,8 @@ export const CONTACT_METHODS = [
     brandColor: "#0077B5",
   },
   {
-    icon: FaTwitter,
-    label: "X (Twitter)",
+    icon: FaXTwitter,
+    label: "X",
     value: "@HamdanKhu41893",
     href: "https://x.com/HamdanKhu41893",
     color: "from-slate-50 to-gray-50",

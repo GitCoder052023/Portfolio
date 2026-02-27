@@ -14,7 +14,7 @@ export default function Footer() {
   const socials = [
     { name: "LinkedIn", href: "https://www.linkedin.com/in/hamdan-khubaib-3046b8331" },
     { name: "GitHub", href: "https://github.com/GitCoder052023" },
-    { name: "Twitter", href: "https://x.com/HamdanKhu41893" },
+    { name: "X", href: "https://x.com/HamdanKhu41893" },
   ];
 
   return (

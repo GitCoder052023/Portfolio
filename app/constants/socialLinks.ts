@@ -1,7 +1,7 @@
 import {
   Github,
   Linkedin,
-  Twitter,
+  X,
   Instagram,
   Facebook,
   MessageCircle,
@@ -22,9 +22,9 @@ export const SOCIAL_LINKS = [
     rel: "external nofollow",
   },
   {
-    name: "X (Twitter)",
+    name: "X",
     url: "https://x.com/HamdanKhu41893",
-    icon: Twitter,
+    icon: X,
     rel: "external nofollow",
   },
   {

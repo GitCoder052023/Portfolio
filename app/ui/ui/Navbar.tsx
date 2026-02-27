@@ -9,8 +9,8 @@ import {
 import { useState, useEffect, useRef } from "react";
 import {
   FaGithub,
-  FaTwitter,
-} from "react-icons/fa";
+  FaXTwitter,
+} from "react-icons/fa6";
 import {
   IoMail,
   IoMenu,
@@ -31,7 +31,7 @@ export default function Navbar() {
 
   const socialLinks = [
     { icon: <FaGithub size={18} />, url: "#github", name: "GitHub" },
-    { icon: <FaTwitter size={18} />, url: "#twitter", name: "Twitter" },
+    { icon: <FaXTwitter size={18} />, url: "#x", name: "X" },
     { icon: <IoMail size={18} />, url: "#email", name: "Email" },
   ];
 
