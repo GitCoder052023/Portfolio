@@ -22,8 +22,8 @@ export const ROOT_METADATA: Metadata = {
     "Full-Stack Engineer",
     "MongoDB",
     "PostgreSQL",
-    "Python Developer",
     "Software Engineer India",
+
     "Web Development",
     "MERN Stack Developer",
     "Frontend Developer",

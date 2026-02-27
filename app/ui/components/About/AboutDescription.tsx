@@ -55,32 +55,30 @@ export default function AboutDescription({ isInView }: InViewProps) {
                         <Sparkles className="w-5 h-5 text-[#37352f]" />
                     </div>
                     <h3 className="text-2xl font-semibold text-[#37352f]">
-                        Python & Data Enthusiast
+                        Architecture & Open Source
                     </h3>
                 </div>
 
                 <p className="text-[#787774] leading-relaxed mb-4">
-                    I use Python as a practical tool for understanding systems, workflows, and
-                    user behavior through data. Over several years, I've applied data analysis
-                    and automation to reduce manual effort, surface insights, and support better
-                    technical and product decisions.
+                    I advocate for modular, decoupled architectures that prioritize developer 
+                    experience and system longevity. My work often involves designing internal 
+                    tooling and shared libraries that standardize complex workflows and reduce 
+                    technical debt across projects.
                 </p>
 
                 <p className="text-[#787774] leading-relaxed mb-4">
-                    My experience includes building repeatable data workflows, cleaning and
-                    structuring messy datasets, and translating raw information into clear,
-                    actionable insights. This has helped guide decisions based on evidence
-                    rather than assumptions.
+                    While my primary focus is on the TypeScript and Node.js ecosystem, I treat 
+                    Python as a versatile tool for automation, rapid prototyping, and 
+                    data-driven decision making when the situation calls for it.
                 </p>
 
                 <p className="text-[#787774] leading-relaxed">
-                    As I continue to grow, I'm expanding into{" "}
-                    <strong className="text-[#37352f]">machine learning fundamentals</strong>{" "}
-                    to further connect data-driven insights with production software systems,
-                    particularly at the intersection of backend engineering and intelligent
-                    applications.
+                    I'm constantly exploring emerging patterns in distributed systems and 
+                    cloud-native development, ensuring that the applications I build are not 
+                    just functional, but resilient and future-proof.
                 </p>
             </motion.div>
+
         </div>
     );
 }

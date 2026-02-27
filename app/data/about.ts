@@ -1,37 +1,6 @@
-import { Briefcase, Code2, MapPin, Terminal } from "lucide-react";
-
-export const ABOUT_STATS = [
-  { 
-    label: "Coding Experience", 
-    value: "6+ Years", 
-    icon: Code2, 
-    color: "bg-amber-50/50", 
-    iconColor: "text-amber-600" 
-  },
-  { 
-    label: "Web Development", 
-    value: "3+ Years", 
-    icon: Briefcase, 
-    color: "bg-blue-50/50", 
-    iconColor: "text-blue-600" 
-  },
-  { 
-    label: "Python Experience", 
-    value: "4+ Years", 
-    icon: Terminal, 
-    color: "bg-emerald-50/50", 
-    iconColor: "text-emerald-600" 
-  },
-  { 
-    label: "Based In", 
-    value: "India", 
-    icon: MapPin, 
-    color: "bg-rose-50/50", 
-    iconColor: "text-rose-600" 
-  },
-];
 
 export const TECH_CATEGORIES = [
+
   {
     category: "Frontend",
     techs: [
@@ -56,7 +25,7 @@ export const TECH_CATEGORIES = [
     ],
   },
   {
-    category: "Data",
+    category: "Secondary",
     techs: [
       { name: "Python", icon: "python" },
       { name: "Pandas", icon: "pandas" },
@@ -67,4 +36,5 @@ export const TECH_CATEGORIES = [
     ],
   },
 ];
+
 

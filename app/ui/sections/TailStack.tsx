@@ -18,7 +18,8 @@ export default function TailStack({ align = "right" }: TailStackProps) {
   const alignClass = align === "right" ? "lg:flex-row-reverse" : "lg:flex-row";
 
   return (
-    <section className="py-28 sm:py-36 px-4 sm:px-6 lg:px-8 bg-[#f7f6f3] relative overflow-hidden">
+    <div className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+
       <TailStackBackground />
 
       <div className="max-w-6xl mx-auto relative">
@@ -39,6 +40,6 @@ export default function TailStack({ align = "right" }: TailStackProps) {
           <TailStackActions />
         </motion.div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -1,18 +1,14 @@
-import { Brain, Code, Smartphone } from "lucide-react";
+import { Code, Smartphone } from "lucide-react";
+
 
 export const YEARLY_GOALS = [
-  {
-    icon: Brain,
-    title: "Machine Learning Fundamentals",
-    description: "Complete machine learning fundamentals and practical application",
-    color: "from-purple-100 to-pink-100",
-  },
   {
     icon: Code,
     title: "Learn Go (Golang)",
     description: "Master Go programming language for backend development",
     color: "from-blue-100 to-cyan-100",
   },
+
   {
     icon: Code,
     title: "Learn Dart",
