@@ -8,6 +8,9 @@ import Section from "@/app/ui/components/Shared/Section";
 import { useEffect, useRef, useState } from "react";
 import { useInView } from "framer-motion";
 
+const CACHE_KEY = "github_contributions_cache";
+const CACHE_DURATION = 48 * 60 * 60 * 1000; // 48 hours in milliseconds
+
 export default function GithubStats() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
@@ -20,13 +23,39 @@ export default function GithubStats() {
 
   useEffect(() => {
     async function fetchContributions() {
+      // 1. Try to load from local cache first
+      try {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+          const { data, timestamp } = JSON.parse(cached);
+          const isExpired = Date.now() - timestamp > CACHE_DURATION;
+          
+          if (!isExpired && data && data.length > 0) {
+            setContributions(data);
+            setIsLoading(false);
+            return; // Skip fetch if cache is valid
+          }
+        }
+      } catch (e) {
+        console.warn("Failed to read from cache", e);
+      }
+
+      // 2. Fetch from backend if no valid cache
       try {
         const res = await fetch("/api/github-contributions");
         if (!res.ok) {
           throw new Error("Failed to fetch contributions data");
         }
         const data = await res.json();
-        setContributions(data.contributions || []);
+        
+        if (data.contributions) {
+          setContributions(data.contributions);
+          // Save to cache
+          localStorage.setItem(CACHE_KEY, JSON.stringify({
+            data: data.contributions,
+            timestamp: Date.now()
+          }));
+        }
       } catch (err: any) {
         setError(err.message || "An error occurred");
       } finally {
@@ -34,10 +63,8 @@ export default function GithubStats() {
       }
     }
 
-    if (isInView) {
-      fetchContributions();
-    }
-  }, [isInView]);
+    fetchContributions();
+  }, []); // Empty dependency array to fetch as soon as component mounts
 
   const customTheme: ThemeInput = {
     light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
