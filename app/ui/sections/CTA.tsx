@@ -82,15 +82,24 @@ export default function CTA() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           {/* Primary button */}
-          <motion.a
-            href="mailto:hamdankhubaib959@gmail.com"
+          <motion.button
+            onClick={() => {
+              const element = document.getElementById("contact");
+              if (element) {
+                const offset = 80;
+                const elementPosition = element.getBoundingClientRect().top;
+                const offsetPosition =
+                  elementPosition + window.pageYOffset - offset;
+                window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+              }
+            }}
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.97 }}
             className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-[#1a1a1a] rounded-full font-semibold text-base shadow-[0_0_40px_rgba(255,255,255,0.08)] hover:shadow-[0_0_60px_rgba(255,255,255,0.15)] transition-shadow duration-500"
           >
             {CONTACT_CONTENT.cta.buttonLabel}
             <HiArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-          </motion.a>
+          </motion.button>
 
           {/* Secondary button */}
           <motion.a
