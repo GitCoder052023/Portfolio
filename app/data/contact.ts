@@ -18,9 +18,12 @@ export const CONTACT_CONTENT = {
         description: "Have a project in mind or want to collaborate? I'd love to hear from you. Let's create something amazing together."
     },
     cta: {
-        title: "Ready to Start a Project?",
-        description: "Whether you're looking for a full-stack developer, need help with a project, or want to discuss potential collaborations, I'm always open to new opportunities.",
-        buttonLabel: "Get In Touch"
+        tagline: "Available for opportunities",
+        title: "Let's create",
+        titleHighlight: "something great.",
+        description: "Have a vision that needs engineering? I build reliable, scalable software that turns ambitious ideas into production-ready products.",
+        buttonLabel: "Start a Conversation",
+        secondaryLabel: "View My Work"
     }
 };
 

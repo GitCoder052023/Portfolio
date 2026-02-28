@@ -6,6 +6,7 @@ import Projects from "@/app/ui/sections/Projects";
 import Publications from "@/app/ui/sections/Publications";
 import GithubStats from "@/app/ui/sections/GithubStats";
 import Contact from "@/app/ui/sections/Contact";
+import CTA from "@/app/ui/sections/CTA";
 import Footer from "@/app/ui/sections/Footer";
 import SmoothScroll from "@/app/ui/utils/SmoothScroll";
 import Navbar from "@/app/ui/ui/Navbar";
@@ -30,6 +31,7 @@ export default function Home() {
         <Publications />
         <GithubStats />
         <Contact />
+        <CTA />
       </main>
       <Footer />
     </SmoothScroll>
