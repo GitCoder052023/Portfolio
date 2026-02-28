@@ -16,6 +16,6 @@ export async function GET(req: NextRequest) {
     );
   }
 
-  return GitHubController.getContributions();
+  return GitHubController.getContributions(req);
 }
 

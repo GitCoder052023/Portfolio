@@ -1,11 +1,22 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { SITE_CONFIG } from "@/app/config/site";
 import { GitHubService } from "./service";
 import { CONTRIBUTION_LEVEL_MAP } from "./config";
 import { ContributionsApiResponse, ErrorResponse, GitHubContributionDay } from "@/app/types/github";
 
 export class GitHubController {
-  static async getContributions(): Promise<NextResponse<ContributionsApiResponse | ErrorResponse>> {
+  static async getContributions(req: NextRequest): Promise<NextResponse<ContributionsApiResponse | ErrorResponse>> {
+    const { searchParams } = new URL(req.url);
+    const year = searchParams.get("year");
+
+    let from: string | undefined;
+    let to: string | undefined;
+
+    if (year) {
+      from = `${year}-01-01T00:00:00Z`;
+      to = `${year}-12-31T23:59:59Z`;
+    }
+
     const username = SITE_CONFIG.githubUsername;
     const token = process.env.GITHUB_TOKEN;
 
@@ -17,7 +28,7 @@ export class GitHubController {
     }
 
     try {
-      const data = await GitHubService.fetchContributions(username, token);
+      const data = await GitHubService.fetchContributions(username, token, from, to);
 
       if (data.errors) {
         console.error("GitHub GraphQL errors:", data.errors);

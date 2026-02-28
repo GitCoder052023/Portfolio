@@ -2,9 +2,9 @@ export const GITHUB_CONFIG = {
   GRAPHQL_API: "https://api.github.com/graphql",
   REVALIDATE_TIME: 86400, // 24 hours
   QUERY: `
-    query($userName: String!) { 
+    query($userName: String!, $from: DateTime, $to: DateTime) { 
       user(login: $userName) {
-        contributionsCollection {
+        contributionsCollection(from: $from, to: $to) {
           contributionCalendar {
             totalContributions
             weeks {

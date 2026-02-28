@@ -1,75 +1,95 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import ActivityCalendar, { ThemeInput } from "react-activity-calendar";
-import { ExternalLink, Loader2 } from "lucide-react";
+import { ExternalLink, Loader2, Calendar as CalendarIcon, ChevronRight } from "lucide-react";
 import { GITHUB_CONTENT } from "@/app/data/github";
 import Section from "@/app/ui/components/Shared/Section";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import { useInView } from "framer-motion";
+import { Contribution } from "@/app/types/github";
 
-const CACHE_KEY = "github_contributions_cache";
+const CACHE_KEY_PREFIX = "github_contributions_cache_v3_";
 const CACHE_DURATION = 48 * 60 * 60 * 1000; // 48 hours in milliseconds
 
 export default function GithubStats() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   
-  const [contributions, setContributions] = useState([]);
+  const currentYear = new Date().getFullYear();
+  const years = useMemo(() => {
+    const startYear = 2023; // As seen in your image
+    const result = [];
+    for (let y = currentYear; y >= startYear; y--) {
+      result.push(y);
+    }
+    return result;
+  }, [currentYear]);
+
+  const [selectedYear, setSelectedYear] = useState<number | "lastYear">(currentYear);
+  const [data, setData] = useState<{ [key: string]: { contributions: Contribution[], total: number } }>({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
   const username = GITHUB_CONTENT.username;
 
-  useEffect(() => {
-    async function fetchContributions() {
-      // 1. Try to load from local cache first
-      try {
-        const cached = localStorage.getItem(CACHE_KEY);
-        if (cached) {
-          const { data, timestamp } = JSON.parse(cached);
-          const isExpired = Date.now() - timestamp > CACHE_DURATION;
-          
-          if (!isExpired && data && data.length > 0) {
-            setContributions(data);
-            setIsLoading(false);
-            return; // Skip fetch if cache is valid
-          }
+  const fetchData = async (year: number | "lastYear") => {
+    setIsLoading(true);
+    setError("");
+    
+    const cacheKey = `${CACHE_KEY_PREFIX}${year}`;
+    
+    // 1. Try Cache
+    try {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        const { contributions, total, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp < CACHE_DURATION) {
+          setData(prev => ({ ...prev, [year]: { contributions, total } }));
+          setIsLoading(false);
+          return;
         }
-      } catch (e) {
-        console.warn("Failed to read from cache", e);
       }
-
-      // 2. Fetch from backend if no valid cache
-      try {
-        const res = await fetch("/api/github-contributions");
-        if (!res.ok) {
-          throw new Error("Failed to fetch contributions data");
-        }
-        const data = await res.json();
-        
-        if (data.contributions) {
-          setContributions(data.contributions);
-          // Save to cache
-          localStorage.setItem(CACHE_KEY, JSON.stringify({
-            data: data.contributions,
-            timestamp: Date.now()
-          }));
-        }
-      } catch (err: any) {
-        setError(err.message || "An error occurred");
-      } finally {
-        setIsLoading(false);
-      }
+    } catch (e) {
+      console.warn("Cache read error", e);
     }
 
-    fetchContributions();
-  }, []); // Empty dependency array to fetch as soon as component mounts
+    // 2. Fetch
+    try {
+      const url = year === "lastYear" 
+        ? "/api/github-contributions" 
+        : `/api/github-contributions?year=${year}`;
+      
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Failed to fetch data");
+      const result = await res.json();
+      
+      if (result.contributions) {
+        setData(prev => ({ ...prev, [year]: { contributions: result.contributions, total: result.total } }));
+        // Save Cache
+        localStorage.setItem(cacheKey, JSON.stringify({
+          contributions: result.contributions,
+          total: result.total,
+          timestamp: Date.now()
+        }));
+      }
+    } catch (err: any) {
+      setError(err.message || "An error occurred");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchData(selectedYear);
+  }, [selectedYear]);
 
   const customTheme: ThemeInput = {
     light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
     dark: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
   };
+
+  const currentYearData = data[selectedYear];
 
   return (
     <Section id="github" className="bg-[#f7f6f3]">
@@ -96,43 +116,102 @@ export default function GithubStats() {
           </motion.a>
         </div>
 
-        <div className="space-y-12">
-          {/* Contribution Calendar */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={
-              isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }
-            }
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white p-8 rounded-2xl border border-[#e9e9e7] overflow-hidden flex flex-col items-center shadow-sm min-h-[220px] justify-center"
-          >
-            <div className="w-full overflow-x-auto flex justify-center py-4">
-              {isLoading ? (
-                <div className="flex flex-col items-center justify-center text-[#787774] gap-3">
-                  <Loader2 className="w-8 h-8 animate-spin" />
-                  <p>Loading GitHub contributions...</p>
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-8 items-start">
+          {/* Main Content Area */}
+          <div className="flex-1 w-full space-y-6">
+            <motion.div
+              layout
+              className="bg-white p-6 sm:p-8 rounded-2xl border border-[#e9e9e7] shadow-sm min-h-[300px] flex flex-col justify-center relative overflow-hidden"
+            >
+              <div className="mb-6 flex justify-between items-center">
+                <h3 className="text-lg font-semibold text-[#37352f]">
+                  {currentYearData?.total || 0} contributions in {selectedYear === "lastYear" ? "the last year" : selectedYear}
+                </h3>
+                {isLoading && <Loader2 size={20} className="animate-spin text-[#787774]" />}
+              </div>
+
+              <div className="w-full overflow-x-auto custom-scrollbar pb-4">
+                <AnimatePresence mode="wait">
+                  {error ? (
+                    <motion.div 
+                      key="error"
+                      initial={{ opacity: 0 }} 
+                      animate={{ opacity: 1 }} 
+                      className="text-red-500 text-center py-10"
+                    >
+                      {error}
+                    </motion.div>
+                  ) : currentYearData ? (
+                    <motion.div
+                      key={selectedYear}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex justify-center"
+                    >
+                      <ActivityCalendar
+                        data={currentYearData.contributions}
+                        blockSize={14}
+                        blockMargin={4}
+                        fontSize={12}
+                        theme={customTheme}
+                        hideTotalCount
+                        labels={{
+                          months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                          weekdays: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+                        }}
+                      />
+                    </motion.div>
+                  ) : null}
+                </AnimatePresence>
+              </div>
+
+              {/* Activity Overview Placeholder to match your image */}
+              <div className="mt-8 pt-8 border-t border-[#f1f1f0] grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                  <h4 className="font-medium text-[#37352f]">Activity overview</h4>
+                  <div className="space-y-3">
+                    <div className="flex gap-3 text-sm text-[#787774]">
+                      <div className="mt-1"><ChevronRight size={14} /></div>
+                      <p>Full commit history available on GitHub profile</p>
+                    </div>
+                    <div className="flex gap-3 text-sm text-[#787774]">
+                      <div className="mt-1"><ChevronRight size={14} /></div>
+                      <p>Contributions include commits, pull requests, and issues</p>
+                    </div>
+                  </div>
                 </div>
-              ) : error ? (
-                <div className="text-red-500 text-center">
-                  <p>Unable to load contributions.</p>
-                  <p className="text-sm">{error}</p>
-                </div>
-              ) : contributions.length > 0 ? (
-                <ActivityCalendar
-                  data={contributions}
-                  blockSize={14}
-                  blockMargin={5}
-                  fontSize={14}
-                  theme={customTheme}
-                  labels={{
-                    totalCount: `{{count}} contributions in the last year`,
-                  }}
-                />
-              ) : (
-                <p className="text-[#787774]">No contribution data found.</p>
-              )}
-            </div>
-          </motion.div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Year Navigation Sidebar */}
+          <div className="w-full md:w-32 flex flex-row md:flex-col gap-2 overflow-x-auto md:overflow-visible pb-4 md:pb-0">
+            {years.map((year) => (
+              <button
+                key={year}
+                onClick={() => setSelectedYear(year)}
+                className={`flex-1 md:flex-none px-4 py-2 rounded-lg text-sm font-medium transition-all text-center md:text-left ${
+                  selectedYear === year 
+                    ? "bg-[#0070f3] text-white shadow-md shadow-blue-100" 
+                    : "bg-transparent text-[#787774] hover:bg-[#efefee]"
+                }`}
+              >
+                {year}
+              </button>
+            ))}
+            <button
+              onClick={() => setSelectedYear("lastYear")}
+              className={`flex-1 md:flex-none px-4 py-2 rounded-lg text-sm font-medium transition-all text-center md:text-left ${
+                selectedYear === "lastYear" 
+                  ? "bg-[#0070f3] text-white shadow-md shadow-blue-100" 
+                  : "bg-transparent text-[#787774] hover:bg-[#efefee]"
+              }`}
+            >
+              Last Year
+            </button>
+          </div>
         </div>
       </div>
     </Section>
