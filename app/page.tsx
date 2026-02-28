@@ -9,6 +9,7 @@ import Contact from "@/app/ui/sections/Contact";
 import Footer from "@/app/ui/sections/Footer";
 import SmoothScroll from "@/app/ui/utils/SmoothScroll";
 import Navbar from "@/app/ui/ui/Navbar";
+import Section from "@/app/ui/components/Shared/Section";
 import { HOME_METADATA } from "@/app/config/seo";
 
 export const metadata: Metadata = HOME_METADATA;
@@ -22,7 +23,9 @@ export default function Home() {
       <main className="min-h-screen">
         <Hero />
         <About />
-        <TechMarquee />
+        <Section py="py-16">
+          <TechMarquee />
+        </Section>
         <Projects />
         <Publications />
         <GithubStats />

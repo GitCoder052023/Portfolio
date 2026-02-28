@@ -85,7 +85,7 @@ export const CONTACT_METHODS = [
   {
     icon: FaComment,
     label: "Threads",
-    value: "@" + SITE_CONFIG.links.threads.split("/").pop(),
+    value: SITE_CONFIG.links.threads.split("/").pop(),
     href: SITE_CONFIG.links.threads,
     color: "from-slate-50 to-gray-50",
     brandColor: "#000000",

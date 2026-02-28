@@ -1,10 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 export default function HeroScrollIndicator() {
+    const { scrollY } = useScroll();
+    const opacity = useTransform(scrollY, [0, 100], [1, 0]);
+
     return (
         <motion.div
+            style={{ opacity }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -29,3 +33,4 @@ export default function HeroScrollIndicator() {
         </motion.div>
     );
 }
+

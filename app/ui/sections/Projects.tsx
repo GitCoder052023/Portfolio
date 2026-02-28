@@ -11,16 +11,31 @@ export default function Projects() {
 
   const nextProject = () => {
     setCurrentIndex((prev) => (prev + 1) % PROJECTS.length);
+    scrollToProjects();
   };
 
   const prevProject = () => {
     setCurrentIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
+    scrollToProjects();
+  };
+
+  const scrollToProjects = () => {
+    const element = document.getElementById("projects");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleDotClick = (index: number) => {
+    setCurrentIndex(index);
+    scrollToProjects();
   };
 
   const ActiveProject = PROJECTS[currentIndex].component;
 
   return (
     <Section id="projects" className="bg-white" py="py-0">
+
       <AnimatePresence mode="wait">
         <motion.div
           key={PROJECTS[currentIndex].id}
@@ -47,7 +62,7 @@ export default function Projects() {
           {PROJECTS.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentIndex(index)}
+              onClick={() => handleDotClick(index)}
               className={`w-2 h-2 rounded-full transition-all ${
                 currentIndex === index 
                   ? "w-8 bg-[#37352f]" 
@@ -57,6 +72,7 @@ export default function Projects() {
             />
           ))}
         </div>
+
 
         <button
           onClick={nextProject}
