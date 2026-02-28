@@ -1,12 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
-
-import { PIDIFY_FEATURES } from "@/app/data/pidify";
-import { PidifyFeaturesProps } from "@/app/types/components";
 import { useActiveState } from "@/app/hooks/useActiveState";
+import { ProjectFeature } from "@/app/types/components";
 
-export default function PidifyFeatures({ isInView, align }: PidifyFeaturesProps) {
+interface ProjectFeaturesProps {
+    isInView: boolean;
+    features: ProjectFeature[];
+    align: "left" | "right";
+    layout?: "grid" | "list";
+}
+
+export default function ProjectFeatures({ isInView, features, align, layout = "grid" }: ProjectFeaturesProps) {
     const { active: activeFeature, setActive: setActiveFeature, clearActive } = useActiveState<number>();
 
     return (
@@ -16,8 +21,8 @@ export default function PidifyFeatures({ isInView, align }: PidifyFeaturesProps)
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex-1"
         >
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                {PIDIFY_FEATURES.map((feature, index) => {
+            <div className={layout === "grid" ? "grid grid-cols-2 gap-3 sm:gap-4" : "space-y-3"}>
+                {features.map((feature, index) => {
                     const Icon = feature.icon;
                     const isActive = activeFeature === index;
                     return (
@@ -31,11 +36,14 @@ export default function PidifyFeatures({ isInView, align }: PidifyFeaturesProps)
                             className="group"
                         >
                             <motion.div
-                                animate={{ y: isActive ? -3 : 0 }}
+                                animate={{ 
+                                    y: layout === "grid" && isActive ? -3 : 0,
+                                    x: layout === "list" && isActive ? 4 : 0
+                                }}
                                 transition={{ duration: 0.2 }}
                                 className={`p-4 sm:p-5 bg-[#f7f6f3] rounded-xl border border-[#e9e9e7] hover:border-[#d4d4d1] hover:bg-white transition-all duration-300 h-full ${isActive ? 'shadow-lg' : 'shadow-sm'}`}
                             >
-                                <div className="flex items-start gap-3">
+                                <div className="flex items-start gap-4">
                                     <motion.div
                                         animate={{ scale: isActive ? 1.1 : 1 }}
                                         transition={{ duration: 0.2 }}
@@ -44,10 +52,10 @@ export default function PidifyFeatures({ isInView, align }: PidifyFeaturesProps)
                                         <Icon className="w-5 h-5 text-[#37352f]" />
                                     </motion.div>
                                     <div className="min-w-0">
-                                        <h4 className="font-semibold text-[#37352f] text-sm sm:text-base">
+                                        <h4 className={`font-semibold text-[#37352f] ${layout === "list" ? "text-base sm:text-lg" : "text-sm sm:text-base"}`}>
                                             {feature.title}
                                         </h4>
-                                        <p className="text-xs sm:text-sm text-[#787774] mt-1 leading-relaxed">
+                                        <p className={`text-[#787774] mt-1 leading-relaxed ${layout === "list" ? "text-sm" : "text-xs sm:text-sm"}`}>
                                             {feature.description}
                                         </p>
                                     </div>

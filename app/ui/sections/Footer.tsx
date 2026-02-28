@@ -4,10 +4,16 @@ import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { NAV_ITEMS } from "@/app/constants/navigation";
 import { FOOTER_CONTENT } from "@/app/data/footer";
+import { SOCIAL_LINKS } from "@/app/constants/socialLinks";
 
 export default function Footer() {
   const sitemap = NAV_ITEMS;
-  const socials = FOOTER_CONTENT.socials;
+  const socials = SOCIAL_LINKS.filter(link => 
+    ["LinkedIn", "GitHub", "X"].includes(link.name)
+  ).map(link => ({
+    name: link.name,
+    href: link.url
+  }));
 
   return (
     <footer className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-t border-[#e9e9e7]">

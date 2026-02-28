@@ -1,11 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRef } from "react";
-import { useInView } from "framer-motion";
 import { GitHubCalendar } from "react-github-calendar";
 import { ExternalLink } from "lucide-react";
 import { GITHUB_CONTENT } from "@/app/data/github";
+import Section from "@/app/ui/components/Shared/Section";
+import { useRef } from "react";
+import { useInView } from "framer-motion";
 
 export default function GithubStats() {
   const ref = useRef(null);
@@ -14,15 +15,9 @@ export default function GithubStats() {
   const username = GITHUB_CONTENT.username;
 
   return (
-    <section id="github" className="py-32 px-4 sm:px-6 lg:px-8 bg-[#f7f6f3]">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
+    <Section id="github" className="bg-[#f7f6f3]">
+      <div ref={ref}>
+        <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold mb-4 text-[#37352f]">
             {GITHUB_CONTENT.title.text} <span className="italic font-serif">{GITHUB_CONTENT.title.highlight}</span>
           </h2>
@@ -39,7 +34,7 @@ export default function GithubStats() {
           >
             {GITHUB_CONTENT.buttonLabel} <ExternalLink size={18} />
           </motion.a>
-        </motion.div>
+        </div>
 
         <div className="space-y-12">
           {/* Contribution Calendar */}
@@ -64,6 +59,6 @@ export default function GithubStats() {
           </motion.div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

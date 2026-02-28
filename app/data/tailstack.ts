@@ -9,69 +9,84 @@ import {
   Layers,
   Settings,
 } from "lucide-react";
+import { ProjectData } from "../types/components";
 
-export const TAILSTACK_FEATURES = [
-  {
-    icon: Package,
-    title: "Proven Architecture",
-    description: "TailStack Architecture — battle-tested for production-grade applications",
-    accent: "from-amber-100 to-orange-100",
+export const TAILSTACK_PROJECT_DATA: ProjectData = {
+  id: "tailstack",
+  name: "TailStack",
+  tagline: "Flagship Project",
+  description: "The flagship Monorepo Project Architecture and boilerplate for ERN applications.",
+  githubUrl: "https://github.com/GitCoder052023/TailStack",
+  backgroundColors: {
+    top: "from-orange-100 via-amber-50 to-transparent",
+    bottom: "from-rose-100 via-pink-50 to-transparent",
   },
-  {
-    icon: Zap,
-    title: "Hit the Ground Running",
-    description: "Pre-configured tools and beautiful UI system out of the box",
-    accent: "from-yellow-100 to-amber-100",
-  },
-  {
-    icon: Sliders,
-    title: "Fully Customizable",
-    description: "Not a rigid framework — adapt to your specific needs",
-    accent: "from-emerald-100 to-teal-100",
-  },
-  {
-    icon: Shield,
-    title: "Industry-Standard Tooling",
-    description: "Rigorous linting, TypeScript, and best practices built-in",
-    accent: "from-sky-100 to-blue-100",
-  },
-  {
-    icon: Rocket,
-    title: "Scalable Foundation",
-    description: "Perfect for MVPs and large-scale enterprise solutions",
-    accent: "from-violet-100 to-purple-100",
-  },
-  {
-    icon: Code2,
-    title: "Full-Stack Ready",
-    description: "Express, React, and Node.js perfectly integrated",
-    accent: "from-rose-100 to-pink-100",
-  },
-];
+  features: [
+    {
+      icon: Package,
+      title: "Proven Architecture",
+      description: "TailStack Architecture — battle-tested for production-grade applications",
+      accent: "from-amber-100 to-orange-100",
+    },
+    {
+      icon: Zap,
+      title: "Hit the Ground Running",
+      description: "Pre-configured tools and beautiful UI system out of the box",
+      accent: "from-yellow-100 to-amber-100",
+    },
+    {
+      icon: Sliders,
+      title: "Fully Customizable",
+      description: "Not a rigid framework — adapt to your specific needs",
+      accent: "from-emerald-100 to-teal-100",
+    },
+    {
+      icon: Shield,
+      title: "Industry-Standard Tooling",
+      description: "Rigorous linting, TypeScript, and best practices built-in",
+      accent: "from-sky-100 to-blue-100",
+    },
+    {
+      icon: Rocket,
+      title: "Scalable Foundation",
+      description: "Perfect for MVPs and large-scale enterprise solutions",
+      accent: "from-violet-100 to-purple-100",
+    },
+    {
+      icon: Code2,
+      title: "Full-Stack Ready",
+      description: "Express, React, and Node.js perfectly integrated",
+      accent: "from-rose-100 to-pink-100",
+    },
+  ],
+  highlights: [
+    {
+      icon: Brain,
+      title: "ERN Stack",
+      description: "Express, React, Node.js — complete full-stack solution with modern tooling",
+      color: "from-blue-50 to-cyan-50",
+      borderColor: "border-blue-200/50",
+    },
+    {
+      icon: Layers,
+      title: "Monorepo Ready",
+      description: "Organized workspace structure with shared configurations",
+      color: "from-purple-50 to-pink-50",
+      borderColor: "border-purple-200/50",
+    },
+    {
+      icon: Settings,
+      title: "Production-Grade",
+      description: "Robust structure tested in real-world applications at scale",
+      color: "from-emerald-50 to-teal-50",
+      borderColor: "border-emerald-200/50",
+    },
+  ],
+};
 
-export const TAILSTACK_HIGHLIGHTS = [
-  {
-    icon: Brain,
-    title: "ERN Stack",
-    description: "Express, React, Node.js — complete full-stack solution with modern tooling",
-    color: "from-blue-50 to-cyan-50",
-    borderColor: "border-blue-200/50",
-  },
-  {
-    icon: Layers,
-    title: "Monorepo Ready",
-    description: "Organized workspace structure with shared configurations",
-    color: "from-purple-50 to-pink-50",
-    borderColor: "border-purple-200/50",
-  },
-  {
-    icon: Settings,
-    title: "Production-Grade",
-    description: "Robust structure tested in real-world applications at scale",
-    color: "from-emerald-50 to-teal-50",
-    borderColor: "border-emerald-200/50",
-  },
-];
+export const TAILSTACK_FEATURES = TAILSTACK_PROJECT_DATA.features;
+export const TAILSTACK_HIGHLIGHTS = TAILSTACK_PROJECT_DATA.highlights;
+
 
 export type TailstackTerminalLineType =
   | "command"

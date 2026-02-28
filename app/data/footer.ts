@@ -7,9 +7,4 @@ export const FOOTER_CONTENT = {
     },
     copyright: SITE_CONFIG.name,
     bottomText: "Build with passion",
-    socials: [
-        { name: "LinkedIn", href: SITE_CONFIG.links.linkedin },
-        { name: "GitHub", href: SITE_CONFIG.links.github },
-        { name: "X", href: SITE_CONFIG.links.twitter },
-    ]
 };

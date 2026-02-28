@@ -3,15 +3,16 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import type { TailStackProps } from "@/app/types/components";
-import TailStackBackground from "@/app/ui/components/Projects/TailStack/TailStackBackground";
-import TailStackHeader from "@/app/ui/components/Projects/TailStack/TailStackHeader";
-import TailStackFeatures from "@/app/ui/components/Projects/TailStack/TailStackFeatures";
+import { ProjectSectionProps } from "@/app/types/components";
+import { TAILSTACK_PROJECT_DATA } from "@/app/data/tailstack";
+import ProjectBackground from "@/app/ui/components/Projects/Shared/ProjectBackground";
+import ProjectHeader from "@/app/ui/components/Projects/Shared/ProjectHeader";
+import ProjectFeatures from "@/app/ui/components/Projects/Shared/ProjectFeatures";
+import ProjectHighlights from "@/app/ui/components/Projects/Shared/ProjectHighlights";
+import ProjectActions from "@/app/ui/components/Projects/Shared/ProjectActions";
 import TailStackTerminal from "@/app/ui/components/Projects/TailStack/TailStackTerminal";
-import TailStackHighlights from "@/app/ui/components/Projects/TailStack/TailStackHighlights";
-import TailStackActions from "@/app/ui/components/Projects/TailStack/TailStackActions";
 
-export default function TailStack({ align = "right" }: TailStackProps) {
+export default function TailStack({ align = "right" }: ProjectSectionProps) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -19,8 +20,7 @@ export default function TailStack({ align = "right" }: TailStackProps) {
 
   return (
     <div className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-
-      <TailStackBackground />
+      <ProjectBackground isInView={isInView} colors={TAILSTACK_PROJECT_DATA.backgroundColors} />
 
       <div className="max-w-6xl mx-auto relative">
         <motion.div
@@ -29,15 +29,29 @@ export default function TailStack({ align = "right" }: TailStackProps) {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <TailStackHeader />
+          <ProjectHeader 
+            isInView={isInView} 
+            tagline={TAILSTACK_PROJECT_DATA.tagline}
+            title={TAILSTACK_PROJECT_DATA.name}
+            description={TAILSTACK_PROJECT_DATA.description}
+          />
 
           <div className={`flex flex-col ${alignClass} gap-12 lg:gap-16 items-stretch mb-20`}>
-            <TailStackFeatures />
+            <ProjectFeatures 
+                isInView={isInView} 
+                features={TAILSTACK_PROJECT_DATA.features} 
+                align={align} 
+                layout="list"
+            />
             <TailStackTerminal isInView={isInView} />
           </div>
 
-          <TailStackHighlights />
-          <TailStackActions />
+          <ProjectHighlights isInView={isInView} highlights={TAILSTACK_PROJECT_DATA.highlights} />
+          <ProjectActions 
+            isInView={isInView} 
+            githubUrl={TAILSTACK_PROJECT_DATA.githubUrl} 
+            docsUrl={TAILSTACK_PROJECT_DATA.docsUrl} 
+          />
         </motion.div>
       </div>
     </div>

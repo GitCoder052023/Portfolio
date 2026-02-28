@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PROJECTS } from "@/app/data/projects";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
+import Section from "@/app/ui/components/Shared/Section";
 
 export default function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,7 +20,7 @@ export default function Projects() {
   const ActiveProject = PROJECTS[currentIndex].component;
 
   return (
-    <section id="projects" className="relative bg-white">
+    <Section id="projects" className="bg-white" py="py-0">
       <AnimatePresence mode="wait">
         <motion.div
           key={PROJECTS[currentIndex].id}
@@ -65,6 +66,6 @@ export default function Projects() {
           <HiChevronRight className="w-5 h-5 text-[#787774] group-hover:text-[#37352f]" />
         </button>
       </div>
-    </section>
+    </Section>
   );
 }

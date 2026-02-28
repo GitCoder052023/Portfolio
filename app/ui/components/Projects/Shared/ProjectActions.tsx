@@ -2,10 +2,14 @@
 
 import { motion } from "framer-motion";
 import { Github, ArrowRight, Sparkles } from "lucide-react";
-
 import { InViewProps } from "@/app/types/components";
 
-export default function PidifyActions({ isInView }: InViewProps) {
+interface ProjectActionsProps extends InViewProps {
+    githubUrl: string;
+    docsUrl?: string;
+}
+
+export default function ProjectActions({ isInView, githubUrl, docsUrl }: ProjectActionsProps) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -14,7 +18,7 @@ export default function PidifyActions({ isInView }: InViewProps) {
             className="flex items-center gap-4"
         >
             <motion.a
-                href="https://github.com/GitCoder052023/PidifyJs"
+                href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
@@ -25,17 +29,19 @@ export default function PidifyActions({ isInView }: InViewProps) {
                 <span>View on GitHub</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </motion.a>
-            <motion.a
-                href="https://github.com/GitCoder052023/PidifyJs#readme"
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2 px-6 py-4 bg-transparent border-2 border-[#e9e9e7] text-[#37352f] rounded-xl hover:border-[#d4d4d1] hover:bg-[#f7f6f3] transition-all duration-300 font-medium"
-            >
-                <Sparkles className="w-4 h-4" />
-                <span>Documentation</span>
-            </motion.a>
+            {docsUrl && (
+                <motion.a
+                    href={docsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ scale: 1.03 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="inline-flex items-center gap-2 px-6 py-4 bg-transparent border-2 border-[#e9e9e7] text-[#37352f] rounded-xl hover:border-[#d4d4d1] hover:bg-[#f7f6f3] transition-all duration-300 font-medium"
+                >
+                    <Sparkles className="w-4 h-4" />
+                    <span>Documentation</span>
+                </motion.a>
+            )}
         </motion.div>
     );
 }

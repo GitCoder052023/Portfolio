@@ -3,7 +3,13 @@
 import { motion } from "framer-motion";
 import { InViewProps } from "@/app/types/components";
 
-export default function PidifyHeader({ isInView }: InViewProps) {
+interface ProjectHeaderProps extends InViewProps {
+    tagline: string;
+    title: string;
+    description: string;
+}
+
+export default function ProjectHeader({ isInView, tagline, title, description }: ProjectHeaderProps) {
     return (
         <div className="mb-16">
             <motion.div
@@ -14,7 +20,7 @@ export default function PidifyHeader({ isInView }: InViewProps) {
             >
                 <div className="h-px w-8 bg-gradient-to-r from-transparent via-[#787774] to-transparent" />
                 <span className="text-sm font-semibold text-[#787774] uppercase tracking-widest">
-                    Featured Project
+                    {tagline}
                 </span>
             </motion.div>
             <motion.h2
@@ -23,7 +29,7 @@ export default function PidifyHeader({ isInView }: InViewProps) {
                 transition={{ duration: 0.6, delay: 0.15 }}
                 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-[#37352f] tracking-tight"
             >
-                PidifyJS
+                {title}
             </motion.h2>
             <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -31,9 +37,7 @@ export default function PidifyHeader({ isInView }: InViewProps) {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="text-lg sm:text-xl text-[#787774] max-w-3xl leading-relaxed"
             >
-                A powerful, production-ready PDF viewer component library for React applications.
-                Built with modern web technologies and designed for document management,
-                e-signature applications, and more.
+                {description}
             </motion.p>
         </div>
     );

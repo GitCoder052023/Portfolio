@@ -8,17 +8,14 @@ import {
 } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import {
-  FaGithub,
-  FaXTwitter,
-} from "react-icons/fa6";
-import {
-  IoMail,
   IoMenu,
   IoClose,
 } from "react-icons/io5";
 import { SITE_CONFIG } from "@/app/config/site";
+
 import { NAV_ITEMS } from "@/app/constants/navigation";
 import { NAVBAR_COLORS } from "@/app/config/ui";
+import { SOCIAL_LINKS } from "@/app/constants/socialLinks";
 
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
@@ -31,11 +28,13 @@ export default function Navbar() {
 
   const { scrollY } = useScroll();
 
-  const socialLinks = [
-    { icon: <FaGithub size={18} />, url: SITE_CONFIG.links.github, name: "GitHub" },
-    { icon: <FaXTwitter size={18} />, url: SITE_CONFIG.links.twitter, name: "X" },
-    { icon: <IoMail size={18} />, url: SITE_CONFIG.links.mail, name: "Email" },
-  ];
+  const socialLinks = SOCIAL_LINKS.filter(link => 
+    ["GitHub", "X", "Email"].includes(link.name)
+  ).map(link => ({
+    icon: <link.icon size={18} />,
+    url: link.url,
+    name: link.name
+  }));
 
   const scrollToSection = (sectionId) => {
 
