@@ -1,19 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SOCIAL_LINKS } from "../../constants/socialLinks";
-
-const SOCIAL_ICON_COLORS: Record<string, string> = {
-  GitHub: "hover:text-gray-700",
-  LinkedIn: "hover:text-blue-700",
-  X: "hover:text-black",
-  Instagram: "hover:text-pink-600",
-  Facebook: "hover:text-blue-600",
-  Threads: "hover:text-gray-700",
-  Email: "hover:text-red-600",
-};
+import { SOCIAL_LINKS, SOCIAL_ICON_COLORS } from "../../constants/socialLinks";
 
 export default function SocialLinks() {
+
   return (
     <nav
       className="flex items-center gap-4"

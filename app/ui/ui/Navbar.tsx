@@ -18,6 +18,7 @@ import {
 } from "react-icons/io5";
 import { SITE_CONFIG } from "@/app/config/site";
 import { NAV_ITEMS } from "@/app/constants/navigation";
+import { NAVBAR_COLORS } from "@/app/config/ui";
 
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
@@ -36,17 +37,8 @@ export default function Navbar() {
     { icon: <IoMail size={18} />, url: SITE_CONFIG.links.mail, name: "Email" },
   ];
 
-
-  const colors = {
-    glass: "rgba(255, 255, 255, 0.9)",
-    border: "rgba(0, 0, 0, 0.08)",
-    textMain: "#525252",
-    textHover: "#000000",
-    bgHover: "rgba(0, 0, 0, 0.05)",
-    activeBg: "rgba(0, 0, 0, 0.08)",
-  };
-
   const scrollToSection = (sectionId) => {
+
     const element = document.getElementById(sectionId);
     if (element) {
       const offset = 80;
@@ -118,9 +110,10 @@ export default function Navbar() {
           onHoverEnd={() => setIsHovered(false)}
           className="pointer-events-auto backdrop-blur-xl rounded-full shadow-2xl flex items-center justify-between md:justify-start p-2 px-5 md:px-6 gap-4 md:gap-6 w-[95%] max-w-md md:w-auto md:max-w-none"
           style={{
-            backgroundColor: colors.glass,
-            border: `1px solid ${colors.border}`,
+            backgroundColor: NAVBAR_COLORS.glass,
+            border: `1px solid ${NAVBAR_COLORS.border}`,
           }}
+
           transition={{ type: "spring", stiffness: 400, damping: 30 }}
         >
           {/* Logo */}
@@ -144,16 +137,17 @@ export default function Navbar() {
                 onClick={(e) => handleNavClick(e, item.href)}
                 className="px-4 cursor-pointer py-2 rounded-full text-sm font-medium transition-all duration-300"
                 style={{
-                  color: colors.textMain,
+                  color: NAVBAR_COLORS.textMain,
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = colors.textHover;
-                  e.currentTarget.style.backgroundColor = colors.bgHover;
+                  e.currentTarget.style.color = NAVBAR_COLORS.textHover;
+                  e.currentTarget.style.backgroundColor = NAVBAR_COLORS.bgHover;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = colors.textMain;
+                  e.currentTarget.style.color = NAVBAR_COLORS.textMain;
                   e.currentTarget.style.backgroundColor = "transparent";
                 }}
+
               >
                 {item.name}
               </button>
@@ -181,13 +175,14 @@ export default function Navbar() {
                     target="_blank"
                     rel="noreferrer"
                     className="p-2 rounded-full transition-colors"
-                    style={{ color: colors.textMain }}
+                    style={{ color: NAVBAR_COLORS.textMain }}
                     onMouseEnter={(e) =>
-                      (e.currentTarget.style.color = colors.textHover)
+                      (e.currentTarget.style.color = NAVBAR_COLORS.textHover)
                     }
                     onMouseLeave={(e) =>
-                      (e.currentTarget.style.color = colors.textMain)
+                      (e.currentTarget.style.color = NAVBAR_COLORS.textMain)
                     }
+
                   >
                     {social.icon}
                   </a>
@@ -199,7 +194,7 @@ export default function Navbar() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden p-2 rounded-full transition-colors hover:bg-black/5 dark:hover:bg-white/10"
-              style={{ color: colors.textMain }}
+              style={{ color: NAVBAR_COLORS.textMain }}
             >
               {mobileMenuOpen ? <IoClose size={24} /> : <IoMenu size={24} />}
             </button>
@@ -221,8 +216,8 @@ export default function Navbar() {
             <div
               className="backdrop-blur-xl rounded-2xl shadow-2xl overflow-hidden p-2"
               style={{
-                backgroundColor: colors.glass,
-                border: `1px solid ${colors.border}`,
+                backgroundColor: NAVBAR_COLORS.glass,
+                border: `1px solid ${NAVBAR_COLORS.border}`,
               }}
             >
               <div className="flex flex-col">
@@ -232,15 +227,15 @@ export default function Navbar() {
                     onClick={(e) => handleNavClick(e, item.href)}
                     className="px-4 py-3 rounded-xl text-left text-sm font-medium transition-colors"
                     style={{
-                      color: colors.textMain,
+                      color: NAVBAR_COLORS.textMain,
                       backgroundColor: "transparent",
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = colors.textHover;
-                      e.currentTarget.style.backgroundColor = colors.bgHover;
+                      e.currentTarget.style.color = NAVBAR_COLORS.textHover;
+                      e.currentTarget.style.backgroundColor = NAVBAR_COLORS.bgHover;
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.color = colors.textMain;
+                      e.currentTarget.style.color = NAVBAR_COLORS.textMain;
                       e.currentTarget.style.backgroundColor = "transparent";
                     }}
                   >
@@ -254,12 +249,12 @@ export default function Navbar() {
                       key={idx}
                       href={social.url}
                       className="p-2 rounded-full transition-colors"
-                      style={{ color: colors.textMain }}
+                      style={{ color: NAVBAR_COLORS.textMain }}
                       onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = colors.textHover)
+                        (e.currentTarget.style.color = NAVBAR_COLORS.textHover)
                       }
                       onMouseLeave={(e) =>
-                        (e.currentTarget.style.color = colors.textMain)
+                        (e.currentTarget.style.color = NAVBAR_COLORS.textMain)
                       }
                     >
                       {social.icon}

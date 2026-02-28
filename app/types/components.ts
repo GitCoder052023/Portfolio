@@ -24,13 +24,8 @@ export interface TerminalLine {
   delay: number;
 }
 
-export interface TechIconProps {
-  name: string;
-  size?: number;
-  className?: string;
-}
-
 export interface PidifyFeaturesProps extends InViewProps {
+
   align: "left" | "right";
 }
 

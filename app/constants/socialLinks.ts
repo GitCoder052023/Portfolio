@@ -54,4 +54,14 @@ export const SOCIAL_LINKS = [
   },
 ];
 
+export const SOCIAL_ICON_COLORS: Record<string, string> = {
+  GitHub: "hover:text-gray-700",
+  LinkedIn: "hover:text-blue-700",
+  X: "hover:text-black",
+  Instagram: "hover:text-pink-600",
+  Facebook: "hover:text-blue-600",
+  Threads: "hover:text-gray-700",
+  Email: "hover:text-red-600",
+};
+
 

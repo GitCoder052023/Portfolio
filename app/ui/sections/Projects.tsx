@@ -2,14 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import PidifyJs from "./PidifyJs";
-import TailStack from "./TailStack";
+import { PROJECTS } from "@/app/data/projects";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
-
-const PROJECTS = [
-  { id: "pidify", component: PidifyJs, name: "Pidify.js" },
-  { id: "tailstack", component: TailStack, name: "TailStack" },
-];
 
 export default function Projects() {
   const [currentIndex, setCurrentIndex] = useState(0);

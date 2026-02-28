@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Hero from "@/app/ui/sections/Hero";
 import About from "@/app/ui/sections/About";
+import TechMarquee from "@/app/ui/components/About/TechMarquee";
 import Projects from "@/app/ui/sections/Projects";
 import GithubStats from "@/app/ui/sections/GithubStats";
 import Contact from "@/app/ui/sections/Contact";
@@ -20,6 +21,7 @@ export default function Home() {
       <main className="min-h-screen">
         <Hero />
         <About />
+        <TechMarquee />
         <Projects />
         <GithubStats />
         <Contact />
