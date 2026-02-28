@@ -12,6 +12,7 @@ export const SITE_CONFIG = {
         instagram: "https://instagram.com/hamdankhubaib.code",
         facebook: "https://www.facebook.com/HamdanKhubaib",
         threads: "https://threads.com/@hamdankhubaib.code",
+        publications: "https://publications.hamdankhubaib.in",
         mail: "mailto:hamdankhubaib959@gmail.com"
     },
     contact: {
