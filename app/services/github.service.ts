@@ -1,4 +1,4 @@
-import { GITHUB_CONFIG } from "./config";
+import { GITHUB_CONFIG } from "@/app/config/githubApi";
 import { GitHubGraphQLResponse } from "@/app/types/github";
 
 export class GitHubService {

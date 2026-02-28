@@ -1,16 +1,18 @@
+import type React from "react";
+
 export interface InViewProps {
   isInView: boolean;
 }
 
 export interface ProjectFeature {
-  icon: any;
+  icon: React.ElementType;
   title: string;
   description: string;
   accent: string;
 }
 
 export interface ProjectHighlight {
-  icon: any;
+  icon: React.ElementType;
   title: string;
   description: string;
   color: string;

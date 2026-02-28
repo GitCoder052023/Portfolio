@@ -5,12 +5,14 @@ import ActivityCalendar, { ThemeInput } from "react-activity-calendar";
 import { ExternalLink, Loader2, Calendar as CalendarIcon, ChevronRight } from "lucide-react";
 import { GITHUB_CONTENT } from "@/app/data/github";
 import Section from "@/app/ui/components/Shared/Section";
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useRef, useState, useMemo } from "react";
 import { useInView } from "framer-motion";
-import { Contribution } from "@/app/types/github";
+import { useGithubContributions } from "@/app/hooks/useGithubContributions";
 
-const CACHE_KEY_PREFIX = "github_contributions_cache_v3_";
-const CACHE_DURATION = 48 * 60 * 60 * 1000; // 48 hours in milliseconds
+const customTheme: ThemeInput = {
+  light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
+  dark: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
+};
 
 export default function GithubStats() {
   const ref = useRef(null);
@@ -27,69 +29,9 @@ export default function GithubStats() {
   }, [currentYear]);
 
   const [selectedYear, setSelectedYear] = useState<number | "lastYear">(currentYear);
-  const [data, setData] = useState<{ [key: string]: { contributions: Contribution[], total: number } }>({});
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState("");
+  const { currentYearData, isLoading, error } = useGithubContributions(selectedYear);
 
   const username = GITHUB_CONTENT.username;
-
-  const fetchData = async (year: number | "lastYear") => {
-    setIsLoading(true);
-    setError("");
-    
-    const cacheKey = `${CACHE_KEY_PREFIX}${year}`;
-    
-    // 1. Try Cache
-    try {
-      const cached = localStorage.getItem(cacheKey);
-      if (cached) {
-        const { contributions, total, timestamp } = JSON.parse(cached);
-        if (Date.now() - timestamp < CACHE_DURATION) {
-          setData(prev => ({ ...prev, [year]: { contributions, total } }));
-          setIsLoading(false);
-          return;
-        }
-      }
-    } catch (e) {
-      console.warn("Cache read error", e);
-    }
-
-    // 2. Fetch
-    try {
-      const url = year === "lastYear" 
-        ? "/api/github-contributions" 
-        : `/api/github-contributions?year=${year}`;
-      
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("Failed to fetch data");
-      const result = await res.json();
-      
-      if (result.contributions) {
-        setData(prev => ({ ...prev, [year]: { contributions: result.contributions, total: result.total } }));
-        // Save Cache
-        localStorage.setItem(cacheKey, JSON.stringify({
-          contributions: result.contributions,
-          total: result.total,
-          timestamp: Date.now()
-        }));
-      }
-    } catch (err: any) {
-      setError(err.message || "An error occurred");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchData(selectedYear);
-  }, [selectedYear]);
-
-  const customTheme: ThemeInput = {
-    light: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
-    dark: ["#ebedf0", "#9be9a8", "#40c463", "#30a14e", "#216e39"],
-  };
-
-  const currentYearData = data[selectedYear];
 
   return (
     <Section id="github" className="bg-[#f7f6f3]">

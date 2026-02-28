@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { GitHubController } from "./controller";
-import { GITHUB_CONFIG } from "./config";
-import { rateLimiter } from "./rate-limiter";
+import { GitHubController } from "@/app/controllers/github.controller";
+import { rateLimiter } from "@/app/utils/rateLimiter";
 
 // Revalidate data every 24 hours
 export const revalidate = 86400;

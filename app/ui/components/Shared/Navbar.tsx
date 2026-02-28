@@ -54,6 +54,7 @@ export default function Navbar() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     setIsMounted(true);
   }, []);
 

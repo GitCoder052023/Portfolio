@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { SITE_CONFIG } from "@/app/config/site";
-import { GitHubService } from "./service";
-import { CONTRIBUTION_LEVEL_MAP } from "./config";
+import { GitHubService } from "@/app/services/github.service";
+import { CONTRIBUTION_LEVEL_MAP } from "@/app/config/githubApi";
 import { ContributionsApiResponse, ErrorResponse, GitHubContributionDay } from "@/app/types/github";
 
 export class GitHubController {
