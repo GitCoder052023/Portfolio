@@ -21,7 +21,7 @@ export default function ContactCTA({ isInView }: InViewProps) {
                 {CONTACT_CONTENT.cta.description}
             </p>
             <motion.a
-                href="mailto:hamdankhubaib959@gmail.com"
+                href="mailto:hi@hamdankhubaib.in"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-[#37352f] text-white rounded-lg hover:bg-[#2e2d29] transition-colors duration-200 font-medium text-lg shadow-lg hover:shadow-xl"

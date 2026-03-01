@@ -13,10 +13,10 @@ export const SITE_CONFIG = {
         facebook: "https://www.facebook.com/HamdanKhubaib",
         threads: "https://threads.com/@hamdankhubaib.code",
         publications: "https://publications.hamdankhubaib.in",
-        mail: "mailto:hamdankhubaib959@gmail.com"
+        mail: "mailto:hi@hamdankhubaib.in"
     },
     contact: {
-        email: "hamdankhubaib959@gmail.com",
+        email: "hi@hamdankhubaib.in",
         phone: "+91 9236785599"
     }
 };
