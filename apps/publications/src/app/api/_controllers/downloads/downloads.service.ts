@@ -51,13 +51,20 @@ export async function processDownload(params: ProcessDownloadParams) {
     }).catch(err => console.error('Failed to track download:', err));
 
     const categoryFolder = STORAGE.folders[publication.category as keyof typeof STORAGE.folders];
-    const correctPdfPath = `${categoryFolder}/${publication.title}.pdf`;
+    // Clean title for storage: remove content after colon and trim
+    const cleanTitle = publication.title.split(':')[0].trim();
+    const storagePath = `${categoryFolder}/${cleanTitle}.pdf`;
 
     console.log(`Generating signed URL for publication ${publicationId}`);
-    console.log(`Original PDF path (DB): ${publication.pdfPath}`);
-    console.log(`Using Storage path: ${correctPdfPath}`);
+    console.log(`Storage path: ${storagePath}`);
 
-    const signedUrl = await getSignedDownloadUrl(correctPdfPath, 120);
+    let signedUrl = await getSignedDownloadUrl(storagePath, 120);
+
+    // Fallback to database pdfPath if title-based path fails
+    if (!signedUrl && publication.pdfPath && publication.pdfPath !== storagePath) {
+        console.log(`Falling back to database pdfPath: ${publication.pdfPath}`);
+        signedUrl = await getSignedDownloadUrl(publication.pdfPath, 120);
+    }
 
     if (!signedUrl) {
         return {

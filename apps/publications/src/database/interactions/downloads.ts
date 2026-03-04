@@ -79,7 +79,7 @@ export async function getSignedDownloadUrl(
     pdfPath: string,
     expiresInSeconds: number = 120 // 2 Minutes
 ): Promise<string | null> {
-    const supabase = getSupabaseServerClient();
+    const supabase = getSupabaseAdminClient();
 
     const { data, error } = await supabase
         .storage

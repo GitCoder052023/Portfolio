@@ -3,7 +3,7 @@
  * Database queries for publications (read-only on server)
  */
 
-import { getSupabaseServerClient } from '@/services/supabase/server';
+import { getSupabaseServerClient, getSupabaseAdminClient } from '@/services/supabase/server';
 import type {
     Publication,
     PublicationWithStats,
@@ -129,7 +129,7 @@ export async function getPublicationBySlug(slug: string): Promise<PublicationWit
  * Get a single publication by ID
  */
 export async function getPublicationById(id: string): Promise<PublicationWithStats | null> {
-    const supabase = getSupabaseServerClient();
+    const supabase = getSupabaseAdminClient();
 
     const { data: row, error } = await supabase
         .from('publications')
