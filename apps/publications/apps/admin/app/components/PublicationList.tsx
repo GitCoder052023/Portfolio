@@ -45,7 +45,7 @@ export function PublicationList({ initialPublications }: { initialPublications: 
             placeholder="Search publications..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-white border border-neutral-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full pl-9 pr-4 py-2 bg-white border border-neutral-200 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-neutral-900 focus:border-neutral-900 transition-colors shadow-sm"
           />
         </div>
         <button
@@ -53,7 +53,7 @@ export function PublicationList({ initialPublications }: { initialPublications: 
             setEditingPub(null);
             setIsModalOpen(true);
           }}
-          className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-neutral-900 text-white text-sm font-medium rounded-lg hover:bg-neutral-800 transition-colors shadow-sm"
         >
           <Plus className="h-4 w-4" />
           Add Publication
@@ -63,12 +63,12 @@ export function PublicationList({ initialPublications }: { initialPublications: 
       <div className="bg-white border border-neutral-200 rounded-xl overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm text-neutral-600">
-            <thead className="bg-neutral-50 text-neutral-900 border-b border-neutral-200">
+            <thead className="bg-neutral-50/50 text-neutral-900 border-b border-neutral-200/80">
               <tr>
-                <th className="px-6 py-4 font-medium">Title & Slug</th>
-                <th className="px-6 py-4 font-medium">Category</th>
-                <th className="px-6 py-4 font-medium">Status</th>
-                <th className="px-6 py-4 font-medium text-right">Actions</th>
+                <th className="px-6 py-4 font-medium text-xs uppercase tracking-wider text-neutral-500">Title & Slug</th>
+                <th className="px-6 py-4 font-medium text-xs uppercase tracking-wider text-neutral-500">Category</th>
+                <th className="px-6 py-4 font-medium text-xs uppercase tracking-wider text-neutral-500">Status</th>
+                <th className="px-6 py-4 font-medium text-xs uppercase tracking-wider text-neutral-500 text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-200">
@@ -86,29 +86,29 @@ export function PublicationList({ initialPublications }: { initialPublications: 
                   <td className="px-6 py-4">
                     <div className="flex gap-2">
                       {pub.is_published ? (
-                        <span className="inline-flex items-center gap-1 text-xs font-medium text-green-700 bg-green-50 px-2 py-1 rounded-md">
-                          <CheckCircle2 className="w-3 h-3" /> Published
+                        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-700 bg-neutral-100 border border-neutral-200/60 px-2 py-1 rounded-md">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-neutral-500" /> Published
                         </span>
                       ) : (
-                        <span className="inline-flex items-center gap-1 text-xs font-medium text-amber-700 bg-amber-50 px-2 py-1 rounded-md">
-                          <XCircle className="w-3 h-3" /> Draft
+                        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-500 bg-white border border-neutral-200 px-2 py-1 rounded-md">
+                          <XCircle className="w-3.5 h-3.5 text-neutral-400" /> Draft
                         </span>
                       )}
                       {pub.is_featured && (
-                        <span className="inline-flex items-center text-xs font-medium text-blue-700 bg-blue-50 px-2 py-1 rounded-md">
+                        <span className="inline-flex items-center text-xs font-medium text-white bg-neutral-900 px-2 py-1 rounded-md shadow-sm">
                           Featured
                         </span>
                       )}
                     </div>
                   </td>
                   <td className="px-6 py-4 text-right">
-                    <div className="flex items-center justify-end gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="flex items-center justify-end gap-1 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
                       <button
                         onClick={() => {
                           setEditingPub(pub);
                           setIsModalOpen(true);
                         }}
-                        className="p-2 text-neutral-400 hover:text-blue-600 rounded-lg hover:bg-blue-50 transition-colors"
+                        className="p-2 text-neutral-400 hover:text-neutral-900 rounded-lg hover:bg-neutral-100 transition-colors"
                         title="Edit"
                       >
                         <Edit2 className="h-4 w-4" />
@@ -116,7 +116,7 @@ export function PublicationList({ initialPublications }: { initialPublications: 
                       <button
                         onClick={() => handleDelete(pub.id)}
                         disabled={isDeleting === pub.id}
-                        className="p-2 text-neutral-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50"
+                        className="p-2 text-neutral-400 hover:text-neutral-900 rounded-lg hover:bg-neutral-100 transition-colors disabled:opacity-50"
                         title="Delete"
                       >
                         <Trash2 className="h-4 w-4" />

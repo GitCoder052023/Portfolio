@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+}
+
+body {
+  @apply text-neutral-900 bg-neutral-50;
+}
+
+::selection {
+  @apply bg-neutral-900 text-white;
+}
