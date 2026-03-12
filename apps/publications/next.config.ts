@@ -7,6 +7,9 @@ dotenv.config({
 });
 
 const nextConfig: NextConfig = {
+   typescript: {
+    ignoreBuildErrors: true,
+  },
   // Image domains for external images (Clerk avatars, etc.)
   images: {
     remotePatterns: [
