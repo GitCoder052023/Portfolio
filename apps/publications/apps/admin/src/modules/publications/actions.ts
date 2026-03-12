@@ -1,7 +1,9 @@
 'use server'
 
-import { supabaseAdmin, PublicationInsert, PublicationUpdate } from './supabase';
+import { supabaseAdmin } from '@/lib/supabase/client';
+import { PublicationInsert, PublicationUpdate } from '@/lib/supabase/types';
 import { revalidatePath } from 'next/cache';
+import { CATEGORY_FOLDERS } from '@/modules/publications/constants';
 
 export async function deletePublication(id: string) {
     const { error } = await supabaseAdmin.from('publications').delete().eq('id', id);
@@ -37,14 +39,7 @@ export async function uploadPdf(formData: FormData) {
     const category = formData.get('category') as string || 'uncategorized';
     const slug = formData.get('slug') as string || 'default';
     
-    // Map category to folder name if possible
-    const folders: Record<string, string> = {
-        'research-paper': 'research-papers',
-        'thesis': 'theses',
-        'idea': 'ideas',
-        'proposal': 'proposals',
-    };
-    const folder = folders[category] || category;
+    const folder = CATEGORY_FOLDERS[category] || category;
     
     const timestamp = new Date().getTime();
     const filePath = `${folder}/${slug}-${timestamp}.pdf`;

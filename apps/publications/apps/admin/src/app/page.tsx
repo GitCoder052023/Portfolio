@@ -1,5 +1,5 @@
-import { supabaseAdmin } from './supabase';
-import { PublicationList } from './components/PublicationList';
+import { supabaseAdmin } from '@/lib/supabase/client';
+import { PublicationList } from '@/modules/publications/components/PublicationList';
 import { Library } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';

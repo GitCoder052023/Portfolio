@@ -2,9 +2,9 @@
 
 import { useState } from 'react';
 import { Plus, Edit2, Trash2, FileText, CheckCircle2, XCircle, Search } from 'lucide-react';
-import { deletePublication } from '../actions';
+import { deletePublication } from '@/modules/publications/actions';
 import { PublicationModal } from './PublicationModal';
-import type { Publication } from '../supabase';
+import type { Publication } from '@/lib/supabase/types';
 
 export function PublicationList({ initialPublications }: { initialPublications: Publication[] }) {
   const [publications, setPublications] = useState<Publication[]>(initialPublications);
