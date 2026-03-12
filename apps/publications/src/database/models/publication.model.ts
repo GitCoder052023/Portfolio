@@ -47,11 +47,4 @@ export function mergeWithStats(
     };
 }
 
-/**
- * Business Logic: Check if a publication is considered "new" (published within 30 days)
- */
-export function isPublicationNew(publication: Publication): boolean {
-    const thirtyDaysAgo = new Date();
-    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-    return new Date(publication.publishedAt) > thirtyDaysAgo;
-}
+

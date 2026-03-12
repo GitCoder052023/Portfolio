@@ -32,25 +32,6 @@ export async function getUserByClerkId(clerkId: string): Promise<User | null> {
     return row ? transformUserRow(row as UserRow) : null;
 }
 
-/**
- * Get user by database ID
- */
-export async function getUserById(id: string): Promise<User | null> {
-    const supabase = getSupabaseServerClient();
-
-    const { data: row, error } = await supabase
-        .from('users')
-        .select('*')
-        .eq('id', id)
-        .maybeSingle();
-
-    if (error) {
-        console.error('Error fetching user:', error);
-        return null;
-    }
-
-    return row ? transformUserRow(row as UserRow) : null;
-}
 
 // =============================================================================
 // Write Operations (using service role key - server only!)

@@ -3,7 +3,7 @@
  * Manages the state and logic for publication likes with optimistic updates
  */
 
-import { useState, useOptimistic, useTransition, useMemo } from "react";
+import { useState, useOptimistic, useTransition } from "react";
 import { useAuth } from "@clerk/nextjs";
 import { toast } from "sonner";
 import { PAGE_ROUTES } from "@/constants";

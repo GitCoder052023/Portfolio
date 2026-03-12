@@ -9,7 +9,7 @@ import { Container } from "@/components/layout";
 import { PublicationGrid } from "@/components/publications";
 import { FadeIn } from "@/components/motion";
 import { getPublications } from "@/database/interactions";
-import { PAGE_ROUTES, SEO } from "@/constants";
+import { PAGE_ROUTES } from "@/constants";
 import { appConfig, type CategoryId } from "@/configs/app.config";
 import { ChevronLeft, ChevronRight, Filter } from "lucide-react";
 import { cn } from "@/utils";

@@ -253,29 +253,4 @@ function DomainCard({ domain }: { domain: { name: string; description: string } 
   );
 }
 
-function StatCard({
-  icon: Icon,
-  value,
-  label,
-  description,
-}: {
-  icon: React.ComponentType<{ className?: string }>;
-  value: number | string;
-  label: string;
-  description: string;
-}) {
-  return (
-    <div className="text-center">
-      <div className="flex justify-center mb-3">
-        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary-100">
-          <Icon className="h-6 w-6 text-primary-600" />
-        </div>
-      </div>
-      <div className="font-serif text-3xl font-bold text-neutral-900">
-        {typeof value === "number" ? value.toLocaleString() : value}
-      </div>
-      <div className="text-sm font-medium text-neutral-700 mt-1">{label}</div>
-      <div className="text-xs text-neutral-500 mt-0.5">{description}</div>
-    </div>
-  );
-}
+

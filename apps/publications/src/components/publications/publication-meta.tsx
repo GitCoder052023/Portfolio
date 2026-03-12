@@ -6,7 +6,7 @@
 import { Download, Heart, MessageCircle, Calendar, FileText, BookOpen } from "lucide-react";
 import { appConfig } from "@/configs/app.config";
 import type { PublicationWithStats } from "@/types";
-import { cn } from "@/utils";
+import { cn, formatFileSize } from "@/utils";
 
 interface PublicationMetaProps {
     publication: PublicationWithStats;
@@ -123,9 +123,4 @@ function StatItem({ icon: Icon, value, label, isString }: StatItemProps) {
     );
 }
 
-function formatFileSize(bytes: number): string {
-    if (bytes < 1024) return `${bytes} B`;
-    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-}
 

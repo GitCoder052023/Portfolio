@@ -13,9 +13,3 @@ export function formatFileSize(bytes: number): string {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
 }
 
-/**
- * Format a number with thousands separators
- */
-export function formatNumber(num: number): string {
-    return num.toLocaleString();
-}

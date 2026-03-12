@@ -10,24 +10,6 @@ import { STORAGE } from '@/constants';
 // Read Operations (using anon key)
 // =============================================================================
 
-/**
- * Get download count for a publication
- */
-export async function getDownloadCount(publicationId: string): Promise<number> {
-    const supabase = getSupabaseServerClient();
-
-    const { count, error } = await supabase
-        .from('downloads')
-        .select('*', { count: 'exact', head: true })
-        .eq('publication_id', publicationId);
-
-    if (error) {
-        console.error('Error fetching download count:', error);
-        return 0;
-    }
-
-    return count || 0;
-}
 
 // =============================================================================
 // Write Operations (using service role key - server only!)
@@ -94,17 +76,4 @@ export async function getSignedDownloadUrl(
     return data.signedUrl;
 }
 
-/**
- * Get a public URL for a PDF (if bucket is public)
- */
-export function getPublicDownloadUrl(pdfPath: string): string {
-    const supabase = getSupabaseServerClient();
-
-    const { data } = supabase
-        .storage
-        .from(STORAGE.bucket)
-        .getPublicUrl(pdfPath);
-
-    return data.publicUrl;
-}
 

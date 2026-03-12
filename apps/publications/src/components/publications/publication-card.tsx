@@ -10,7 +10,7 @@ import { Download, Heart, MessageCircle, Calendar, FileText } from "lucide-react
 import { motion } from "motion/react";
 import { PAGE_ROUTES } from "@/constants";
 import type { PublicationWithStats } from "@/types";
-import { cn } from "@/utils";
+import { cn, formatFileSize } from "@/utils";
 
 interface PublicationCardProps {
     publication: PublicationWithStats;
@@ -118,9 +118,4 @@ export function PublicationCard({ publication, variant = "default" }: Publicatio
     );
 }
 
-function formatFileSize(bytes: number): string {
-    if (bytes < 1024) return `${bytes} B`;
-    if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-    return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-}
 

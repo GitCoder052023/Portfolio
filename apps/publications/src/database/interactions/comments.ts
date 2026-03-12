@@ -42,25 +42,6 @@ export async function getComments(publicationId: string): Promise<CommentWithUse
     return nestComments(flat);
 }
 
-/**
- * Get comment count for a publication
- */
-export async function getCommentCount(publicationId: string): Promise<number> {
-    const supabase = getSupabaseServerClient();
-
-    const { count, error } = await supabase
-        .from('comments')
-        .select('*', { count: 'exact', head: true })
-        .eq('publication_id', publicationId)
-        .eq('is_approved', true);
-
-    if (error) {
-        console.error('Error fetching comment count:', error);
-        return 0;
-    }
-
-    return count || 0;
-}
 
 // =============================================================================
 // Write Operations (using service role key - server only!)
