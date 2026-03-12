@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from 'react';
 import { X, Loader2 } from 'lucide-react';
+import { PDFDocument } from 'pdf-lib';
 import { addPublication, updatePublication, uploadPdf } from '@/modules/publications/actions';
 import type { Publication } from '@/lib/supabase/types';
 import { CATEGORIES } from '@/modules/publications/constants';
 import { PublicationFileUpload } from './PublicationFileUpload';
+import { PublicationPreview } from './PublicationPreview';
 
 interface PublicationModalProps {
   publication?: Publication | null;
@@ -16,6 +18,7 @@ interface PublicationModalProps {
 export function PublicationModal({ publication, onClose, onSuccess }: PublicationModalProps) {
   const isEditing = !!publication;
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfUploading, setPdfUploading] = useState(false);
   
@@ -76,18 +79,28 @@ export function PublicationModal({ publication, onClose, onSuccess }: Publicatio
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.title && !pdfFile && !isEditing) {
+      alert('Please upload a PDF or enter a title');
+      return;
+    }
+
+    setShowPreview(true);
+  };
+
+  const handleFinalSubmit = async (finalData: typeof formData) => {
     setIsSubmitting(true);
 
     try {
-      let finalPdfPath = formData.pdf_path;
-      let finalPdfSize = formData.pdf_size_bytes;
+      let finalPdfPath = finalData.pdf_path;
+      let finalPdfSize = finalData.pdf_size_bytes;
 
       if (pdfFile) {
         setPdfUploading(true);
         const data = new FormData();
         data.append('file', pdfFile);
-        data.append('slug', formData.slug);
-        data.append('category', formData.category);
+        data.append('slug', finalData.slug);
+        data.append('category', finalData.category);
 
         const result = await uploadPdf(data);
         finalPdfPath = result.path;
@@ -100,12 +113,12 @@ export function PublicationModal({ publication, onClose, onSuccess }: Publicatio
       }
 
       const submissionData = {
-        ...formData,
-        tags: formData.tags ? formData.tags.split(',').map(t => t.trim()).filter(Boolean) : null,
+        ...finalData,
+        tags: finalData.tags ? finalData.tags.split(',').map(t => t.trim()).filter(Boolean) : null,
         pdf_path: finalPdfPath,
         pdf_size_bytes: finalPdfSize,
-        page_count: formData.page_count ? parseInt(formData.page_count.toString(), 10) : null,
-        published_at: new Date(formData.published_at).toISOString(),
+        page_count: finalData.page_count ? parseInt(finalData.page_count.toString(), 10) : null,
+        published_at: new Date(finalData.published_at).toISOString(),
       };
 
       let saved;
@@ -155,37 +168,14 @@ export function PublicationModal({ publication, onClose, onSuccess }: Publicatio
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-neutral-700">Title <span className="text-neutral-400">*</span></label>
                   <input
-                    required
                     type="text"
                     name="title"
                     value={formData.title}
                     onChange={handleChange}
                     onBlur={!formData.slug ? handleSlugify : undefined}
-                    placeholder="Enter publication title"
+                    placeholder="Enter publication title (auto-filled from PDF if uploaded)"
                     className="w-full px-4 py-2.5 bg-neutral-50/50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900/10 focus:border-neutral-900 focus:bg-white transition-all sm:text-sm"
                   />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-neutral-700">Slug <span className="text-neutral-400">*</span></label>
-                  <div className="flex gap-3">
-                    <input
-                      required
-                      type="text"
-                      name="slug"
-                      value={formData.slug}
-                      onChange={handleChange}
-                      placeholder="publication-url-slug"
-                      className="flex-1 px-4 py-2.5 bg-neutral-50/50 border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-neutral-900/10 focus:border-neutral-900 focus:bg-white transition-all sm:text-sm"
-                    />
-                    <button
-                      type="button"
-                      onClick={handleSlugify}
-                      className="px-4 py-2.5 text-sm font-medium text-neutral-700 bg-white border border-neutral-200 rounded-xl hover:bg-neutral-50 hover:border-neutral-300 transition-all shadow-sm whitespace-nowrap"
-                    >
-                      Auto-generate
-                    </button>
-                  </div>
                 </div>
 
                 <div className="space-y-2">
@@ -234,10 +224,46 @@ export function PublicationModal({ publication, onClose, onSuccess }: Publicatio
 
             <div className="lg:w-[320px] shrink-0 space-y-8">
               <div className="space-y-6">
-                <h3 className="text-sm font-medium text-neutral-900 uppercase tracking-wider mb-4 pb-2 border-b border-neutral-100">Document Upload</h3>
                 <PublicationFileUpload 
                   pdfFile={pdfFile}
-                  onFileChange={setPdfFile}
+                  onFileChange={async (file) => {
+                    setPdfFile(file);
+                    
+                    // Extract page count
+                    try {
+                      const arrayBuffer = await file.arrayBuffer();
+                      const pdfDoc = await PDFDocument.load(arrayBuffer, { 
+                        ignoreEncryption: true 
+                      });
+                      const pageCount = pdfDoc.getPageCount();
+                      setFormData(prev => ({
+                        ...prev,
+                        page_count: pageCount.toString()
+                      }));
+                    } catch (err) {
+                      console.error('Error reading PDF page count:', err);
+                    }
+
+                    if (!formData.title) {
+                      const nameWithoutExt = file.name.replace(/\.[^/.]+$/, "");
+                      const cleanTitle = nameWithoutExt
+                        .replace(/[_-]/g, ' ')
+                        .replace(/\b\w/g, l => l.toUpperCase());
+                      
+                      setFormData(prev => {
+                        const newTitle = cleanTitle;
+                        const newSlug = newTitle
+                          .toLowerCase()
+                          .replace(/[^a-z0-9]+/g, '-')
+                          .replace(/(^-|-$)+/g, '');
+                        return {
+                          ...prev,
+                          title: newTitle,
+                          slug: prev.slug || newSlug
+                        };
+                      });
+                    }
+                  }}
                   existingPdfPath={formData.pdf_path}
                 />
               </div>
@@ -344,11 +370,22 @@ export function PublicationModal({ publication, onClose, onSuccess }: Publicatio
                 {pdfUploading ? 'Uploading PDF...' : 'Saving...'}
               </>
             ) : (
-              isEditing ? 'Save Changes' : 'Publish Document'
+              isEditing ? 'Review Changes' : 'Preview & Publish'
             )}
           </button>
         </div>
       </div>
+
+      {showPreview && (
+        <PublicationPreview
+          formData={formData}
+          pdfFile={pdfFile}
+          onClose={() => setShowPreview(false)}
+          onConfirm={handleFinalSubmit}
+          isSubmitting={isSubmitting}
+          pdfUploading={pdfUploading}
+        />
+      )}
     </div>
   );
 }
