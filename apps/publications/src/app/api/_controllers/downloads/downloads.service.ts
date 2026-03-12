@@ -5,7 +5,6 @@
 
 import { createHash } from 'crypto';
 import { getPublicationById, trackDownload, getSignedDownloadUrl } from '@/database/interactions';
-import { STORAGE } from '@/constants';
 import { rateLimit } from '@/lib/rate-limit';
 
 const limiter = rateLimit({
@@ -50,19 +49,11 @@ export async function processDownload(params: ProcessDownloadParams) {
         referrer,
     }).catch(err => console.error('Failed to track download:', err));
 
-    const categoryFolder = STORAGE.folders[publication.category as keyof typeof STORAGE.folders];
-    // Clean title for storage: remove content after colon and trim
-    const cleanTitle = publication.title.split(':')[0].trim();
-    const storagePath = `${categoryFolder}/${cleanTitle}.pdf`;
-
     console.log(`Generating signed URL for publication ${publicationId}`);
-    console.log(`Storage path: ${storagePath}`);
+    console.log(`Using database pdfPath: ${publication.pdfPath}`);
 
-    let signedUrl = await getSignedDownloadUrl(storagePath, 120);
-
-    // Fallback to database pdfPath if title-based path fails
-    if (!signedUrl && publication.pdfPath && publication.pdfPath !== storagePath) {
-        console.log(`Falling back to database pdfPath: ${publication.pdfPath}`);
+    let signedUrl = null;
+    if (publication.pdfPath) {
         signedUrl = await getSignedDownloadUrl(publication.pdfPath, 120);
     }
 

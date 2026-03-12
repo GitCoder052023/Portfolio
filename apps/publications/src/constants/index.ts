@@ -36,12 +36,6 @@ export const PAGE_ROUTES = {
 
 export const STORAGE = {
     bucket: 'publications',
-    folders: {
-        'research-paper': 'research-papers',
-        'thesis': 'theses',
-        'idea': 'ideas',
-        'proposal': 'proposals',
-    },
 } as const;
 
 // =============================================================================
