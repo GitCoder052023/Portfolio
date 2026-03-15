@@ -1,6 +1,7 @@
 import { supabaseAdmin } from '@/lib/supabase/client';
 import { PublicationList } from '@/modules/publications/components/PublicationList';
 import { Library } from 'lucide-react';
+import { UserButton } from "@clerk/nextjs";
 
 export const dynamic = 'force-dynamic';
 
@@ -30,11 +31,14 @@ export default async function AdminDashboard() {
               <div className="p-2 bg-white border border-neutral-200 shadow-sm rounded-xl">
                 <Library className="w-5 h-5" />
               </div>
-              <h1 className="text-2xl font-semibold tracking-tight">Publications</h1>
+              <h1 className="text-2xl font-semibold tracking-tight">Publications Admin</h1>
             </div>
             <p className="text-sm text-neutral-500 max-w-lg">
               Manage your research papers, theses, proposals, and ideas. Create new entries or edit existing ones.
             </p>
+          </div>
+          <div className="flex items-center gap-4">
+            <UserButton afterSignOutUrl="/sign-in" />
           </div>
         </header>
         
