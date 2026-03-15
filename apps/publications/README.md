@@ -20,7 +20,7 @@ This is not a blog. This is not a portfolio. This is a space where ideas are doc
 - 📖 **Read Publications** - Browse and read all publications freely
 - 📥 **Download PDFs** - Download any publication as PDF
 - 🔗 **Share** - Share publications via social media or copy link
-- 🏷️ **Browse by Category** - Filter by Research Papers, Theses, Ideas, Proposals
+- 🏷️ **Browse by Category** - Filter by Research Papers, Philosophical Papers, Conceptual Papers
 
 ### For Registered Users
 - ❤️ **Like Publications** - Show appreciation for papers you enjoy
@@ -118,9 +118,8 @@ Visit [http://localhost:3000](http://localhost:3000)
 
 Upload PDF files to the `publications` bucket with paths like:
 - `research-papers/your-paper-slug.pdf`
-- `theses/your-thesis-slug.pdf`
-- `ideas/your-idea-slug.pdf`
-- `proposals/your-proposal-slug.pdf`
+- `philosophical-papers/your-paper-slug.pdf`
+- `conceptual-papers/your-paper-slug.pdf`
 
 ### 2. Add Publication Metadata
 
@@ -143,7 +142,7 @@ INSERT INTO publications (
   'Your Paper Title',
   'A brief description of your paper.',
   'The full abstract text...',
-  'research-paper', -- or 'thesis', 'idea', 'proposal'
+  'research-paper', -- or 'philosophical-paper', 'conceptual-paper'
   ARRAY['tag1', 'tag2', 'tag3'],
   'research-papers/your-paper-slug.pdf',
   1234567, -- file size in bytes

@@ -18,7 +18,8 @@ import { cn } from "@/utils";
 const navLinks = [
     { href: PAGE_ROUTES.publications, label: "Publications" },
     { href: PAGE_ROUTES.category("research-paper"), label: "Research" },
-    { href: PAGE_ROUTES.category("thesis"), label: "Theses" },
+    { href: PAGE_ROUTES.category("philosophical-paper"), label: "Philosophy" },
+    { href: PAGE_ROUTES.category("conceptual-paper"), label: "Concepts" },
     { href: PAGE_ROUTES.about, label: "About" },
 ];
 

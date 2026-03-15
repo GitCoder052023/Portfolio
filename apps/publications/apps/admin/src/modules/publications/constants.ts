@@ -1,13 +1,11 @@
 export const CATEGORY_FOLDERS: Record<string, string> = {
   'research-paper': 'research-papers',
-  'thesis': 'theses',
-  'idea': 'ideas',
-  'proposal': 'proposals',
+  'philosophical-paper': 'philosophical-papers',
+  'conceptual-paper': 'conceptual-papers',
 };
 
 export const CATEGORIES = [
   { value: 'research-paper', label: 'Research Paper' },
-  { value: 'thesis', label: 'Thesis' },
-  { value: 'idea', label: 'Idea' },
-  { value: 'proposal', label: 'Proposal' },
+  { value: 'philosophical-paper', label: 'Philosophical Paper' },
+  { value: 'conceptual-paper', label: 'Conceptual Paper' },
 ] as const;

@@ -92,7 +92,7 @@ export default async function HomePage() {
                   </p>
                   <p>
                     This is a public journal of serious inquiry — a place where I publish
-                    formal writings, theories, research, and proposals on the questions
+                    formal writings, theories, research, and philosophies on the questions
                     that resist easy answers.
                   </p>
                   <p>

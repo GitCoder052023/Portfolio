@@ -14,9 +14,8 @@ const footerLinks = {
     browse: [
         { href: PAGE_ROUTES.publications, label: "All Publications" },
         { href: PAGE_ROUTES.category("research-paper"), label: "Research Papers" },
-        { href: PAGE_ROUTES.category("thesis"), label: "Theses" },
-        { href: PAGE_ROUTES.category("idea"), label: "Ideas" },
-        { href: PAGE_ROUTES.category("proposal"), label: "Proposals" },
+        { href: PAGE_ROUTES.category("philosophical-paper"), label: "Philosophical Papers" },
+        { href: PAGE_ROUTES.category("conceptual-paper"), label: "Conceptual Papers" },
     ],
     about: [
         { href: PAGE_ROUTES.about, label: "About the Writer" },

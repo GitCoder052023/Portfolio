@@ -50,9 +50,8 @@ export const appConfig = {
   // Publication categories
   categories: [
     { id: 'research-paper', label: 'Research Papers', description: 'Academic research and studies' },
-    { id: 'thesis', label: 'Theses', description: 'Doctoral and masters theses' },
-    { id: 'idea', label: 'Ideas', description: 'Conceptual explorations and ideations' },
-    { id: 'proposal', label: 'Proposals', description: 'Project proposals and plans' },
+    { id: 'philosophical-paper', label: 'Philosophical Papers', description: 'Philosophical inquiries and essays' },
+    { id: 'conceptual-paper', label: 'Conceptual Papers', description: 'Conceptual frameworks and theories' },
   ] as const,
   
   // Pagination defaults

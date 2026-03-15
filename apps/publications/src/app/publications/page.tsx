@@ -16,7 +16,7 @@ import { cn } from "@/utils";
 
 export const metadata: Metadata = {
     title: "Publications",
-    description: "Browse all research papers, theses, ideas, and proposals. Free to read and download.",
+    description: "Browse all research papers, philosophical inquiries, and conceptual frameworks. Free to read and download.",
 };
 
 interface PublicationsPageProps {

@@ -34,7 +34,7 @@ export default async function AdminDashboard() {
               <h1 className="text-2xl font-semibold tracking-tight">Publications Admin</h1>
             </div>
             <p className="text-sm text-neutral-500 max-w-lg">
-              Manage your research papers, theses, proposals, and ideas. Create new entries or edit existing ones.
+              Manage your Publications. Create new entries or edit existing ones.
             </p>
           </div>
           <div className="flex items-center gap-4">

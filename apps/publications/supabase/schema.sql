@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS publications (
   title VARCHAR(500) NOT NULL,
   description TEXT,
   abstract TEXT,
-  category VARCHAR(100) NOT NULL CHECK (category IN ('research-paper', 'thesis', 'idea', 'proposal')),
+  category VARCHAR(100) NOT NULL CHECK (category IN ('research-paper', 'philosophical-paper', 'conceptual-paper')),
   tags TEXT[] DEFAULT '{}',
   pdf_path VARCHAR(500) NOT NULL,
   pdf_size_bytes BIGINT,
