@@ -5,6 +5,7 @@ import TechMarquee from "@/app/ui/components/About/TechMarquee";
 import Projects from "@/app/ui/sections/Projects";
 import Publications from "@/app/ui/sections/Publications";
 import GithubStats from "@/app/ui/sections/GithubStats";
+import Resume from "@/app/ui/sections/Resume";
 import Contact from "@/app/ui/sections/Contact";
 import CTA from "@/app/ui/sections/CTA";
 import Footer from "@/app/ui/sections/Footer";
@@ -30,6 +31,7 @@ export default function Home() {
         <Projects />
         <Publications />
         <GithubStats />
+        <Resume />
         <Contact />
         <CTA />
       </main>
