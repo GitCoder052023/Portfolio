@@ -3,7 +3,7 @@ import Hero from "@/app/ui/sections/Hero";
 import About from "@/app/ui/sections/About";
 import TechMarquee from "@/app/ui/components/About/TechMarquee";
 import Projects from "@/app/ui/sections/Projects";
-import Publications from "@/app/ui/sections/Publications";
+import MegaProjects from "@/app/ui/sections/MegaProjects";
 import GithubStats from "@/app/ui/sections/GithubStats";
 import Resume from "@/app/ui/sections/Resume";
 import Contact from "@/app/ui/sections/Contact";
@@ -29,7 +29,7 @@ export default function Home() {
           <TechMarquee />
         </Section>
         <Projects />
-        <Publications />
+        <MegaProjects />
         <GithubStats />
         <Resume />
         <Contact />

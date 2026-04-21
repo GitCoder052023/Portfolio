@@ -7,9 +7,10 @@ import { InViewProps } from "@/app/types/components";
 interface ProjectActionsProps extends InViewProps {
     githubUrl: string;
     docsUrl?: string;
+    docsLabel?: string;
 }
 
-export default function ProjectActions({ isInView, githubUrl, docsUrl }: ProjectActionsProps) {
+export default function ProjectActions({ isInView, githubUrl, docsUrl, docsLabel = "Documentation" }: ProjectActionsProps) {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -39,7 +40,7 @@ export default function ProjectActions({ isInView, githubUrl, docsUrl }: Project
                     className="inline-flex items-center gap-2 px-6 py-4 bg-transparent border-2 border-[#e9e9e7] text-[#37352f] rounded-xl hover:border-[#d4d4d1] hover:bg-[#f7f6f3] transition-all duration-300 font-medium"
                 >
                     <Sparkles className="w-4 h-4" />
-                    <span>Documentation</span>
+                    <span>{docsLabel}</span>
                 </motion.a>
             )}
         </motion.div>
