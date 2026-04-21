@@ -64,13 +64,13 @@ export default function PublicationsProject({ align = "left" }: ProjectSectionPr
             description={PUBLICATIONS_BACKEND_DATA.description}
           />
 
-          <div className={`flex flex-col ${align === "right" ? "lg:flex-row-reverse" : "lg:flex-row"} gap-12 lg:gap-16 items-center mb-20`}>
-            <div className="flex-1 w-full">
+          <div className={`flex flex-col ${align === "right" ? "lg:flex-row-reverse" : "lg:flex-row"} gap-10 lg:gap-16 items-center mb-16 lg:mb-20`}>
+            <div className="flex-1 w-full order-2 lg:order-1">
                 <BackendVisualizer isInView={isInView} />
             </div>
             
-            <div className="flex-1">
-                <div className="grid grid-cols-1 gap-4">
+            <div className="flex-1 w-full order-1 lg:order-2">
+                <div className="grid grid-cols-1 gap-3 sm:gap-4">
                     {highlights.map((highlight, index) => (
                         <motion.div
                             key={highlight.title}
@@ -94,29 +94,29 @@ export default function PublicationsProject({ align = "left" }: ProjectSectionPr
             </div>
           </div>
 
-          <div className="bg-slate-50/50 rounded-[2.5rem] p-8 lg:p-16 relative overflow-hidden border border-slate-100 shadow-sm">
+          <div className="bg-slate-50/50 rounded-[1.5rem] sm:rounded-[2.5rem] p-6 sm:p-8 lg:p-16 relative overflow-hidden border border-slate-100 shadow-sm">
             {/* Minimalist Background Pattern */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
                  style={{ backgroundImage: "radial-gradient(#37352f 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
             
             <div className="relative z-10">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-16">
                     <div>
-                        <div className="flex items-center gap-2 mb-4">
-                            <div className="w-10 h-[1px] bg-slate-300" />
-                            <span className="text-slate-500 font-mono text-[10px] uppercase tracking-[0.2em]">Engineering Schematics</span>
+                        <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                            <div className="w-8 sm:w-10 h-[1px] bg-slate-300" />
+                            <span className="text-slate-500 font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.2em]">Engineering Schematics</span>
                         </div>
-                        <h3 className="text-3xl sm:text-4xl font-bold text-[#37352f]">
-                            Core <span className="italic font-serif text-slate-400 underline decoration-slate-200 underline-offset-8">Backend</span> Infrastructure
+                        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#37352f] leading-tight">
+                            Core <span className="italic font-serif text-slate-400 underline decoration-slate-200 underline-offset-4 sm:underline-offset-8">Backend</span> Infrastructure
                         </h3>
                     </div>
-                    <div className="flex items-center gap-4 bg-white px-5 py-2.5 rounded-full border border-slate-200 shadow-sm">
-                        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">System Verified</span>
+                    <div className="flex self-start md:self-auto items-center gap-3 bg-white px-4 py-2 rounded-full border border-slate-200 shadow-sm">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-wider">System Verified</span>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 lg:gap-x-12 gap-y-8 sm:gap-y-12">
                     {(PUBLICATIONS_BACKEND_DATA.features as any[]).map((feature: any, i) => {
                         const FeatureIcon = icons[feature.icon] || Code;
                         return (
@@ -125,25 +125,25 @@ export default function PublicationsProject({ align = "left" }: ProjectSectionPr
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                                 transition={{ duration: 0.5, delay: 0.5 + i * 0.05 }}
-                                className="group flex gap-6"
+                                className="group flex gap-4 sm:gap-6"
                             >
                                 <div className="flex flex-col items-center">
-                                    <div className="w-14 h-14 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center group-hover:border-emerald-200 group-hover:shadow-md transition-all duration-300">
-                                        <FeatureIcon className="w-6 h-6 text-slate-700 group-hover:text-emerald-600 transition-colors" />
+                                    <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-center group-hover:border-emerald-200 group-hover:shadow-md transition-all duration-300">
+                                        <FeatureIcon className="w-5 h-5 sm:w-6 h-6 text-slate-700 group-hover:text-emerald-600 transition-colors" />
                                     </div>
                                     {i < (PUBLICATIONS_BACKEND_DATA.features as any[]).length - 2 && (
-                                        <div className="w-px flex-1 bg-gradient-to-b from-slate-200 to-transparent mt-4" />
+                                        <div className="hidden sm:block w-px flex-1 bg-gradient-to-b from-slate-200 to-transparent mt-4" />
                                     )}
                                 </div>
 
-                                <div className="pt-2">
-                                    <h4 className="text-xl font-bold text-[#37352f] mb-2 flex items-center gap-3">
+                                <div className="pt-1 sm:pt-2">
+                                    <h4 className="text-lg sm:text-xl font-bold text-[#37352f] mb-1 sm:mb-2 flex items-center gap-3">
                                         {feature.title}
-                                        <span className="text-[10px] font-mono text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span className="text-[9px] sm:text-[10px] font-mono text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity">
                                             0{i + 1}
                                         </span>
                                     </h4>
-                                    <p className="text-sm text-slate-500 leading-relaxed max-w-md">
+                                    <p className="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-md">
                                         {feature.description}
                                     </p>
                                 </div>
@@ -152,14 +152,14 @@ export default function PublicationsProject({ align = "left" }: ProjectSectionPr
                     })}
                 </div>
 
-                <div className="mt-20 pt-10 border-t border-slate-200/60">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-12">
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest whitespace-nowrap">Integrated Stack</span>
-                        <div className="flex flex-wrap gap-x-8 gap-y-4">
+                <div className="mt-12 sm:mt-20 pt-8 sm:pt-10 border-t border-slate-200/60">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-12">
+                        <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-widest whitespace-nowrap">Integrated Stack</span>
+                        <div className="flex flex-wrap gap-x-4 sm:gap-x-8 gap-y-2 sm:gap-y-4">
                             {["Next.js 15", "Supabase", "PostgreSQL", "Clerk", "Redis", "Svix Webhooks"].map(tech => (
                                 <div key={tech} className="flex items-center gap-2">
                                     <div className="w-1 h-1 rounded-full bg-slate-300" />
-                                    <span className="text-xs font-semibold text-slate-600">{tech}</span>
+                                    <span className="text-[10px] sm:text-xs font-semibold text-slate-600">{tech}</span>
                                 </div>
                             ))}
                         </div>
@@ -201,26 +201,25 @@ function BackendVisualizer({ isInView }: { isInView: boolean }) {
     ];
 
     return (
-        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 sm:p-10 shadow-inner relative h-full min-h-[400px] flex flex-col justify-center">
-            <div className="space-y-8 relative">
+        <div className="bg-slate-50/50 border border-slate-200 rounded-2xl sm:rounded-3xl p-6 sm:p-10 shadow-inner relative h-full min-h-[350px] sm:min-h-[400px] flex flex-col justify-center">
+            <div className="space-y-6 sm:space-y-8 relative">
                 {steps.map((step, index) => {
                     const Icon = step.icon;
                     const isActive = activeStep === index;
-                    const isPassed = activeStep > index;
 
                     return (
                         <div key={step.title} className="relative z-10">
-                            <div className={`flex items-center gap-6 transition-all duration-500 ${isActive ? "translate-x-4" : "opacity-60"}`}>
-                                <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${isActive ? "bg-white shadow-lg ring-2 ring-slate-200 scale-110" : "bg-slate-200 shadow-none scale-100"}`}>
-                                    <Icon className={`w-6 h-6 ${isActive ? step.color : "text-slate-500"}`} />
+                            <div className={`flex items-center gap-4 sm:gap-6 transition-all duration-500 ${isActive ? "translate-x-2 sm:translate-x-4" : "opacity-60"}`}>
+                                <div className={`w-10 h-10 sm:w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-500 ${isActive ? "bg-white shadow-lg ring-2 ring-slate-200 scale-105 sm:scale-110" : "bg-slate-200 shadow-none scale-100"}`}>
+                                    <Icon className={`w-5 h-5 sm:w-6 h-6 ${isActive ? step.color : "text-slate-500"}`} />
                                 </div>
                                 <div>
-                                    <h5 className={`font-bold transition-colors ${isActive ? "text-slate-900" : "text-slate-500"}`}>{step.title}</h5>
-                                    <p className="text-xs text-slate-400 font-mono">{step.detail}</p>
+                                    <h5 className={`text-sm sm:text-base font-bold transition-colors ${isActive ? "text-slate-900" : "text-slate-500"}`}>{step.title}</h5>
+                                    <p className="text-[10px] sm:text-xs text-slate-400 font-mono">{step.detail}</p>
                                 </div>
                             </div>
                             {index < steps.length - 1 && (
-                                <div className="absolute left-6 top-12 w-0.5 h-8 bg-slate-200 overflow-hidden">
+                                <div className="absolute left-5 sm:left-6 top-10 sm:top-12 w-0.5 h-6 sm:h-8 bg-slate-200 overflow-hidden">
                                     <motion.div 
                                         className={`w-full bg-gradient-to-b from-blue-500 to-emerald-500`}
                                         initial={{ height: 0 }}
@@ -234,13 +233,13 @@ function BackendVisualizer({ isInView }: { isInView: boolean }) {
                 })}
             </div>
             
-            <div className="absolute top-6 right-6 hidden sm:block">
-                <div className="bg-white p-4 rounded-xl shadow-sm border border-slate-100 max-w-[200px]">
-                    <div className="flex items-center gap-2 mb-2">
-                        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-tight">Active Process</span>
+            <div className="absolute top-4 right-4 sm:top-6 sm:right-6 hidden xs:block">
+                <div className="bg-white p-3 sm:p-4 rounded-xl shadow-sm border border-slate-100 max-w-[150px] sm:max-w-[200px]">
+                    <div className="flex items-center gap-2 mb-1 sm:mb-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="text-[9px] sm:text-[10px] font-bold text-slate-400 uppercase tracking-tight whitespace-nowrap">Active Process</span>
                     </div>
-                    <div className="text-[11px] font-mono text-slate-600 truncate">
+                    <div className="text-[10px] sm:text-[11px] font-mono text-slate-600 truncate">
                         {steps[activeStep].detail}
                     </div>
                 </div>
