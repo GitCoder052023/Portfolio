@@ -21,7 +21,7 @@ export default function ProjectFeatures({ isInView, features, align, layout = "g
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex-1"
         >
-            <div className={layout === "grid" ? "grid grid-cols-2 gap-3 sm:gap-4" : "space-y-3"}>
+            <div className={layout === "grid" ? "grid grid-cols-1 xs:grid-cols-2 gap-3 sm:gap-4" : "space-y-3"}>
                 {features.map((feature, index) => {
                     const Icon = feature.icon;
                     const isActive = activeFeature === index;
@@ -43,19 +43,19 @@ export default function ProjectFeatures({ isInView, features, align, layout = "g
                                 transition={{ duration: 0.2 }}
                                 className={`p-4 sm:p-5 bg-[#f7f6f3] rounded-xl border border-[#e9e9e7] hover:border-[#d4d4d1] hover:bg-white transition-all duration-300 h-full ${isActive ? 'shadow-lg' : 'shadow-sm'}`}
                             >
-                                <div className="flex items-start gap-4">
+                                <div className="flex items-start gap-3 sm:gap-4">
                                     <motion.div
                                         animate={{ scale: isActive ? 1.1 : 1 }}
                                         transition={{ duration: 0.2 }}
-                                        className={`flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br ${feature.accent} flex items-center justify-center`}
+                                        className={`flex-shrink-0 w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br ${feature.accent} flex items-center justify-center`}
                                     >
-                                        <Icon className="w-5 h-5 text-[#37352f]" />
+                                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-[#37352f]" />
                                     </motion.div>
                                     <div className="min-w-0">
-                                        <h4 className={`font-semibold text-[#37352f] ${layout === "list" ? "text-base sm:text-lg" : "text-sm sm:text-base"}`}>
+                                        <h4 className={`font-bold text-[#37352f] ${layout === "list" ? "text-base sm:text-lg" : "text-sm sm:text-base"}`}>
                                             {feature.title}
                                         </h4>
-                                        <p className={`text-[#787774] mt-1 leading-relaxed ${layout === "list" ? "text-sm" : "text-xs sm:text-sm"}`}>
+                                        <p className={`text-[#787774] mt-1 leading-relaxed ${layout === "list" ? "text-xs sm:text-sm" : "text-[11px] sm:text-sm"}`}>
                                             {feature.description}
                                         </p>
                                     </div>

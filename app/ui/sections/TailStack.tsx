@@ -19,7 +19,7 @@ export default function TailStack({ align = "right" }: ProjectSectionProps) {
   const alignClass = align === "right" ? "lg:flex-row-reverse" : "lg:flex-row";
 
   return (
-    <div className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div className="py-12 sm:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <ProjectBackground isInView={isInView} colors={TAILSTACK_PROJECT_DATA.backgroundColors} />
 
       <div className="max-w-6xl mx-auto relative">
@@ -36,14 +36,18 @@ export default function TailStack({ align = "right" }: ProjectSectionProps) {
             description={TAILSTACK_PROJECT_DATA.description}
           />
 
-          <div className={`flex flex-col ${alignClass} gap-12 lg:gap-16 items-stretch mb-20`}>
-            <ProjectFeatures 
-                isInView={isInView} 
-                features={TAILSTACK_PROJECT_DATA.features} 
-                align={align} 
-                layout="list"
-            />
-            <TailStackTerminal isInView={isInView} />
+          <div className={`flex flex-col ${alignClass} gap-8 sm:gap-12 lg:gap-16 items-stretch mb-12 sm:mb-20`}>
+            <div className="flex-1 order-2 lg:order-1">
+              <ProjectFeatures 
+                  isInView={isInView} 
+                  features={TAILSTACK_PROJECT_DATA.features} 
+                  align={align} 
+                  layout="list"
+              />
+            </div>
+            <div className="flex-1 order-1 lg:order-2">
+              <TailStackTerminal isInView={isInView} />
+            </div>
           </div>
 
           <ProjectHighlights isInView={isInView} highlights={TAILSTACK_PROJECT_DATA.highlights} />

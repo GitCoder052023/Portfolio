@@ -16,7 +16,7 @@ export default function ProjectActions({ isInView, githubUrl, docsUrl, docsLabel
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex items-center gap-4"
+            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4"
         >
             <motion.a
                 href={githubUrl}
@@ -24,7 +24,7 @@ export default function ProjectActions({ isInView, githubUrl, docsUrl, docsLabel
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="group inline-flex items-center gap-3 px-7 py-4 bg-[#37352f] text-white rounded-xl hover:bg-[#2e2d29] transition-all duration-300 font-medium shadow-lg hover:shadow-xl"
+                className="group inline-flex items-center justify-center gap-3 px-6 sm:px-7 py-3.5 sm:py-4 bg-[#37352f] text-white rounded-xl hover:bg-[#2e2d29] transition-all duration-300 font-medium shadow-lg hover:shadow-xl text-sm sm:text-base"
             >
                 <Github className="w-5 h-5" />
                 <span>View on GitHub</span>
@@ -37,7 +37,7 @@ export default function ProjectActions({ isInView, githubUrl, docsUrl, docsLabel
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    className="inline-flex items-center gap-2 px-6 py-4 bg-transparent border-2 border-[#e9e9e7] text-[#37352f] rounded-xl hover:border-[#d4d4d1] hover:bg-[#f7f6f3] transition-all duration-300 font-medium"
+                    className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 bg-transparent border-2 border-[#e9e9e7] text-[#37352f] rounded-xl hover:border-[#d4d4d1] hover:bg-[#f7f6f3] transition-all duration-300 font-medium text-sm sm:text-base"
                 >
                     <Sparkles className="w-4 h-4" />
                     <span>{docsLabel}</span>

@@ -10,20 +10,20 @@ export default function TailStackTerminal({ isInView }: InViewProps) {
 
     return (
         <div className="flex-1">
-            <div className="relative min-h-[400px] bg-slate-900 rounded-2xl border border-slate-700/50 shadow-2xl overflow-hidden">
-                <div className="flex items-center justify-between px-5 py-4 border-b border-slate-700/50 bg-slate-800/50">
-                    <div className="flex gap-2">
-                        <div className="w-3 h-3 rounded-full bg-red-400" />
-                        <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                        <div className="w-3 h-3 rounded-full bg-green-400" />
+            <div className="relative min-h-[350px] sm:min-h-[400px] bg-slate-900 rounded-2xl border border-slate-700/50 shadow-2xl overflow-hidden">
+                <div className="flex items-center justify-between px-4 sm:px-5 py-3 sm:py-4 border-b border-slate-700/50 bg-slate-800/50">
+                    <div className="flex gap-1.5 sm:gap-2">
+                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-400" />
+                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-400" />
+                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-400" />
                     </div>
-                    <span className="text-xs font-mono text-emerald-400/80">tailstack/ ~ zsh</span>
+                    <span className="text-[10px] sm:text-xs font-mono text-emerald-400/80">tailstack/ ~ zsh</span>
                 </div>
 
                 {/* SCROLLBAR HIDDEN HERE */}
                 <div
                     ref={terminalContentRef}
-                    className="p-6 font-mono text-sm space-y-1.5 overflow-y-auto h-[480px] scroll-smooth 
+                    className="p-4 sm:p-6 font-mono text-[11px] sm:text-sm space-y-1 sm:space-y-1.5 overflow-y-auto h-[350px] sm:h-[480px] scroll-smooth 
           [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
                 >
                     {TAILSTACK_TERMINAL_LINES.map((line, index) => {

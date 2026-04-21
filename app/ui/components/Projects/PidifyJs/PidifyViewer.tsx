@@ -22,30 +22,30 @@ export default function PidifyViewer({ isInView }: InViewProps) {
                 <div className="absolute -inset-4 bg-gradient-to-br from-blue-200/30 via-purple-200/20 to-pink-200/30 rounded-3xl blur-2xl" />
 
                 {/* PDF Viewer container */}
-                <div className="relative bg-white rounded-2xl border border-[#e9e9e7] shadow-2xl overflow-hidden h-full min-h-[480px]">
+                <div className="relative bg-white rounded-2xl border border-[#e9e9e7] shadow-2xl overflow-hidden h-full min-h-[380px] sm:min-h-[480px]">
                     {/* Viewer header */}
-                    <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-[#e9e9e7] bg-[#f7f6f3]">
-                        <div className="flex items-center gap-3">
-                            <div className="flex gap-2">
-                                <div className="w-3 h-3 rounded-full bg-red-400" />
-                                <div className="w-3 h-3 rounded-full bg-yellow-400" />
-                                <div className="w-3 h-3 rounded-full bg-green-400" />
+                    <div className="flex items-center justify-between px-3 sm:px-5 py-2 sm:py-3 border-b border-[#e9e9e7] bg-[#f7f6f3]">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                            <div className="flex gap-1 sm:gap-2">
+                                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-400" />
+                                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-400" />
+                                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-400" />
                             </div>
-                            <div className="w-px h-4 bg-[#e9e9e7]" />
-                            <div className="flex items-center gap-2">
-                                <FileText className="w-4 h-4 text-[#787774]" />
-                                <span className="text-xs font-medium text-[#37352f]">document.pdf</span>
+                            <div className="w-px h-3 sm:h-4 bg-[#e9e9e7]" />
+                            <div className="flex items-center gap-1.5 sm:gap-2">
+                                <FileText className="w-3 h-3 sm:w-4 sm:h-4 text-[#787774]" />
+                                <span className="text-[10px] sm:text-xs font-medium text-[#37352f]">document.pdf</span>
                             </div>
                         </div>
                         <div className="flex items-center gap-2">
-                            <span className="text-xs text-[#787774] px-2 py-1 bg-white rounded-md border border-[#e9e9e7]">
+                            <span className="text-[10px] sm:text-xs text-[#787774] px-1.5 py-0.5 sm:px-2 sm:py-1 bg-white rounded-md border border-[#e9e9e7]">
                                 Page {previewPage} of 12
                             </span>
                         </div>
                     </div>
 
                     {/* Toolbar */}
-                    <div className="flex items-center gap-1 px-4 sm:px-5 py-2.5 border-b border-[#e9e9e7] bg-white">
+                    <div className="flex items-center gap-0.5 sm:gap-1 px-3 sm:px-5 py-2 sm:py-2.5 border-b border-[#e9e9e7] bg-white overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                         {PIDIFY_PREVIEW_TOOLS.map((tool, index) => {
                             const Icon = tool.icon;
                             return (
@@ -54,41 +54,41 @@ export default function PidifyViewer({ isInView }: InViewProps) {
                                     initial={{ opacity: 0, scale: 0.8 }}
                                     animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
                                     transition={{ duration: 0.3, delay: 0.6 + index * 0.08 }}
-                                    className="p-2 hover:bg-[#f7f6f3] rounded-lg transition-colors cursor-pointer group"
+                                    className="p-1.5 sm:p-2 hover:bg-[#f7f6f3] rounded-lg transition-colors cursor-pointer group"
                                     title={tool.label}
                                 >
-                                    <Icon className="w-4 h-4 text-[#787774] group-hover:text-[#37352f] transition-colors" />
+                                    <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#787774] group-hover:text-[#37352f] transition-colors" />
                                 </motion.div>
                             );
                         })}
-                        <div className="w-px h-5 bg-[#e9e9e7] mx-2" />
-                        <div className="flex items-center gap-1">
+                        <div className="w-px h-4 sm:h-5 bg-[#e9e9e7] mx-1 sm:mx-2 flex-shrink-0" />
+                        <div className="flex items-center gap-0.5 sm:gap-1">
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={prevPage}
-                                className="p-2 hover:bg-[#f7f6f3] rounded-lg transition-colors text-[#787774] hover:text-[#37352f]"
+                                className="p-1.5 sm:p-2 hover:bg-[#f7f6f3] rounded-lg transition-colors text-[#787774] hover:text-[#37352f]"
                             >
-                                <ArrowRight className="w-4 h-4 rotate-180" />
+                                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 rotate-180" />
                             </motion.button>
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
                                 onClick={nextPage}
-                                className="p-2 hover:bg-[#f7f6f3] rounded-lg transition-colors text-[#787774] hover:text-[#37352f]"
+                                className="p-1.5 sm:p-2 hover:bg-[#f7f6f3] rounded-lg transition-colors text-[#787774] hover:text-[#37352f]"
                             >
-                                <ArrowRight className="w-4 h-4" />
+                                <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                             </motion.button>
                         </div>
                     </div>
 
                     {/* PDF Preview Area */}
-                    <div className="p-4 sm:p-6 bg-[#f7f6f3] h-full min-h-[320px] flex items-center justify-center">
+                    <div className="p-3 sm:p-6 bg-[#f7f6f3] h-full min-h-[250px] sm:min-h-[320px] flex items-center justify-center">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                             transition={{ duration: 0.5, delay: 0.7 }}
-                            className="w-full max-w-[280px] aspect-[3/4] bg-white rounded-lg shadow-lg border border-[#e9e9e7] overflow-hidden relative"
+                            className="w-full max-w-[200px] sm:max-w-[280px] aspect-[3/4] bg-white rounded-lg shadow-lg border border-[#e9e9e7] overflow-hidden relative"
                         >
                             {/* Document content simulation */}
                             <div className="p-6 space-y-3">
