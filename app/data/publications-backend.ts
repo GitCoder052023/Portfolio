@@ -8,6 +8,28 @@ export const PUBLICATIONS_BACKEND_DATA = {
     top: "from-[#f3f3f2]",
     bottom: "to-[#ffffff]"
   },
+  userFeatures: [
+    { 
+      title: "Public Journaling", 
+      description: "A specialized space for formal writings, research papers, and theoretical inquiries with optimized reading layouts.",
+      icon: "Feather"
+    },
+    { 
+      title: "Domain Categorization", 
+      description: "Organizes intellectual content into specific 'Domains of Inquiry' such as Epistemology, Consciousness, and Science.",
+      icon: "Grid"
+    },
+    { 
+      title: "Intellectual Discussion", 
+      description: "Integrated discussion engine (Clerk Auth) that enables users to challenge arguments and provide alternative perspectives.",
+      icon: "MessageCircle"
+    },
+    { 
+      title: "Interaction Engine", 
+      description: "Full suite of engagement tools including real-time likes, nested commenting systems, and social sharing.",
+      icon: "Heart"
+    }
+  ],
   highlights: [
     {
       title: "Modular Service Architecture",

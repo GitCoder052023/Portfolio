@@ -11,7 +11,8 @@ import ProjectFeatures from "@/app/ui/components/Projects/Shared/ProjectFeatures
 import ProjectActions from "@/app/ui/components/Projects/Shared/ProjectActions";
 import { 
   Layers, RefreshCw, ShieldCheck, Cpu, Database, Server, Code, Globe, 
-  Box, UserCheck, Zap, HardDrive, Activity, AlertTriangle 
+  Box, UserCheck, Zap, HardDrive, Activity, AlertTriangle,
+  Feather, Grid, MessageCircle, Heart, ArrowUpRight
 } from "lucide-react";
 
 export default function PublicationsProject({ align = "left" }: ProjectSectionProps) {
@@ -29,7 +30,11 @@ export default function PublicationsProject({ align = "left" }: ProjectSectionPr
     Zap,
     HardDrive,
     Activity,
-    AlertTriangle
+    AlertTriangle,
+    Feather,
+    Grid,
+    MessageCircle,
+    Heart
   };
 
   const highlights = PUBLICATIONS_BACKEND_DATA.highlights.map(h => ({
@@ -64,12 +69,91 @@ export default function PublicationsProject({ align = "left" }: ProjectSectionPr
             description={PUBLICATIONS_BACKEND_DATA.description}
           />
 
+          {/* User Experience Section */}
+          <div className="mb-24 sm:mb-32">
+            <div className="flex flex-col items-center text-center mb-16">
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    className="flex items-center gap-2 mb-4 bg-slate-100 px-3 py-1 rounded-full border border-slate-200"
+                >
+                    <Feather size={12} className="text-slate-500" />
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Platform Experience</span>
+                </motion.div>
+                <h3 className="text-3xl sm:text-4xl font-bold text-[#37352f] mb-4">Designed for Deep <span className="italic font-serif">Inquiry</span></h3>
+                <p className="text-slate-500 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+                    A minimal, focused environment where complex ideas are published, engaged with, and built upon through collaborative intellectual exchange.
+                </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {(PUBLICATIONS_BACKEND_DATA.userFeatures as any[]).map((feature: any, i) => {
+                    const Icon = icons[feature.icon] || Feather;
+                    return (
+                        <motion.div
+                            key={feature.title}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.1 }}
+                            className="group relative p-8 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 overflow-hidden"
+                        >
+                            <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
+                                <Icon size={80} />
+                            </div>
+                            <div className="relative z-10">
+                                <div className="w-12 h-12 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 group-hover:bg-[#37352f] group-hover:border-[#37352f] transition-colors duration-500">
+                                    <Icon className="w-6 h-6 text-slate-700 group-hover:text-white transition-colors duration-500" />
+                                </div>
+                                <h4 className="text-lg font-bold text-[#37352f] mb-3">{feature.title}</h4>
+                                <p className="text-sm text-slate-500 leading-relaxed">
+                                    {feature.description}
+                                </p>
+                                <div className="mt-6 flex items-center gap-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                    <span>Experience</span>
+                                    <ArrowUpRight size={12} />
+                                </div>
+                            </div>
+                        </motion.div>
+                    );
+                })}
+            </div>
+          </div>
+
+          {/* Contextual Visual Divide */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="relative py-12 sm:py-20"
+          >
+            <div className="absolute inset-0 flex items-center" aria-hidden="true">
+                <div className="w-full border-t border-slate-200"></div>
+            </div>
+            <div className="relative flex justify-center">
+                <span className="bg-white px-6 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] border border-slate-200 rounded-full shadow-sm">
+                    Technical Deep Dive
+                </span>
+            </div>
+          </motion.div>
+
           <div className={`flex flex-col ${align === "right" ? "lg:flex-row-reverse" : "lg:flex-row"} gap-10 lg:gap-16 items-center mb-16 lg:mb-20`}>
             <div className="flex-1 w-full order-2 lg:order-1">
+                <div className="mb-8 lg:hidden">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-slate-50 px-3 py-1 rounded-full border border-slate-200">
+                        Process Flow
+                    </span>
+                </div>
                 <BackendVisualizer isInView={isInView} />
             </div>
             
             <div className="flex-1 w-full order-1 lg:order-2">
+                <div className="mb-6 hidden lg:block">
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-slate-50 px-3 py-1 rounded-full border border-slate-200">
+                        Process Flow
+                    </span>
+                </div>
                 <div className="grid grid-cols-1 gap-3 sm:gap-4">
                     {highlights.map((highlight, index) => (
                         <motion.div
@@ -94,6 +178,7 @@ export default function PublicationsProject({ align = "left" }: ProjectSectionPr
             </div>
           </div>
 
+          {/* Core Backend Infrastructure (The Schematic) */}
           <div className="bg-slate-50/50 rounded-[1.5rem] sm:rounded-[2.5rem] p-6 sm:p-8 lg:p-16 relative overflow-hidden border border-slate-100 shadow-sm">
             {/* Minimalist Background Pattern */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
