@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { 
   Cpu, Zap, Shield, FileText, Mail, 
   Database, Terminal, Activity, ArrowRight, 
@@ -53,7 +53,7 @@ export default function ExamBazarProject() {
           </h2>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-12">
-              <p className="text-xl text-slate-500 leading-relaxed">
+              <p className="text-xl text-slate-500 leading-relaxed mb-8">
                 {EXAM_BAZAR_DATA.description}
               </p>
             </div>
@@ -192,35 +192,6 @@ export default function ExamBazarProject() {
             );
           })}
         </div>
-
-        {/* Closing Architecture Schematic (RESTORED EXACTLY AS IT WAS) */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="p-8 sm:p-16 bg-slate-50 rounded-[3rem] border border-slate-100 relative overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 p-8 opacity-[0.03] pointer-events-none">
-            <Server size={400} />
-          </div>
-          
-          <div className="relative z-10">
-            <h3 className="text-4xl font-bold text-[#37352f] mb-12">Micro-Scaling <span className="italic font-serif text-slate-400">Master-Worker</span> Cluster</h3>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { title: "Distributed Caching", detail: "Multi-node Redis for sub-millisecond session and order state retrieval.", icon: Database },
-                { title: "Request Limiting", detail: "Sliding-window rate limiting to prevent DDoS and brute-force attacks.", icon: Shield },
-                { title: "Atomic Persistence", detail: "PostgreSQL transactions ensuring no partial order states ever exist.", icon: Lock }
-              ].map((feat, i) => (
-                <div key={i} className="p-8 bg-white rounded-3xl border border-slate-200/50 shadow-sm hover:shadow-md transition-shadow">
-                  <feat.icon className="text-slate-400 mb-6" size={32} />
-                  <h4 className="text-lg font-bold text-slate-800 mb-3">{feat.title}</h4>
-                  <p className="text-sm text-slate-500 leading-relaxed">{feat.detail}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
 
         {/* System Status Warning */}
         <motion.div 
