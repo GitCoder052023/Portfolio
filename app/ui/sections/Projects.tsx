@@ -1,21 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { PROJECTS } from "@/app/data/projects";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import Section from "@/app/ui/components/Shared/Section";
 
-export default function Projects() {
+function ProjectsContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Initialize from URL on mount
+  useEffect(() => {
+    const projectParam = searchParams.get("p");
+    if (projectParam) {
+      const index = parseInt(projectParam);
+      if (!isNaN(index) && index >= 0 && index < PROJECTS.length) {
+        setCurrentIndex(index);
+      }
+    }
+  }, [searchParams]);
+
+  const updateUrl = (index: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("p", index.toString());
+    router.replace(`?${params.toString()}`, { scroll: false });
+  };
+
   const nextProject = () => {
-    setCurrentIndex((prev) => (prev + 1) % PROJECTS.length);
+    const newIndex = (currentIndex + 1) % PROJECTS.length;
+    setCurrentIndex(newIndex);
+    updateUrl(newIndex);
     scrollToProjects();
   };
 
   const prevProject = () => {
-    setCurrentIndex((prev) => (prev - 1 + PROJECTS.length) % PROJECTS.length);
+    const newIndex = (currentIndex - 1 + PROJECTS.length) % PROJECTS.length;
+    setCurrentIndex(newIndex);
+    updateUrl(newIndex);
     scrollToProjects();
   };
 
@@ -28,14 +52,14 @@ export default function Projects() {
 
   const handleDotClick = (index: number) => {
     setCurrentIndex(index);
+    updateUrl(index);
     scrollToProjects();
   };
 
   const ActiveProject = PROJECTS[currentIndex].component;
 
   return (
-    <Section id="projects" className="bg-white" py="py-0">
-
+    <>
       <AnimatePresence mode="wait">
         <motion.div
           key={PROJECTS[currentIndex].id}
@@ -82,6 +106,16 @@ export default function Projects() {
           <HiChevronRight className="w-5 h-5 text-[#787774] group-hover:text-[#37352f]" />
         </button>
       </div>
+    </>
+  );
+}
+
+export default function Projects() {
+  return (
+    <Section id="projects" className="bg-white" py="py-0">
+      <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading Projects...</div>}>
+        <ProjectsContent />
+      </Suspense>
     </Section>
   );
 }

@@ -3,6 +3,8 @@ export const EXAM_BAZAR_DATA = {
   subtitle: "High-Performance Ed-Tech Ecosystem",
   tagline: "Architecting a resilient marketplace for digital educational assets.",
   description: "A comprehensive Ed-Tech marketplace designed to streamline the delivery of educational resources through a modern, reliable e-commerce experience.",
+  githubUrl: "https://github.com/GitCoder052023/ExamBazar",
+  archiveUrl: "https://exambazar.in",
   
   // Non-technical / UX Features
   ecommerceFeatures: [

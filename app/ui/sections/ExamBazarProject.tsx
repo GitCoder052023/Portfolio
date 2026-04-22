@@ -226,14 +226,24 @@ export default function ExamBazarProject() {
           </div>
 
           <div className="flex gap-4">
-            <button className="flex items-center gap-2 px-6 py-3 bg-[#37352f] text-white rounded-full font-bold text-sm hover:bg-black transition-colors shadow-lg">
+            <a 
+              href={EXAM_BAZAR_DATA.githubUrl} 
+              target="_blank" 
+              rel="noreferrer"
+              className="flex items-center gap-2 px-6 py-3 bg-[#37352f] text-white rounded-full font-bold text-sm hover:bg-black transition-colors shadow-lg"
+            >
               <Github size={16} />
               Repository
-            </button>
-            <button className="flex items-center gap-2 px-6 py-3 bg-white text-[#37352f] border border-slate-200 rounded-full font-bold text-sm hover:bg-slate-50 transition-colors shadow-sm">
+            </a>
+            <a 
+              href={EXAM_BAZAR_DATA.archiveUrl} 
+              target="_blank" 
+              rel="noreferrer"
+              className="flex items-center gap-2 px-6 py-3 bg-white text-[#37352f] border border-slate-200 rounded-full font-bold text-sm hover:bg-slate-50 transition-colors shadow-sm"
+            >
               <ExternalLink size={16} />
               Operational Archive
-            </button>
+            </a>
           </div>
         </motion.div>
       </div>

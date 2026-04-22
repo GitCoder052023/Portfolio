@@ -1,20 +1,44 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { MEGA_PROJECTS } from "@/app/data/mega-projects";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
-export default function MegaProjects() {
+function MegaProjectsContent() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Initialize from URL on mount
+  useEffect(() => {
+    const megaParam = searchParams.get("m");
+    if (megaParam) {
+      const index = parseInt(megaParam);
+      if (!isNaN(index) && index >= 0 && index < MEGA_PROJECTS.length) {
+        setCurrentIndex(index);
+      }
+    }
+  }, [searchParams]);
+
+  const updateUrl = (index: number) => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("m", index.toString());
+    router.replace(`?${params.toString()}`, { scroll: false });
+  };
+
   const nextProject = () => {
-    setCurrentIndex((prev) => (prev + 1) % MEGA_PROJECTS.length);
+    const newIndex = (currentIndex + 1) % MEGA_PROJECTS.length;
+    setCurrentIndex(newIndex);
+    updateUrl(newIndex);
     scrollToMegaProjects();
   };
 
   const prevProject = () => {
-    setCurrentIndex((prev) => (prev - 1 + MEGA_PROJECTS.length) % MEGA_PROJECTS.length);
+    const newIndex = (currentIndex - 1 + MEGA_PROJECTS.length) % MEGA_PROJECTS.length;
+    setCurrentIndex(newIndex);
+    updateUrl(newIndex);
     scrollToMegaProjects();
   };
 
@@ -27,13 +51,14 @@ export default function MegaProjects() {
 
   const handleDotClick = (index: number) => {
     setCurrentIndex(index);
+    updateUrl(index);
     scrollToMegaProjects();
   };
 
   const ActiveProject = MEGA_PROJECTS[currentIndex].component;
 
   return (
-    <div id="mega-projects" className="bg-white">
+    <>
       {/* Section Header */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-24 pb-8 sm:pb-12">
         <motion.div
@@ -98,6 +123,16 @@ export default function MegaProjects() {
           <HiChevronRight className="w-5 h-5 text-[#787774] group-hover:text-[#37352f]" />
         </button>
       </div>
+    </>
+  );
+}
+
+export default function MegaProjects() {
+  return (
+    <div id="mega-projects" className="bg-white">
+      <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading Mega Projects...</div>}>
+        <MegaProjectsContent />
+      </Suspense>
     </div>
   );
 }
